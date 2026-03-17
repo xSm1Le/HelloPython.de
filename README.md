@@ -1,1 +1,1 @@
-Meine seite HelloPython.de Soll andeen Schülern erleichtern das Programmieren mit python zu lernen.
+Meine seite HelloPython.de Soll anderen Schülern erleichtern das Programmieren mit python zu lernen.
