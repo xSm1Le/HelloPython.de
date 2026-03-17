@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Python – Die Programmiersprache</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/landingpageStyle.css">
+<body>
+
+<!-- PROGRESS BAR -->
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- TOP NAV -->
+<nav class="topnav">
+  <a class="nav-logo" href="#hero"><span>&gt;</span> HelloPython.de</a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#was">Grundlagen</a></li>
+      <li><a href="#geschichte">Geschichte</a></li>
+      <li><a href="#warum">Warum Python?</a></li>
+      <li><a href="#themen">Themen</a></li>
+      <li><a href="#start">Erste Schritte</a></li>
+    </ul>
+    <button class="hamburger" id="hamburgerBtn" aria-label="Menü öffnen">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- SIDEBAR OVERLAY -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+
+  <div class="sidebar-section-label">Navigation</div>
+
+  <a class="sidebar-link active" href="#hero" data-section="hero">
+    <span class="s-icon">🏠</span> Startseite
+  </a>
+  <a class="sidebar-link" href="#was" data-section="was">
+    <span class="s-icon">🐍</span> Was ist Python?
+  </a>
+  <a class="sidebar-link" href="#geschichte" data-section="geschichte">
+    <span class="s-icon">📅</span> Geschichte
+  </a>
+  <a class="sidebar-link" href="#warum" data-section="warum">
+    <span class="s-icon">💡</span> Warum Python?
+  </a>
+  <a class="sidebar-link" href="#einsatz" data-section="einsatz">
+    <span class="s-icon">🔧</span> Einsatzgebiete
+  </a>
+  <a class="sidebar-link" href="#vergleich" data-section="vergleich">
+    <span class="s-icon">⚖️</span> Vergleich
+  </a>
+  <a class="sidebar-link" href="#start" data-section="start">
+    <span class="s-icon">🚀</span> Erste Schritte
+  </a>
+
+  <div class="sidebar-divider"></div>
+  <div class="sidebar-section-label">Lernthemen</div>
+
+  <a class="sidebar-link" href="/html/vscode.html" data-section="themen">
+    <span class="s-icon">💻</span> VS Code Guide
+    <span class="s-badge">neu</span>
+  </a>
+  <a class="sidebar-link" href="/html/syntax.html" data-section="themen">
+    <span class="s-icon">⚙️</span> Syntax
+    <span class="s-badge">neu</span>
+  </a>
+  <a class="sidebar-link" href="/html/funktionen.html" data-section="themen">
+    <span class="s-icon">📦</span> Funktionen
+    <span class="s-badge">neu</span>
+  </a>
+  <a class="sidebar-link" href="/html/schleifen.html" data-section="themen">
+    <span class="s-icon">🔁</span> Schleifen
+    <span class="s-badge">neu</span>
+  </a>
+  <a class="sidebar-link" href="/html/datenstrukturen.html" data-section="themen">
+    <span class="s-icon">🗂️</span> Datenstrukturen
+    <span class="s-badge">neu</span>
+  </a>
+  <a class="sidebar-link" href="/html/oop.html" data-section="themen">
+      <span class="s-icon">📐</span> OOP
+      <span class="s-badge">neu</span>
+    </a>
+    <a class="sidebar-link" href="/html/fehlerbehandlung.html" data-section="themen">
+      <span class="s-icon">🛡️</span> Fehlerbehandlung
+      <span class="s-badge">neu</span>
+    </a>
+    <a class="sidebar-link" href="/html/module_pakete.html" data-section="themen">
+      <span class="s-icon">📦</span> Module & Pakete
+      <span class="s-badge">neu</span>
+    </a>
+
+  <!--
+  <a class="sidebar-link" href="#themen" data-section="themen">
+    <span class="s-icon">📦</span> Module & Pakete
+  </a>
+  <a class="sidebar-link" href="#themen" data-section="themen">
+    <span class="s-icon">🏗️</span> Praxisprojekte
+    <span class="s-badge">neu</span>
+  </a>
+-->
+</aside>
+
+<!-- PAGE LAYOUT -->
+<div class="page-layout">
+  <div class="main-content">
+
+    <!-- HERO -->
+    <section id="hero">
+      <div class="hero-badge">Die Programmiersprache für alle</div>
+      <h1 class="hero-title">Python</h1>
+      <p class="hero-sub"># einfach · mächtig · überall</p>
+      <div class="hero-code">
+        <div><span class="cmt"># Dein erstes Python-Programm</span></div>
+        <div><span class="fn">print</span>(<span class="str">"Hallo, Welt!"</span>)</div>
+        <div>&nbsp;</div>
+        <div><span class="param">name</span> = <span class="fn">input</span>(<span class="str">"Wie heißt du? "</span>)</div>
+        <div><span class="fn">print</span>(<span class="str">f"Willkommen, {name}!"</span>)</div>
+      </div>
+      <div class="hero-buttons">
+        <a href="#was" class="btn btn-primary">Los geht's →</a>
+        <a href="#themen" class="btn btn-outline">Alle Themen</a>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- WAS IST PYTHON -->
+    <section id="was">
+      <div class="fade-in">
+        <div class="section-label">▸ 01 — Grundlagen</div>
+        <h2 class="section-heading">Was ist Python?</h2>
+        <p class="section-desc">Python ist eine universelle, interpretierte Programmiersprache – bekannt für ihre klare, lesbare Syntax und riesige Community. Sie ist sowohl für Einsteiger als auch für Profis geeignet.</p>
+      </div>
+      <div class="grid-2 fade-in">
+        <div class="info-card" style="border-color:rgba(245,200,66,0.2)">
+          <div class="info-card-icon">🐍</div>
+          <div class="info-card-title">Interpretierte Sprache</div>
+          <div class="info-card-text">Python-Code wird Zeile für Zeile ausgeführt – kein Kompilieren nötig. Du siehst Ergebnisse sofort, was das Lernen und Testen deutlich einfacher macht.</div>
+        </div>
+        <div class="info-card" style="border-color:rgba(79,168,255,0.2)">
+          <div class="info-card-icon">📖</div>
+          <div class="info-card-title">Lesbare Syntax</div>
+          <div class="info-card-text">Python-Code liest sich fast wie normaler Text. Einrückungen statt geschweifter Klammern – der Code ist strukturiert und übersichtlich von Natur aus.</div>
+        </div>
+        <div class="info-card" style="border-color:rgba(77,255,176,0.2)">
+          <div class="info-card-icon">🔓</div>
+          <div class="info-card-title">Open Source</div>
+          <div class="info-card-text">Python ist kostenlos und quelloffen. Jeder kann es nutzen, verändern und weitergeben – für private Projekte genauso wie in Unternehmen.</div>
+        </div>
+        <div class="info-card" style="border-color:rgba(184,122,255,0.2)">
+          <div class="info-card-icon">📦</div>
+          <div class="info-card-title">Riesige Bibliothek</div>
+          <div class="info-card-text">Mit über 400.000 Paketen auf PyPI gibt es für fast jede Aufgabe bereits fertige Lösungen – von Webentwicklung bis hin zu KI und Datenanalyse.</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- GESCHICHTE -->
+    <section id="geschichte">
+      <div class="fade-in">
+        <div class="section-label">▸ 02 — Geschichte</div>
+        <h2 class="section-heading">Von wem wurde Python entwickelt?</h2>
+        <p class="section-desc">Python wurde von <strong style="color:var(--yellow)">Guido van Rossum</strong>, einem niederländischen Informatiker, entwickelt. Er begann Ende der 1980er Jahre damit und wollte eine Sprache schaffen, die einfacher zu lesen und schreiben ist als damals üblich.</p>
+      </div>
+      <div class="timeline fade-in">
+        <div class="tl-item">
+          <div class="tl-year">1989</div>
+          <div class="tl-title">Die Idee entsteht</div>
+          <div class="tl-desc">Guido van Rossum beginnt über die Weihnachtsferien mit der Entwicklung von Python als Hobby-Projekt. Er möchte eine Nachfolgesprache für "ABC" schaffen.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">1991</div>
+          <div class="tl-title">Python 0.9.0 – Die erste Version</div>
+          <div class="tl-desc">Die erste öffentliche Version wird veröffentlicht. Sie enthält bereits Kernfeatures wie Klassen, Ausnahmebehandlung und Funktionen.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">2000</div>
+          <div class="tl-title">Python 2.0</div>
+          <div class="tl-desc">Großes Update mit List Comprehensions und Garbage Collection. Python gewinnt stark an Popularität in der Open-Source-Community.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">2008</div>
+          <div class="tl-title">Python 3.0 – Die moderne Ära</div>
+          <div class="tl-desc">Ein kompletter Neustart – nicht abwärtskompatibel. Python 3 behebt viele Designschwächen und ist heute der Standard. Python 2 wurde 2020 eingestellt.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">Heute</div>
+          <div class="tl-title">Die beliebteste Sprache der Welt</div>
+          <div class="tl-desc">Laut TIOBE-Index und Stack Overflow ist Python seit Jahren die Nummer 1. Millionen Entwickler weltweit nutzen Python täglich.</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- WARUM PYTHON -->
+    <section id="warum">
+      <div class="fade-in">
+        <div class="section-label">▸ 03 — Motivation</div>
+        <h2 class="section-heading">Warum mit Python lernen?</h2>
+        <p class="section-desc">Python ist weltweit die meistempfohlene Sprache für Programmieranfänger – und das aus sehr guten Gründen.</p>
+      </div>
+      <div class="grid-3 fade-in">
+        <div class="reason-card">
+          <div class="reason-icon">🚀</div>
+          <div class="reason-title">Schneller Einstieg</div>
+          <div class="reason-text">Mit wenigen Zeilen Code erreichst du sichtbare Ergebnisse. Kein stundenlanger Setup – einfach losschreiben.</div>
+        </div>
+        <div class="reason-card">
+          <div class="reason-icon">🧠</div>
+          <div class="reason-title">Klare Syntax</div>
+          <div class="reason-text">Der Code liest sich fast wie ein englischer Text. Weniger Sonderzeichen, mehr Verständlichkeit.</div>
+        </div>
+        <div class="reason-card">
+          <div class="reason-icon">💼</div>
+          <div class="reason-title">Jobmarkt</div>
+          <div class="reason-text">Python-Kenntnisse sind extrem gefragt: Data Science, KI, Web, Automatisierung – überall gesucht.</div>
+        </div>
+        <div class="reason-card">
+          <div class="reason-icon">🤝</div>
+          <div class="reason-title">Riesige Community</div>
+          <div class="reason-text">Millionen Entwickler, unzählige Tutorials, Foren und Kurse. Für jede Frage gibt es eine Antwort.</div>
+        </div>
+        <div class="reason-card">
+          <div class="reason-icon">🔧</div>
+          <div class="reason-title">Vielseitig einsetzbar</div>
+          <div class="reason-text">Vom kleinen Skript bis zur KI-Anwendung – Python deckt alles ab. Eine Sprache für alles.</div>
+        </div>
+        <div class="reason-card">
+          <div class="reason-icon">🆓</div>
+          <div class="reason-title">Kostenlos & offen</div>
+          <div class="reason-text">Kein Abo, keine Lizenz. Python und seine Tools sind komplett kostenlos verfügbar.</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- EINSATZGEBIETE -->
+    <section id="einsatz">
+      <div class="fade-in">
+        <div class="section-label">▸ 04 — Einsatzgebiete</div>
+        <h2 class="section-heading">Was kann man mit Python machen?</h2>
+        <p class="section-desc">Python ist eine der vielseitigsten Sprachen überhaupt. Hier sind die wichtigsten Bereiche.</p>
+      </div>
+      <div class="grid-2 fade-in">
+        <div class="area-card">
+          <div class="area-header">
+            <div class="area-dot" style="background:var(--yellow)"></div>
+            <div class="area-title">🤖 Künstliche Intelligenz</div>
+          </div>
+          <div class="area-text">Python ist die Standardsprache für KI und Machine Learning. Mit Bibliotheken wie TensorFlow oder PyTorch lassen sich neuronale Netze trainieren.</div>
+          <div class="area-tags">
+            <span class="tag">TensorFlow</span>
+            <span class="tag">PyTorch</span>
+            <span class="tag">scikit-learn</span>
+          </div>
+        </div>
+        <div class="area-card">
+          <div class="area-header">
+            <div class="area-dot" style="background:var(--blue)"></div>
+            <div class="area-title">📊 Datenanalyse</div>
+          </div>
+          <div class="area-text">Daten einlesen, analysieren und visualisieren – Python ist das Werkzeug Nr. 1 für Data Scientists und Analysten weltweit.</div>
+          <div class="area-tags">
+            <span class="tag">Pandas</span>
+            <span class="tag">NumPy</span>
+            <span class="tag">Matplotlib</span>
+          </div>
+        </div>
+        <div class="area-card">
+          <div class="area-header">
+            <div class="area-dot" style="background:var(--green)"></div>
+            <div class="area-title">🌐 Webentwicklung</div>
+          </div>
+          <div class="area-text">Backends und APIs lassen sich mit Python schnell und zuverlässig bauen. Viele bekannte Webseiten laufen auf Python-Frameworks.</div>
+          <div class="area-tags">
+            <span class="tag">Django</span>
+            <span class="tag">Flask</span>
+            <span class="tag">FastAPI</span>
+          </div>
+        </div>
+        <div class="area-card">
+          <div class="area-header">
+            <div class="area-dot" style="background:var(--pink)"></div>
+            <div class="area-title">⚙️ Automatisierung</div>
+          </div>
+          <div class="area-text">Wiederkehrende Aufgaben automatisieren: Dateien umbenennen, E-Mails versenden, Webseiten auslesen – Python macht's in wenigen Zeilen.</div>
+          <div class="area-tags">
+            <span class="tag">Selenium</span>
+            <span class="tag">BeautifulSoup</span>
+            <span class="tag">os / shutil</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- VERGLEICH -->
+    <section id="vergleich">
+      <div class="fade-in">
+        <div class="section-label">▸ 05 — Vergleich</div>
+        <h2 class="section-heading">Python vs. andere Sprachen</h2>
+        <p class="section-desc">Warum Python gerade für Einsteiger die bessere Wahl ist – im Vergleich zu anderen populären Sprachen.</p>
+      </div>
+      <div class="grid-3 fade-in">
+        <div class="lang-card highlight">
+          <div class="lang-name" style="color:var(--yellow)">Python</div>
+          <div class="lang-badge" style="background:rgba(245,200,66,0.15);color:var(--yellow)">★ Empfohlen</div>
+          <ul class="lang-props">
+            <li>Sehr einfache Syntax</li>
+            <li>Schneller Einstieg</li>
+            <li>Riesige Community</li>
+            <li>Ideal für KI &amp; Daten</li>
+            <li>Langsamer als C/Java</li>
+          </ul>
+        </div>
+        <div class="lang-card">
+          <div class="lang-name" style="color:var(--blue)">JavaScript</div>
+          <div class="lang-badge" style="background:rgba(79,168,255,0.12);color:var(--blue)">Web-Standard</div>
+          <ul class="lang-props">
+            <li>Mittlere Lernkurve</li>
+            <li>Ideal für Webseiten</li>
+            <li>Läuft im Browser</li>
+            <li>Viele Sonderzeichen</li>
+            <li>Komplexere Konzepte</li>
+          </ul>
+        </div>
+        <div class="lang-card">
+          <div class="lang-name" style="color:var(--muted)">Java</div>
+          <div class="lang-badge" style="background:rgba(255,255,255,0.05);color:var(--muted)">Enterprise</div>
+          <ul class="lang-props">
+            <li>Steile Lernkurve</li>
+            <li>Sehr viel Boilerplate</li>
+            <li>Stark typisiert</li>
+            <li>Sehr performant</li>
+            <li>Weniger für Anfänger</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- LERNTHEMEN -->
+    <section id="themen">
+      <div class="fade-in">
+        <div class="section-label">▸ 06 — Lernthemen</div>
+        <h2 class="section-heading">Alle Themen im Überblick</h2>
+        <p class="section-desc">Von den Grundlagen bis zu Praxisprojekten – hier findest du alle wichtigen Python-Themen strukturiert aufgelistet.</p>
+      </div>
+      <div class="topic-list fade-in">
+        <a class="topic-item" href="/html/vscode.html">
+          <div class="topic-icon">💻</div>
+          <div class="topic-info">
+            <div class="topic-title">Installationsguide für VS Code</div>
+            <div class="topic-desc">Editor einrichten, Extensions, Python-Pfad</div>
+          </div>
+          <span class="topic-arrow">→</span>
+        </a>
+        <a class="topic-item" href="/html/syntax.html">
+          <div class="topic-icon">⚙️</div>
+          <div class="topic-info">
+            <div class="topic-title">Syntax</div>
+            <div class="topic-desc">Variablen, Datentypen, Operatoren, Einrückungen</div>
+          </div>
+          <span class="topic-arrow">→</span>
+        </a>
+        <a class="topic-item" href="/html/schleifen.html">
+          <div class="topic-icon">🔁</div>
+          <div class="topic-info">
+            <div class="topic-title">Schleifen</div>
+            <div class="topic-desc">for, while, break, continue, range()</div>
+          </div>
+          <span class="topic-arrow">→</span>
+        </a>
+        <a class="topic-item" href="/html/funktionen.html">
+          <div class="topic-icon">📦</div>
+          <div class="topic-info">
+            <div class="topic-title">Funktionen</div>
+            <div class="topic-desc">def, Parameter, Return, Standardwerte, Lambda</div>
+          </div>
+          <span class="topic-arrow">→</span>
+        </a>
+        <a class="topic-item" href="#">
+          <div class="topic-icon">🗂️</div>
+          <div class="topic-info">
+            <div class="topic-title">Datenstrukturen</div>
+            <div class="topic-desc">Listen, Tupel, Dictionaries, Sets</div>
+          </div>
+          <span class="topic-arrow">→</span>
+        </a>
+        <a class="topic-item" href="#">
+          <div class="topic-icon">📐</div>
+          <div class="topic-info">
+            <div class="topic-title">Objektorientiertes Programmieren</div>
+            <div class="topic-desc">Klassen, Objekte, Vererbung, Methoden</div>
+          </div>
+          <span class="topic-arrow">→</span>
+        </a>
+        <a class="topic-item" href="#">
+          <div class="topic-icon">🛡️</div>
+          <div class="topic-info">
+            <div class="topic-title">Fehlerbehandlung</div>
+            <div class="topic-desc">try, except, finally, eigene Exceptions</div>
+          </div>
+          <span class="topic-arrow">→</span>
+        </a>
+        <a class="topic-item" href="#">
+          <div class="topic-icon">📤</div>
+          <div class="topic-info">
+            <div class="topic-title">Module und Pakete</div>
+            <div class="topic-desc">import, pip, eigene Module, PyPI</div>
+          </div>
+          <span class="topic-arrow">→</span>
+        </a>
+        <a class="topic-item" href="#">
+          <div class="topic-icon">🏗️</div>
+          <div class="topic-info">
+            <div class="topic-title">Praxisprojekte</div>
+            <div class="topic-desc">Taschenrechner, To-Do-App, Web-Scraper, API</div>
+          </div>
+          <span class="topic-arrow">→</span>
+        </a>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ERSTE SCHRITTE -->
+    <section id="start">
+      <div class="fade-in">
+        <div class="section-label">▸ 07 — Loslegen</div>
+        <h2 class="section-heading">Erste Schritte mit Python</h2>
+        <p class="section-desc">In 4 einfachen Schritten von null zum ersten lauffähigen Programm.</p>
+      </div>
+      <div class="steps fade-in">
+        <div class="step">
+          <div class="step-num" style="background:rgba(245,200,66,0.15);color:var(--yellow)">1</div>
+          <div>
+            <div class="step-title">Python installieren</div>
+            <div class="step-text">Lade Python von der offiziellen Webseite herunter und installiere es. Wähle immer die neueste stabile Version.</div>
+            <div class="step-code">→ python.org/downloads</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num" style="background:rgba(79,168,255,0.15);color:var(--blue)">2</div>
+          <div>
+            <div class="step-title">Editor einrichten</div>
+            <div class="step-text">Installiere einen Code-Editor. VS Code ist kostenlos, leistungsstark und bei Anfängern sehr beliebt.</div>
+            <div class="step-code">→ code.visualstudio.com</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num" style="background:rgba(77,255,176,0.15);color:var(--green)">3</div>
+          <div>
+            <div class="step-title">Erste Datei erstellen</div>
+            <div class="step-text">Erstelle eine neue Datei mit der Endung <code style="font-family:'JetBrains Mono',monospace;color:var(--green)">.py</code> und schreibe dein erstes Programm.</div>
+            <div class="step-code"><span class="fn">print</span>(<span class="str">"Hallo, Welt!"</span>)</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num" style="background:rgba(184,122,255,0.15);color:var(--purple)">4</div>
+          <div>
+            <div class="step-title">Programm ausführen</div>
+            <div class="step-text">Öffne das Terminal, navigiere in deinen Ordner und starte dein Programm mit einem Befehl.</div>
+            <div class="step-code">$ python mein_programm.py</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="cta">
+      <div class="cta-box fade-in">
+        <div class="cta-title">Bereit zum Starten?</div>
+        <p class="cta-text">Python ist die beste Entscheidung für deinen Einstieg in die Programmierung. Einfach anfangen – der Rest kommt von selbst.</p>
+        <div class="hero-buttons">
+          <a href="/html/syntax.html" class="btn btn-primary">Los geht's! →</a>
+          <a href="#was" class="btn btn-outline">Nochmal lesen</a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      Erstellt mit <span>♥</span> · HelloPython.de · Bastian Meese · <span>2025 - 2026</span>
+    </footer>
+
+  </div><!-- end main-content -->
+</div><!-- end page-layout -->
+
+<script src="/JS/landingpage.js">
+</script>
+</body>
+</html>
