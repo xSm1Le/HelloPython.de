@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Python Schleifen – HelloPython.de</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/python Grundlagen/css/schleifenStyle.css">
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- TOP NAV -->
+<nav class="topnav">
+  <a class="nav-logo" href="/index.html"><span>&lt;</span> HelloPython.de</a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#for">for-Schleife</a></li>
+      <li><a href="#while">while-Schleife</a></li>
+      <li><a href="#ablauf">Ablauf</a></li>
+      <li><a href="#stufen">4 Stufen</a></li>
+      <li><a href="#vergleich">Vergleich</a></li>
+    </ul>
+    <button class="hamburger" id="hamburgerBtn" aria-label="Menü öffnen">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- OVERLAY -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+
+  <a class="sidebar-back" href="/index.html">
+    <span class="sidebar-back-arrow">←</span> Zurück zur Startseite
+  </a>
+
+  <div class="sidebar-divider"></div>
+
+  <div class="sidebar-section-label">Schleifen – Kapitel</div>
+
+  <a class="sidebar-link active" href="#for" data-section="for">
+    <span class="s-icon">🔢</span> for-Schleife
+  </a>
+  <a class="sidebar-link" href="#while" data-section="while">
+    <span class="s-icon">🔄</span> while-Schleife
+  </a>
+  <a class="sidebar-link" href="#ablauf" data-section="ablauf">
+    <span class="s-icon">📊</span> Ablauf
+  </a>
+  <a class="sidebar-link" href="#stufen" data-section="stufen">
+    <span class="s-icon">📶</span> 4 Stufen
+  </a>
+  <a class="sidebar-link" href="#vergleich" data-section="vergleich">
+    <span class="s-icon">⚖️</span> for vs. while
+    <span class="s-badge">info</span>
+  </a>
+  <a class="sidebar-link" href="#regel" data-section="regel">
+    <span class="s-icon">💡</span> Goldene Regel
+    <span class="s-badge">wichtig</span>
+  </a>
+
+  <div class="sidebar-divider"></div>
+
+  <div class="sidebar-section-label">Weitere – Kapitel</div>
+
+  <a class="sidebar-link" href="/python Grundlagen/html/schleifen.html">
+    <span class="s-icon">🔁</span> Schleifen
+    <span class="s-badge">aktiv</span>
+  </a>
+  <a class="sidebar-link" href="/python Grundlagen/html/vscode.html">
+    <span class="s-icon">💻</span> VS Code Guide
+    <span class="s-badge">neu</span>
+  </a>
+  <a class="sidebar-link" href="/python Grundlagen/html/syntax.html">
+    <span class="s-icon">⚙️</span> Syntax
+  </a>
+  <a class="sidebar-link" href="/python Grundlagen/html/funktionen.html">
+    <span class="s-icon">📦</span> Funktionen
+  </a>
+  <a class="sidebar-link" href="/python Grundlagen/html/datenstrukturen.html" data-section="themen">
+    <span class="s-icon">🗂️</span> Datenstrukturen
+    <span class="s-badge">neu</span>
+  </a>
+  <a class="sidebar-link" href="/python Grundlagen/html/oop.html" data-section="themen">
+      <span class="s-icon">📐</span> OOP
+      <span class="s-badge">neu</span>
+    </a>
+    <a class="sidebar-link" href="/python Grundlagen/html/fehlerbehandlung.html" data-section="themen">
+      <span class="s-icon">🛡️</span> Fehlerbehandlung
+      <span class="s-badge">neu</span>
+    </a>
+    <a class="sidebar-link" href="/python Grundlagen/html/module_pakete.html" data-section="themen">
+      <span class="s-icon">📦</span> Module & Pakete
+      <span class="s-badge">neu</span>
+    </a>
+</aside>
+
+<!-- LAYOUT -->
+<div class="layout">
+<main class="main">
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-badge">Code wiederholen mit</div>
+    <h1 class="hero-title">Schleifen</h1>
+    <p class="hero-sub"># for · while · break · continue</p>
+    <div class="hero-code">
+      <span class="cmt"># for-Schleife</span><br>
+      <span class="kw">for</span> <span class="param">i</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="num">5</span>):<br>
+      <span class="ind"></span><span class="fn">print</span>(<span class="param">i</span>)  <span class="cmt"># → 0, 1, 2, 3, 4</span>
+    </div>
+    <div class="hero-buttons">
+      <a href="#for" class="btn btn-primary">Los geht's →</a>
+      <a href="/index.html#themen" class="btn btn-outline">Alle Themen</a>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- FOR + WHILE -->
+  <section id="for">
+    <div class="fade-in">
+      <div class="section-label">▸ 01 — for & while</div>
+      <h2 class="section-heading">for- und while-Schleife</h2>
+      <p class="section-desc">Python kennt zwei Arten von Schleifen: <code class="code-inline">for</code> für bekannte Mengen und <code class="code-inline">while</code> für bedingungsbasierte Wiederholungen.</p>
+    </div>
+
+    <div class="anatomy-split fade-in">
+      <div class="anatomy-half">
+        <div class="section-title">▸ for-Schleife</div>
+        <div class="code-anatomy" style="font-size:13px; line-height:1.9">
+          <div class="code-line">
+            <span class="kw">for</span>&nbsp;<span class="param">i</span>&nbsp;<span class="kw">in</span>&nbsp;<span class="fn">range</span><span class="paren">(</span><span class="num">5</span><span class="paren">)</span><span class="op">:</span>
+          </div>
+          <div class="code-line">
+            <span class="indent"></span><span class="var">print</span><span class="paren">(</span><span class="param">i</span><span class="paren">)</span>
+          </div>
+          <br>
+          <div class="code-line"><span class="cmt"># → 0, 1, 2, 3, 4</span></div>
+        </div>
+        <div class="annotations" style="margin-top:16px; grid-template-columns:1fr;">
+          <div class="ann">
+            <div class="ann-dot" style="background:var(--pink)"></div>
+            <div><div class="ann-label">for … in</div><div class="ann-desc">Wiederholt für jeden Wert in einer Sequenz</div></div>
+          </div>
+          <div class="ann">
+            <div class="ann-dot" style="background:var(--blue)"></div>
+            <div><div class="ann-label">i</div><div class="ann-desc">Laufvariable – aktueller Wert pro Durchlauf</div></div>
+          </div>
+          <div class="ann">
+            <div class="ann-dot" style="background:var(--orange)"></div>
+            <div><div class="ann-label">range(5)</div><div class="ann-desc">Erzeugt Zahlen von 0 bis 4</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="anatomy-half" id="while">
+        <div class="section-title">▸ while-Schleife</div>
+        <div class="code-anatomy" style="font-size:13px; line-height:1.9">
+          <div class="code-line"><span class="var">x</span>&nbsp;<span class="op">=</span>&nbsp;<span class="num">0</span></div>
+          <div class="code-line">
+            <span class="kw">while</span>&nbsp;<span class="param">x</span>&nbsp;<span class="op">&lt;</span>&nbsp;<span class="num">5</span><span class="op">:</span>
+          </div>
+          <div class="code-line">
+            <span class="indent"></span><span class="var">print</span><span class="paren">(</span><span class="param">x</span><span class="paren">)</span>
+          </div>
+          <div class="code-line">
+            <span class="indent"></span><span class="param">x</span>&nbsp;<span class="op">+=</span>&nbsp;<span class="num">1</span>
+          </div>
+          <br>
+          <div class="code-line"><span class="cmt"># → 0, 1, 2, 3, 4</span></div>
+        </div>
+        <div class="annotations" style="margin-top:16px; grid-template-columns:1fr;">
+          <div class="ann">
+            <div class="ann-dot" style="background:var(--pink)"></div>
+            <div><div class="ann-label">while</div><div class="ann-desc">Läuft solange die Bedingung True ist</div></div>
+          </div>
+          <div class="ann">
+            <div class="ann-dot" style="background:var(--green)"></div>
+            <div><div class="ann-label">x &lt; 5</div><div class="ann-desc">Bedingung – wird vor jedem Durchlauf geprüft</div></div>
+          </div>
+          <div class="ann">
+            <div class="ann-dot" style="background:var(--purple)"></div>
+            <div><div class="ann-label">x += 1</div><div class="ann-desc">Zähler erhöhen – sonst Endlosschleife!</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ABLAUF -->
+  <section id="ablauf">
+    <div class="fade-in">
+      <div class="section-label">▸ 02 — Ablauf</div>
+      <h2 class="section-heading">Wie läuft eine Schleife ab?</h2>
+      <p class="section-desc">Jede Schleife prüft eine Bedingung, führt den Code aus und springt zurück – bis die Bedingung False wird.</p>
+    </div>
+
+    <div class="flow-card fade-in">
+      <div class="section-title">▸ Flussdiagramm</div>
+      <div class="flow-loop">
+        <div class="flow-row">
+          <div class="flow-box" style="background:rgba(79,168,255,0.1); border:1px solid rgba(79,168,255,0.3)">
+            <div class="flow-label">Start</div>
+            <div class="flow-value" style="color:var(--blue)">i = 0</div>
+          </div>
+        </div>
+        <div class="flow-arrow-v">↓</div>
+        <div class="flow-row" style="gap:16px">
+          <div class="flow-box" style="background:rgba(245,200,66,0.1); border:1px solid rgba(245,200,66,0.3)">
+            <div class="flow-label">Bedingung</div>
+            <div class="flow-value" style="color:var(--yellow)">i &lt; 5 ?</div>
+          </div>
+          <div style="display:flex; flex-direction:column; align-items:center; gap:4px">
+            <span style="font-size:11px; color:var(--muted); font-family:'JetBrains Mono',monospace">False</span>
+            <span style="font-size:18px; color:var(--pink)">→</span>
+          </div>
+          <div class="flow-box" style="background:rgba(255,107,157,0.1); border:1px solid rgba(255,107,157,0.3)">
+            <div class="flow-label">Ende</div>
+            <div class="flow-value" style="color:var(--pink)">Schleife stoppt</div>
+          </div>
+        </div>
+        <div style="display:flex; align-items:center; gap:6px">
+          <span style="font-size:11px; color:var(--muted); font-family:'JetBrains Mono',monospace">True</span>
+          <span class="flow-arrow-v">↓</span>
+        </div>
+        <div class="flow-row">
+          <div class="flow-box" style="background:rgba(77,255,176,0.1); border:1px solid rgba(77,255,176,0.3)">
+            <div class="flow-label">Code ausführen</div>
+            <div class="flow-value" style="color:var(--green)">print(i)</div>
+          </div>
+        </div>
+        <div class="flow-arrow-v">↓</div>
+        <div class="flow-row">
+          <div class="flow-box" style="background:rgba(184,122,255,0.1); border:1px solid rgba(184,122,255,0.3)">
+            <div class="flow-label">Zähler erhöhen</div>
+            <div class="flow-value" style="color:var(--purple)">i += 1</div>
+          </div>
+        </div>
+        <div class="loop-back">
+          <div class="loop-back-line"></div>
+          <span>↑ zurück zur Bedingung</span>
+          <div class="loop-back-line"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 4 STUFEN -->
+  <section id="stufen">
+    <div class="fade-in">
+      <div class="section-label">▸ 03 — Stufen</div>
+      <h2 class="section-heading">4 Stufen – von einfach bis komplex</h2>
+      <p class="section-desc">Von der einfachen <code class="code-inline">range()</code>-Schleife bis hin zu <code class="code-inline">break</code> und <code class="code-inline">continue</code>.</p>
+    </div>
+
+    <div class="levels-grid fade-in">
+
+      <div class="level-card" data-color="blue">
+        <div class="level-header">
+          <div class="level-num" style="background:rgba(79,168,255,0.15);color:var(--blue)">1</div>
+          <div class="level-title">for mit range()</div>
+        </div>
+        <div class="level-code">
+          <span class="kw">for</span> <span class="param">i</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="num">3</span>):<br>
+          &nbsp;&nbsp;<span class="var">print</span>(<span class="param">i</span>)
+        </div>
+        <div class="level-output"><span class="output-arrow">▶</span> 0 &nbsp;1 &nbsp;2</div>
+      </div>
+
+      <div class="level-card" data-color="green">
+        <div class="level-header">
+          <div class="level-num" style="background:rgba(77,255,176,0.15);color:var(--green)">2</div>
+          <div class="level-title">for über Liste</div>
+        </div>
+        <div class="level-code">
+          <span class="var">tiere</span> = [<span class="str">"Hund"</span>, <span class="str">"Katze"</span>]<br>
+          <span class="kw">for</span> <span class="param">t</span> <span class="kw">in</span> <span class="var">tiere</span>:<br>
+          &nbsp;&nbsp;<span class="var">print</span>(<span class="param">t</span>)
+        </div>
+        <div class="level-output"><span class="output-arrow">▶</span> Hund &nbsp;Katze</div>
+      </div>
+
+      <div class="level-card" data-color="pink">
+        <div class="level-header">
+          <div class="level-num" style="background:rgba(255,107,157,0.15);color:var(--pink)">3</div>
+          <div class="level-title">while + break</div>
+        </div>
+        <div class="level-code">
+          <span class="var">x</span> = <span class="num">0</span><br>
+          <span class="kw">while</span> <span class="ret">True</span>:<br>
+          &nbsp;&nbsp;<span class="kw">if</span> <span class="param">x</span> == <span class="num">3</span>: <span class="kw">break</span><br>
+          &nbsp;&nbsp;<span class="param">x</span> += <span class="num">1</span>
+        </div>
+        <div class="level-output"><span class="output-arrow">▶</span> stoppt bei x = 3</div>
+      </div>
+
+      <div class="level-card" data-color="purple">
+        <div class="level-header">
+          <div class="level-num" style="background:rgba(184,122,255,0.15);color:var(--purple)">4</div>
+          <div class="level-title">continue überspringen</div>
+        </div>
+        <div class="level-code">
+          <span class="kw">for</span> <span class="param">i</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="num">5</span>):<br>
+          &nbsp;&nbsp;<span class="kw">if</span> <span class="param">i</span> == <span class="num">2</span>: <span class="kw">continue</span><br>
+          &nbsp;&nbsp;<span class="var">print</span>(<span class="param">i</span>)
+        </div>
+        <div class="level-output"><span class="output-arrow">▶</span> 0 &nbsp;1 &nbsp;3 &nbsp;4</div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- VERGLEICH -->
+  <section id="vergleich">
+    <div class="fade-in">
+      <div class="section-label">▸ 04 — Vergleich</div>
+      <h2 class="section-heading">for vs. while – wann was?</h2>
+      <p class="section-desc">Beide Schleifen können viel, aber je nach Situation ist eine besser geeignet als die andere.</p>
+    </div>
+
+    <div class="compare-card fade-in">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Schleife</th>
+            <th>Wann benutzen?</th>
+            <th>Beispiel</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="tag" style="background:rgba(79,168,255,0.15);color:var(--blue)">for</span></td>
+            <td style="color:var(--text)">Anzahl der Durchläufe ist bekannt</td>
+            <td style="color:var(--muted)">Liste durchgehen, range(n)</td>
+          </tr>
+          <tr>
+            <td><span class="tag" style="background:rgba(77,255,176,0.15);color:var(--green)">while</span></td>
+            <td style="color:var(--text)">Läuft bis eine Bedingung erfüllt ist</td>
+            <td style="color:var(--muted)">Benutzereingabe, Warteschleife</td>
+          </tr>
+          <tr>
+            <td><span class="tag" style="background:rgba(255,107,157,0.15);color:var(--pink)">break</span></td>
+            <td style="color:var(--text)">Schleife sofort beenden</td>
+            <td style="color:var(--muted)">Suche abbrechen wenn gefunden</td>
+          </tr>
+          <tr>
+            <td><span class="tag" style="background:rgba(184,122,255,0.15);color:var(--purple)">continue</span></td>
+            <td style="color:var(--text)">Aktuellen Durchlauf überspringen</td>
+            <td style="color:var(--muted)">Ungültige Werte ignorieren</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- GOLDENE REGEL -->
+  <section id="regel">
+    <div class="fade-in">
+      <div class="section-label">▸ 05 — Goldene Regel</div>
+      <h2 class="section-heading">Die goldene Regel</h2>
+    </div>
+    <div class="rule-card fade-in">
+      <div class="rule-icon">💡</div>
+      <div class="rule-text">
+        <strong>Die goldene Regel:</strong> Immer sicherstellen, dass eine <strong>while-Schleife</strong> irgendwann endet – sonst entsteht eine Endlosschleife, die das Programm zum Absturz bringt!
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="cta">
+    <div class="cta-box fade-in">
+      <div class="cta-title">Weiter lernen</div>
+      <p class="cta-text">Du hast Schleifen gemeistert! Als nächstes kommen Funktionen, Datenstrukturen und mehr.</p>
+      <div class="hero-buttons">
+        <a href="/python Grundlagen/html/datenstrukturen.html" class="btn btn-primary">Datenstrukturen →</a>
+        <a href="/index.html" class="btn btn-outline">← Startseite</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>Erstellt mit <span>♥</span> · HelloPython.de · Bastian Meese · <span>2025 - 2026</span></footer>
+
+</main>
+</div>
+
+<script src="/python Grundlagen/JS/syntax.js"></script>
+</body>
+</html>

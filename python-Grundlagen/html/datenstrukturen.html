@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Python Datenstrukturen – HelloPython.de</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/python Grundlagen/css/Datenstrukturen.css">
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- TOP NAV -->
+<nav class="topnav">
+  <a class="nav-logo" href="/index.html"><span>&lt;</span> HelloPython.de</a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#listen">Listen</a></li>
+      <li><a href="#tupel">Tupel</a></li>
+      <li><a href="#dictionaries">Dictionaries</a></li>
+      <li><a href="#sets">Sets</a></li>
+      <li><a href="#vergleich">Vergleich</a></li>
+    </ul>
+    <button class="hamburger" id="hamburgerBtn" aria-label="Menü öffnen">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- OVERLAY -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+
+  <a class="sidebar-back" href="/index.html">
+    <span class="sidebar-back-arrow">←</span> Zurück zur Startseite
+  </a>
+
+  <div class="sidebar-divider"></div>
+
+  <div class="sidebar-section-label">Datenstrukturen – Kapitel</div>
+
+  <a class="sidebar-link active" href="#listen" data-section="listen">
+    <span class="s-icon">📋</span> Listen
+  </a>
+  <a class="sidebar-link" href="#tupel" data-section="tupel">
+    <span class="s-icon">📌</span> Tupel
+  </a>
+  <a class="sidebar-link" href="#dictionaries" data-section="dictionaries">
+    <span class="s-icon">📖</span> Dictionaries
+  </a>
+  <a class="sidebar-link" href="#sets" data-section="sets">
+    <span class="s-icon">🔵</span> Sets
+  </a>
+  <a class="sidebar-link" href="#vergleich" data-section="vergleich">
+    <span class="s-icon">⚖️</span> Vergleich
+    <span class="s-badge">info</span>
+  </a>
+  <a class="sidebar-link" href="#regel" data-section="regel">
+    <span class="s-icon">💡</span> Goldene Regel
+    <span class="s-badge">wichtig</span>
+  </a>
+
+  <div class="sidebar-divider"></div>
+
+  <div class="sidebar-section-label">Weitere – Kapitel</div>
+
+  <a class="sidebar-link" href="/html/datenstrukturen.html" data-section="themen">
+    <span class="s-icon">🗂️</span> Datenstrukturen
+    <span class="s-badge">aktiv</span>
+  </a>
+  <a class="sidebar-link" href="/html/vscode.html">
+    <span class="s-icon">💻</span> VS Code Guide
+  </a>
+  <a class="sidebar-link" href="/html/syntax.html">
+    <span class="s-icon">⚙️</span> Syntax
+  </a>
+  <a class="sidebar-link" href="/html/schleifen.html">
+    <span class="s-icon">🔁</span> Schleifen
+  </a>
+  <a class="sidebar-link" href="/html/funktionen.html">
+    <span class="s-icon">📦</span> Funktionen
+  </a>
+  <a class="sidebar-link" href="/html/oop.html" data-section="themen">
+      <span class="s-icon">📐</span> OOP
+      <span class="s-badge">neu</span>
+    </a>
+  <a class="sidebar-link" href="/html/fehlerbehandlung.html" data-section="themen">
+      <span class="s-icon">🛡️</span> Fehlerbehandlung
+      <span class="s-badge">neu</span>
+    </a>
+    <a class="sidebar-link" href="/html/module_pakete.html" data-section="themen">
+      <span class="s-icon">📦</span> Module & Pakete
+      <span class="s-badge">neu</span>
+    </a>
+  <div class="sidebar-divider"></div>
+
+</aside>
+
+<!-- LAYOUT -->
+<div class="layout">
+<main class="main">
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-badge">Daten organisieren mit</div>
+    <h1 class="hero-title">Datenstrukturen</h1>
+    <p class="hero-sub"># list · tuple · dict · set</p>
+    <div class="hero-code">
+      <span class="cmt"># Die 4 wichtigsten Datenstrukturen</span><br>
+      <span class="var">liste</span>  <span class="op">=</span> [<span class="str">"Python"</span>, <span class="str">"ist"</span>, <span class="str">"cool"</span>]<br>
+      <span class="var">tupel</span>  <span class="op">=</span> (<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>)<br>
+      <span class="var">dict</span>   <span class="op">=</span> {<span class="str">"name"</span><span class="op">:</span> <span class="str">"Anna"</span>, <span class="str">"alter"</span><span class="op">:</span> <span class="num">25</span>}<br>
+      <span class="var">menge</span>  <span class="op">=</span> {<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">2</span>, <span class="num">1</span>}  <span class="cmt"># → {1, 2, 3}</span>
+    </div>
+    <div class="hero-buttons">
+      <a href="#listen" class="btn btn-primary">Los geht's →</a>
+      <a href="/index.html#themen" class="btn btn-outline">Alle Themen</a>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- LISTEN -->
+  <section id="listen">
+    <div class="fade-in">
+      <div class="section-label">▸ 01 — Listen</div>
+      <h2 class="section-heading">Listen <span class="type-badge" style="background:rgba(77,255,176,0.12);color:var(--green);border-color:rgba(77,255,176,0.3)">list</span></h2>
+      <p class="section-desc">Eine Liste speichert mehrere Werte in einer bestimmten Reihenfolge. Sie ist <strong>veränderbar</strong> – du kannst Einträge hinzufügen, löschen und ändern.</p>
+    </div>
+
+    <div class="fade-in">
+      <div class="code-header">
+        <div class="code-dots">
+          <div class="code-dot" style="background:#ff5f57"></div>
+          <div class="code-dot" style="background:#febc2e"></div>
+          <div class="code-dot" style="background:#28c840"></div>
+        </div>
+        <span class="code-filename">listen.py</span>
+        <span></span>
+      </div>
+      <div class="code-block">
+<span class="line"><span class="cmt"># Liste erstellen</span></span>
+<span class="line"><span class="var">fruechte</span> <span class="op">=</span> [<span class="str">"Apfel"</span>, <span class="str">"Banane"</span>, <span class="str">"Kirsche"</span>]</span>
+<span class="line"></span>
+<span class="line"><span class="cmt"># Zugriff per Index (beginnt bei 0)</span></span>
+<span class="line"><span class="fn">print</span>(<span class="var">fruechte</span>[<span class="num">0</span>])   <span class="cmt"># → Apfel</span></span>
+<span class="line"><span class="fn">print</span>(<span class="var">fruechte</span>[<span class="op">-</span><span class="num">1</span>])  <span class="cmt"># → Kirsche (letztes Element)</span></span>
+<span class="line"></span>
+<span class="line"><span class="cmt"># Elemente hinzufügen</span></span>
+<span class="line"><span class="var">fruechte</span>.<span class="fn">append</span>(<span class="str">"Mango"</span>)     <span class="cmt"># am Ende anfügen</span></span>
+<span class="line"><span class="var">fruechte</span>.<span class="fn">insert</span>(<span class="num">1</span>, <span class="str">"Birne"</span>)  <span class="cmt"># an Position 1 einfügen</span></span>
+<span class="line"></span>
+<span class="line"><span class="cmt"># Element entfernen</span></span>
+<span class="line"><span class="var">fruechte</span>.<span class="fn">remove</span>(<span class="str">"Banane"</span>)    <span class="cmt"># nach Wert entfernen</span></span>
+<span class="line"><span class="var">fruechte</span>.<span class="fn">pop</span>()               <span class="cmt"># letztes Element entfernen</span></span>
+<span class="line"></span>
+<span class="line"><span class="cmt"># Länge und Iteration</span></span>
+<span class="line"><span class="fn">print</span>(<span class="fn">len</span>(<span class="var">fruechte</span>))          <span class="cmt"># Anzahl der Elemente</span></span>
+<span class="line"><span class="kw">for</span> <span class="param">f</span> <span class="kw">in</span> <span class="var">fruechte</span>: <span class="fn">print</span>(<span class="param">f</span>)  <span class="cmt"># alle ausgeben</span></span>
+      </div>
+    </div>
+
+    <div class="methods-grid fade-in">
+      <div class="method-card" style="--c: var(--green); --cb: rgba(77,255,176,0.08)">
+        <div class="method-name">.append(x)</div>
+        <div class="method-desc">Fügt x ans Ende der Liste an</div>
+      </div>
+      <div class="method-card" style="--c: var(--blue); --cb: rgba(79,168,255,0.08)">
+        <div class="method-name">.insert(i, x)</div>
+        <div class="method-desc">Fügt x an Position i ein</div>
+      </div>
+      <div class="method-card" style="--c: var(--pink); --cb: rgba(255,107,157,0.08)">
+        <div class="method-name">.remove(x)</div>
+        <div class="method-desc">Entfernt erstes Vorkommen von x</div>
+      </div>
+      <div class="method-card" style="--c: var(--yellow); --cb: rgba(245,200,66,0.08)">
+        <div class="method-name">.pop()</div>
+        <div class="method-desc">Entfernt & gibt letztes Element zurück</div>
+      </div>
+      <div class="method-card" style="--c: var(--purple); --cb: rgba(184,122,255,0.08)">
+        <div class="method-name">.sort()</div>
+        <div class="method-desc">Sortiert die Liste aufsteigend</div>
+      </div>
+      <div class="method-card" style="--c: var(--orange); --cb: rgba(255,159,74,0.08)">
+        <div class="method-name">.reverse()</div>
+        <div class="method-desc">Kehrt die Reihenfolge um</div>
+      </div>
+    </div>
+
+    <div class="index-visual fade-in">
+      <div class="section-title-sm">▸ Index-Visualisierung</div>
+      <div class="index-row">
+        <div class="index-item">
+          <div class="index-num" style="color:var(--green)">0</div>
+          <div class="index-val">"Apfel"</div>
+          <div class="index-neg">-3</div>
+        </div>
+        <div class="index-arrow">→</div>
+        <div class="index-item">
+          <div class="index-num" style="color:var(--blue)">1</div>
+          <div class="index-val">"Banane"</div>
+          <div class="index-neg">-2</div>
+        </div>
+        <div class="index-arrow">→</div>
+        <div class="index-item">
+          <div class="index-num" style="color:var(--pink)">2</div>
+          <div class="index-val">"Kirsche"</div>
+          <div class="index-neg">-1</div>
+        </div>
+      </div>
+      <div class="index-hint">
+        <span style="color:var(--green)">Positiver Index</span> zählt von vorne &nbsp;·&nbsp;
+        <span style="color:var(--muted)">Negativer Index</span> zählt von hinten
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- TUPEL -->
+  <section id="tupel">
+    <div class="fade-in">
+      <div class="section-label">▸ 02 — Tupel</div>
+      <h2 class="section-heading">Tupel <span class="type-badge" style="background:rgba(245,200,66,0.12);color:var(--yellow);border-color:rgba(245,200,66,0.3)">tuple</span></h2>
+      <p class="section-desc">Ein Tupel ist wie eine Liste – aber <strong>unveränderbar</strong>. Einmal erstellt, können Werte nicht mehr geändert werden. Ideal für feste Daten wie Koordinaten.</p>
+    </div>
+
+    <div class="fade-in">
+      <div class="code-header">
+        <div class="code-dots">
+          <div class="code-dot" style="background:#ff5f57"></div>
+          <div class="code-dot" style="background:#febc2e"></div>
+          <div class="code-dot" style="background:#28c840"></div>
+        </div>
+        <span class="code-filename">tupel.py</span>
+        <span></span>
+      </div>
+      <div class="code-block">
+<span class="line"><span class="cmt"># Tupel erstellen (runde Klammern)</span></span>
+<span class="line"><span class="var">koordinaten</span> <span class="op">=</span> (<span class="num">48.1</span>, <span class="num">11.6</span>)     <span class="cmt"># München</span></span>
+<span class="line"><span class="var">farben</span>      <span class="op">=</span> (<span class="str">"rot"</span>, <span class="str">"grün"</span>, <span class="str">"blau"</span>)</span>
+<span class="line"></span>
+<span class="line"><span class="cmt"># Zugriff per Index (wie bei Listen)</span></span>
+<span class="line"><span class="fn">print</span>(<span class="var">koordinaten</span>[<span class="num">0</span>])  <span class="cmt"># → 48.1</span></span>
+<span class="line"><span class="fn">print</span>(<span class="var">farben</span>[<span class="num">1</span>])       <span class="cmt"># → grün</span></span>
+<span class="line"></span>
+<span class="line"><span class="cmt"># Tupel entpacken (Unpacking)</span></span>
+<span class="line"><span class="var">lat</span>, <span class="var">lon</span> <span class="op">=</span> <span class="var">koordinaten</span></span>
+<span class="line"><span class="fn">print</span>(<span class="var">lat</span>)  <span class="cmt"># → 48.1</span></span>
+<span class="line"><span class="fn">print</span>(<span class="var">lon</span>)  <span class="cmt"># → 11.6</span></span>
+<span class="line"></span>
+<span class="line"><span class="cmt"># Das geht NICHT – Tupel sind unveränderbar!</span></span>
+<span class="line"><span class="cmt"># koordinaten[0] = 50.0  → TypeError!</span></span>
+      </div>
+    </div>
+
+    <div class="compare-half-grid fade-in">
+      <div class="prop-card" style="border-color:rgba(77,255,176,0.25)">
+        <div class="prop-icon">✅</div>
+        <div class="prop-title" style="color:var(--green)">Wann Tupel benutzen?</div>
+        <ul class="prop-list">
+          <li>Daten die sich nie ändern (GPS, RGB, Datum)</li>
+          <li>Rückgabe mehrerer Werte aus Funktionen</li>
+          <li>Als Dictionary-Schlüssel (Listen können das nicht)</li>
+          <li>Schneller als Listen bei unveränderlichen Daten</li>
+        </ul>
+      </div>
+      <div class="prop-card" style="border-color:rgba(255,107,157,0.25)">
+        <div class="prop-icon">❌</div>
+        <div class="prop-title" style="color:var(--pink)">Wann besser eine Liste?</div>
+        <ul class="prop-list">
+          <li>Wenn du Elemente hinzufügen willst</li>
+          <li>Wenn du Elemente löschen willst</li>
+          <li>Wenn sich die Sammlung dynamisch ändert</li>
+          <li>Wenn du sortieren oder umkehren willst</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- DICTIONARIES -->
+  <section id="dictionaries">
+    <div class="fade-in">
+      <div class="section-label">▸ 03 — Dictionaries</div>
+      <h2 class="section-heading">Dictionaries <span class="type-badge" style="background:rgba(79,168,255,0.12);color:var(--blue);border-color:rgba(79,168,255,0.3)">dict</span></h2>
+      <p class="section-desc">Ein Dictionary speichert Daten als <strong>Schlüssel-Wert-Paare</strong>. Perfekt wenn du Daten benennen willst – wie ein echtes Wörterbuch oder eine Datenbank-Zeile.</p>
+    </div>
+
+    <div class="fade-in">
+      <div class="code-header">
+        <div class="code-dots">
+          <div class="code-dot" style="background:#ff5f57"></div>
+          <div class="code-dot" style="background:#febc2e"></div>
+          <div class="code-dot" style="background:#28c840"></div>
+        </div>
+        <span class="code-filename">dictionaries.py</span>
+        <span></span>
+      </div>
+      <div class="code-block">
+<span class="line"><span class="cmt"># Dictionary erstellen</span></span>
+<span class="line"><span class="var">person</span> <span class="op">=</span> {</span>
+<span class="line">    <span class="str">"name"</span>  <span class="op">:</span> <span class="str">"Anna"</span>,</span>
+<span class="line">    <span class="str">"alter"</span> <span class="op">:</span> <span class="num">25</span>,</span>
+<span class="line">    <span class="str">"stadt"</span> <span class="op">:</span> <span class="str">"Berlin"</span></span>
+<span class="line">}</span>
+<span class="line"></span>
+<span class="line"><span class="cmt"># Zugriff per Schlüssel</span></span>
+<span class="line"><span class="fn">print</span>(<span class="var">person</span>[<span class="str">"name"</span>])           <span class="cmt"># → Anna</span></span>
+<span class="line"><span class="fn">print</span>(<span class="var">person</span>.<span class="fn">get</span>(<span class="str">"alter"</span>))      <span class="cmt"># → 25 (sicherer!)</span></span>
+<span class="line"></span>
+<span class="line"><span class="cmt"># Wert hinzufügen / ändern</span></span>
+<span class="line"><span class="var">person</span>[<span class="str">"email"</span>] <span class="op">=</span> <span class="str">"anna@mail.de"</span> <span class="cmt"># neu hinzufügen</span></span>
+<span class="line"><span class="var">person</span>[<span class="str">"alter"</span>] <span class="op">=</span> <span class="num">26</span>             <span class="cmt"># Wert ändern</span></span>
+<span class="line"></span>
+<span class="line"><span class="cmt"># Alle Schlüssel / Werte / Paare</span></span>
+<span class="line"><span class="fn">print</span>(<span class="var">person</span>.<span class="fn">keys</span>())    <span class="cmt"># → dict_keys([...])</span></span>
+<span class="line"><span class="fn">print</span>(<span class="var">person</span>.<span class="fn">values</span>())  <span class="cmt"># → dict_values([...])</span></span>
+<span class="line"></span>
+<span class="line"><span class="cmt"># Über Dictionary iterieren</span></span>
+<span class="line"><span class="kw">for</span> <span class="param">key</span>, <span class="param">val</span> <span class="kw">in</span> <span class="var">person</span>.<span class="fn">items</span>():</span>
+<span class="line">    <span class="fn">print</span>(<span class="str">f"<span style="color:var(--blue)">{"{key}"}</span>: <span style="color:var(--blue)">{"{val}"}</span>"</span>)</span>
+      </div>
+    </div>
+
+    <div class="dict-visual fade-in">
+      <div class="section-title-sm">▸ Schlüssel → Wert</div>
+      <div class="kv-list">
+        <div class="kv-row">
+          <div class="kv-key">"name"</div>
+          <div class="kv-arrow">→</div>
+          <div class="kv-val" style="color:var(--green)">"Anna"</div>
+        </div>
+        <div class="kv-row">
+          <div class="kv-key">"alter"</div>
+          <div class="kv-arrow">→</div>
+          <div class="kv-val" style="color:var(--orange)">25</div>
+        </div>
+        <div class="kv-row">
+          <div class="kv-key">"stadt"</div>
+          <div class="kv-arrow">→</div>
+          <div class="kv-val" style="color:var(--blue)">"Berlin"</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="methods-grid fade-in">
+      <div class="method-card" style="--c: var(--blue); --cb: rgba(79,168,255,0.08)">
+        <div class="method-name">.get(key)</div>
+        <div class="method-desc">Sicherer Zugriff – kein Fehler wenn Key fehlt</div>
+      </div>
+      <div class="method-card" style="--c: var(--green); --cb: rgba(77,255,176,0.08)">
+        <div class="method-name">.keys()</div>
+        <div class="method-desc">Alle Schlüssel als Ansicht zurückgeben</div>
+      </div>
+      <div class="method-card" style="--c: var(--yellow); --cb: rgba(245,200,66,0.08)">
+        <div class="method-name">.values()</div>
+        <div class="method-desc">Alle Werte als Ansicht zurückgeben</div>
+      </div>
+      <div class="method-card" style="--c: var(--pink); --cb: rgba(255,107,157,0.08)">
+        <div class="method-name">.items()</div>
+        <div class="method-desc">Alle Schlüssel-Wert-Paare als Tupel</div>
+      </div>
+      <div class="method-card" style="--c: var(--purple); --cb: rgba(184,122,255,0.08)">
+        <div class="method-name">.pop(key)</div>
+        <div class="method-desc">Schlüssel entfernen & Wert zurückgeben</div>
+      </div>
+      <div class="method-card" style="--c: var(--orange); --cb: rgba(255,159,74,0.08)">
+        <div class="method-name">.update(d)</div>
+        <div class="method-desc">Dictionary mit anderem Dictionary zusammenführen</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- SETS -->
+  <section id="sets">
+    <div class="fade-in">
+      <div class="section-label">▸ 04 — Sets</div>
+      <h2 class="section-heading">Sets <span class="type-badge" style="background:rgba(184,122,255,0.12);color:var(--purple);border-color:rgba(184,122,255,0.3)">set</span></h2>
+      <p class="section-desc">Ein Set ist eine ungeordnete Sammlung von <strong>einzigartigen</strong> Werten – doppelte Einträge werden automatisch entfernt. Ideal zum Filtern von Duplikaten.</p>
+    </div>
+
+    <div class="fade-in">
+      <div class="code-header">
+        <div class="code-dots">
+          <div class="code-dot" style="background:#ff5f57"></div>
+          <div class="code-dot" style="background:#febc2e"></div>
+          <div class="code-dot" style="background:#28c840"></div>
+        </div>
+        <span class="code-filename">sets.py</span>
+        <span></span>
+      </div>
+      <div class="code-block">
+<span class="line"><span class="cmt"># Set erstellen – Duplikate werden entfernt!</span></span>
+<span class="line"><span class="var">zahlen</span> <span class="op">=</span> {<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">2</span>, <span class="num">1</span>, <span class="num">3</span>}</span>
+<span class="line"><span class="fn">print</span>(<span class="var">zahlen</span>)  <span class="cmt"># → {1, 2, 3}</span></span>
+<span class="line"></span>
+<span class="line"><span class="cmt"># Duplikate aus einer Liste entfernen</span></span>
+<span class="line"><span class="var">doppelt</span> <span class="op">=</span> [<span class="str">"a"</span>, <span class="str">"b"</span>, <span class="str">"a"</span>, <span class="str">"c"</span>, <span class="str">"b"</span>]</span>
+<span class="line"><span class="var">einmalig</span> <span class="op">=</span> <span class="fn">list</span>(<span class="fn">set</span>(<span class="var">doppelt</span>))</span>
+<span class="line"><span class="fn">print</span>(<span class="var">einmalig</span>)  <span class="cmt"># → ["a", "b", "c"]</span></span>
+<span class="line"></span>
+<span class="line"><span class="cmt"># Element hinzufügen / entfernen</span></span>
+<span class="line"><span class="var">zahlen</span>.<span class="fn">add</span>(<span class="num">4</span>)      <span class="cmt"># hinzufügen</span></span>
+<span class="line"><span class="var">zahlen</span>.<span class="fn">discard</span>(<span class="num">2</span>) <span class="cmt"># entfernen (kein Fehler wenn nicht vorhanden)</span></span>
+<span class="line"></span>
+<span class="line"><span class="cmt"># Mengenoperationen</span></span>
+<span class="line"><span class="var">a</span> <span class="op">=</span> {<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>}</span>
+<span class="line"><span class="var">b</span> <span class="op">=</span> {<span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>}</span>
+<span class="line"><span class="fn">print</span>(<span class="var">a</span> <span class="op">|</span> <span class="var">b</span>)  <span class="cmt"># Vereinigung  → {1, 2, 3, 4}</span></span>
+<span class="line"><span class="fn">print</span>(<span class="var">a</span> <span class="op">&amp;</span> <span class="var">b</span>)  <span class="cmt"># Schnittmenge → {2, 3}</span></span>
+<span class="line"><span class="fn">print</span>(<span class="var">a</span> <span class="op">-</span> <span class="var">b</span>)  <span class="cmt"># Differenz   → {1}</span></span>
+      </div>
+    </div>
+
+    <div class="set-ops-visual fade-in">
+      <div class="section-title-sm">▸ Mengenoperationen im Überblick</div>
+      <div class="set-ops-grid">
+        <div class="set-op">
+          <div class="set-op-sym" style="color:var(--blue)">a | b</div>
+          <div class="set-op-name">Vereinigung</div>
+          <div class="set-op-desc">Alle Elemente aus beiden Sets</div>
+        </div>
+        <div class="set-op">
+          <div class="set-op-sym" style="color:var(--green)">a &amp; b</div>
+          <div class="set-op-name">Schnittmenge</div>
+          <div class="set-op-desc">Nur Elemente die in beiden vorkommen</div>
+        </div>
+        <div class="set-op">
+          <div class="set-op-sym" style="color:var(--pink)">a - b</div>
+          <div class="set-op-name">Differenz</div>
+          <div class="set-op-desc">Elemente in a, die nicht in b sind</div>
+        </div>
+        <div class="set-op">
+          <div class="set-op-sym" style="color:var(--purple)">a ^ b</div>
+          <div class="set-op-name">Symmetrische Differenz</div>
+          <div class="set-op-desc">Elemente die nur in einem der beiden vorkommen</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- VERGLEICH -->
+  <section id="vergleich">
+    <div class="fade-in">
+      <div class="section-label">▸ 05 — Vergleich</div>
+      <h2 class="section-heading">Wann was verwenden?</h2>
+      <p class="section-desc">Alle vier Datenstrukturen haben ihre Stärken. Diese Tabelle hilft dir die richtige Wahl zu treffen.</p>
+    </div>
+
+    <div class="compare-table-wrap fade-in">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Typ</th>
+            <th>Symbol</th>
+            <th>Geordnet?</th>
+            <th>Änderbar?</th>
+            <th>Duplikate?</th>
+            <th>Typischer Einsatz</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="ds-tag" style="background:rgba(77,255,176,0.12);color:var(--green);border-color:rgba(77,255,176,0.3)">list</span></td>
+            <td class="sym-cell">[ ]</td>
+            <td class="yes-cell">✅ Ja</td>
+            <td class="yes-cell">✅ Ja</td>
+            <td class="yes-cell">✅ Ja</td>
+            <td class="desc-cell">Sammlungen die sich ändern</td>
+          </tr>
+          <tr>
+            <td><span class="ds-tag" style="background:rgba(245,200,66,0.12);color:var(--yellow);border-color:rgba(245,200,66,0.3)">tuple</span></td>
+            <td class="sym-cell">( )</td>
+            <td class="yes-cell">✅ Ja</td>
+            <td class="no-cell">❌ Nein</td>
+            <td class="yes-cell">✅ Ja</td>
+            <td class="desc-cell">Feste Daten, Koordinaten</td>
+          </tr>
+          <tr>
+            <td><span class="ds-tag" style="background:rgba(79,168,255,0.12);color:var(--blue);border-color:rgba(79,168,255,0.3)">dict</span></td>
+            <td class="sym-cell">{ : }</td>
+            <td class="yes-cell">✅ Ja</td>
+            <td class="yes-cell">✅ Ja</td>
+            <td class="no-cell">❌ (Keys)</td>
+            <td class="desc-cell">Benannte Daten, JSON-ähnlich</td>
+          </tr>
+          <tr>
+            <td><span class="ds-tag" style="background:rgba(184,122,255,0.12);color:var(--purple);border-color:rgba(184,122,255,0.3)">set</span></td>
+            <td class="sym-cell">{ }</td>
+            <td class="no-cell">❌ Nein</td>
+            <td class="yes-cell">✅ Ja</td>
+            <td class="no-cell">❌ Nein</td>
+            <td class="desc-cell">Einzigartige Werte, Mengenoperationen</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- GOLDENE REGEL -->
+  <section id="regel">
+    <div class="fade-in">
+      <div class="section-label">▸ 06 — Goldene Regel</div>
+      <h2 class="section-heading">Die goldene Regel</h2>
+    </div>
+    <div class="rule-card fade-in">
+      <div class="rule-icon">💡</div>
+      <div class="rule-text">
+        <strong>Die goldene Regel:</strong> Wähle die Datenstruktur die am besten zum Einsatzzweck passt –
+        <strong>list</strong> für geordnete Sammlungen,
+        <strong>tuple</strong> für unveränderliche Daten,
+        <strong>dict</strong> für benannte Schlüssel-Wert-Paare,
+        <strong>set</strong> für einzigartige Werte.
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="cta">
+    <div class="cta-box fade-in">
+      <div class="cta-title">Weiter lernen</div>
+      <p class="cta-text">Du hast die 4 Datenstrukturen gemeistert! Als nächstes kommen OOP und Fehlerbehandlung.</p>
+      <div class="hero-buttons">
+        <a href="/python Grundlagen/html/oop.html" class="btn btn-primary">OOP </a>
+        <a href="/index.html" class="btn btn-outline">Startseite</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>Erstellt mit <span>♥</span> · HelloPython.de · Bastian Meese · <span>2025 - 2026</span></footer>
+
+</main>
+</div>
+
+<script src="/python Grundlagen/JS/syntax.js"></script>
+</body>
+</html>
