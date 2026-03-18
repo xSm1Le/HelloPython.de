@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Python – OOP</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet" />
+  <!-- gleicher Stil wie deine Syntax-Seite -->
+  <link rel="stylesheet" href="/python Grundlagen/css/syntax.css" />
+</head>
+<body>
+  <div class="progress-bar" id="progressBar"></div>
+
+  <!-- TOP NAV -->
+  <nav class="topnav">
+    <a class="nav-logo" href="/index.html"><span><</span> HelloPython.de</a>
+
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="#oop">OOP</a></li>
+        <li><a href="#klassen">Klassen</a></li>
+        <li><a href="#init">__init__</a></li>
+        <li><a href="#methoden">Methoden</a></li>
+        <li><a href="#vererbung">Vererbung</a></li>
+        <li><a href="#dunder">Dunder</a></li>
+      </ul>
+
+      <button class="hamburger" id="hamburgerBtn" aria-label="Menü öffnen">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- OVERLAY -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <!-- Zurück-Button -->
+    <a class="sidebar-back" href="/index.html">
+      <span class="sidebar-back-arrow">←</span> Zurück zur Startseite
+    </a>
+
+    <div class="sidebar-divider"></div>
+
+    <!-- Navigation der Landingpage -->
+    <div class="sidebar-section-label">Hier geht's zurück</div>
+    <a class="sidebar-link lp-link" href="/index.html">
+      <span class="s-icon">🐍</span> Was ist Python?
+      <span class="s-badge">Start</span>
+    </a>
+
+    <div class="sidebar-divider"></div>
+
+    <!-- OOP-Kapitel -->
+    <div class="sidebar-section-label">OOP – Kapitel</div>
+
+    <a class="sidebar-link active" href="#oop" data-section="oop">
+      <span class="s-icon">🧠</span> OOP – Grundidee
+    </a>
+    <a class="sidebar-link" href="#klassen" data-section="klassen">
+      <span class="s-icon">🏷️</span> Klassen & Objekte
+    </a>
+    <a class="sidebar-link" href="#init" data-section="init">
+      <span class="s-icon">⚙️</span> Konstruktor (__init__)
+      <span class="s-badge">wichtig</span>
+    </a>
+    <a class="sidebar-link" href="#attribute" data-section="attribute">
+      <span class="s-icon">📌</span> Attribute
+    </a>
+    <a class="sidebar-link" href="#methoden" data-section="methoden">
+      <span class="s-icon">🧩</span> Methoden & self
+    </a>
+    <a class="sidebar-link" href="#kapselung" data-section="kapselung">
+      <span class="s-icon">🔒</span> Kapselung & Properties
+    </a>
+    <a class="sidebar-link" href="#vererbung" data-section="vererbung">
+      <span class="s-icon">🧬</span> Vererbung
+      <span class="s-badge">info</span>
+    </a>
+    <a class="sidebar-link" href="#polymorph" data-section="polymorph">
+      <span class="s-icon">🎭</span> Polymorphismus
+    </a>
+    <a class="sidebar-link" href="#komposition" data-section="komposition">
+      <span class="s-icon">🧱</span> Komposition
+    </a>
+    <a class="sidebar-link" href="#classmethods" data-section="classmethods">
+      <span class="s-icon">🛠️</span> @classmethod & @staticmethod
+    </a>
+    <a class="sidebar-link" href="#dunder" data-section="dunder">
+      <span class="s-icon">✨</span> Dunder-Methoden
+    </a>
+    <a class="sidebar-link" href="#praxis" data-section="praxis">
+      <span class="s-icon">🏗️</span> Mini-Projekt
+      <span class="s-badge">praxis</span>
+    </a>
+
+    <div class="sidebar-divider"></div>
+
+    <!-- Weitere-Kapitel -->
+    <div class="sidebar-section-label">Weitere – Kapitel</div>
+
+    <a class="sidebar-link" href="/python Grundlagen/html/oop.html" data-section="themen">
+      <span class="s-icon">📐</span> OOP
+      <span class="s-badge">aktiv</span>
+    </a>
+    <a class="sidebar-link" href="/python Grundlagen/html/vscode.html" data-section="themen">
+    <span class="s-icon">💻</span> VS Code Guide
+    <span class="s-badge">neu</span>
+  </a>
+    <a class="sidebar-link" href="/python Grundlagen/html/syntax.html" data-section="themen">
+      <span class="s-icon">⚙️</span> Syntax
+    </a>
+    <a class="sidebar-link" href="/python Grundlagen/html/schleifen.html" data-section="themen">
+      <span class="s-icon">🔁</span> Schleifen
+    </a>
+    <a class="sidebar-link" href="/python Grundlagen/html/funktionen.html" data-section="themen">
+      <span class="s-icon">📦</span> Funktionen
+    </a>
+    <a class="sidebar-link" href="/python Grundlagen/html/datenstrukturen.html" data-section="themen">
+      <span class="s-icon">🗂️</span> Datenstrukturen
+      <span class="s-badge">neu</span>
+    </a>
+    <a class="sidebar-link" href="/python Grundlagen/html/fehlerbehandlung.html" data-section="themen">
+      <span class="s-icon">🛡️</span> Fehlerbehandlung
+      <span class="s-badge">neu</span>
+    </a>
+    <a class="sidebar-link" href="/python Grundlagen/html/module_pakete.html" data-section="themen">
+      <span class="s-icon">📦</span> Module & Pakete
+      <span class="s-badge">neu</span>
+    </a>
+
+  </aside>
+
+  <!-- LAYOUT -->
+  <div class="layout">
+    <main class="main">
+
+      <!-- HERO -->
+      <section id="hero">
+        <div class="hero-badge">Ab hier wird Python richtig mächtig – mit</div>
+        <h1 class="hero-title">OOP</h1>
+        <p class="hero-sub">( Objektorientiertes Programmieren )</p>
+        <p class="hero-sub"># class · object · __init__ · self · inheritance · polymorphism</p>
+
+        <div class="hero-code">
+          <span class="cmt"># Mini-Vorschau: Klasse + Objekt</span><br>
+          <span class="kw">class</span> <span class="cls">User</span><span class="op">:</span><br>
+          <span class="ind"></span><span class="kw">def</span> <span class="fn">__init__</span><span class="op">(</span><span class="prm">self</span><span class="op">,</span> <span class="var">name</span><span class="op">)</span><span class="op">:</span><br>
+          <span class="ind"></span><span class="ind"></span><span class="prm">self</span><span class="op">.</span><span class="var">name</span> <span class="op">=</span> <span class="var">name</span><br>
+          <span class="ind"></span><span class="kw">def</span> <span class="fn">say_hi</span><span class="op">(</span><span class="prm">self</span><span class="op">)</span><span class="op">:</span><br>
+          <span class="ind"></span><span class="ind"></span><span class="fn">print</span><span class="op">(</span><span class="str">f"Hi, ich bin {</span><span style="color:var(--blue)">{"{self.name}"}</span><span class="str">}!"</span><span class="op">)</span><br>
+          <br>
+          <span class="var">u1</span> <span class="op">=</span> <span class="cls">User</span><span class="op">(</span><span class="str">"Bastian"</span><span class="op">)</span><br>
+          <span class="var">u1</span><span class="op">.</span><span class="fn">say_hi</span><span class="op">()</span> <span class="cmt"># → Hi, ich bin Bastian!</span>
+        </div>
+
+        <div class="hero-buttons">
+          <a href="#oop" class="btn btn-primary">Los geht's →</a>
+          <a href="#praxis" class="btn btn-outline">Mini-Projekt ↓</a>
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- 01 OOP -->
+      <section id="oop">
+        <div class="fade-in">
+          <div class="section-label">▸ 01 — OOP</div>
+          <h2 class="section-heading">Was bedeutet Objektorientierung?</h2>
+          <p class="section-desc">
+            <strong>OOP</strong> (Objektorientierte Programmierung) bedeutet: Du modellierst deinen Code wie die echte Welt.
+            Statt nur Funktionen und Variablen zu verteilen, packst du <strong>Daten</strong> (Attribute) und <strong>Funktionen</strong>
+            (Methoden) in eine gemeinsame Einheit: ein <strong>Objekt</strong>.
+          </p>
+        </div>
+
+        <div class="grid-3 fade-in">
+          <div class="card c-green">
+            <div class="card-icon">🧩</div>
+            <div class="card-title">Klasse</div>
+            <div class="card-text">Bauplan / Vorlage. Definiert, welche Eigenschaften und Methoden Objekte haben.</div>
+          </div>
+          <div class="card c-blue">
+            <div class="card-icon">📦</div>
+            <div class="card-title">Objekt</div>
+            <div class="card-text">Ein konkretes „Ding“, das aus der Klasse erstellt wurde (Instanz).</div>
+          </div>
+          <div class="card c-purple">
+            <div class="card-icon">🔁</div>
+            <div class="card-title">Wiederverwendbarkeit</div>
+            <div class="card-text">Du kannst Strukturen sauber wiederverwenden und erweitern (z.B. Vererbung).</div>
+          </div>
+        </div>
+
+        <div class="rule-card fade-in">
+          <span class="rule-icon">💡</span>
+          <div class="rule-text">
+            OOP ist kein „Muss“. Für kleine Skripte reicht oft prozeduraler Code.
+            Aber sobald ein Projekt wächst, wird OOP <strong>übersichtlicher</strong> und <strong>wartbarer</strong>.
+          </div>
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- 02 Klassen & Objekte -->
+      <section id="klassen">
+        <div class="fade-in">
+          <div class="section-label">▸ 02 — Klassen & Objekte</div>
+          <h2 class="section-heading">class & Instanzen</h2>
+          <p class="section-desc">
+            Eine <strong>Klasse</strong> definierst du mit <code style="font-family:'JetBrains Mono',monospace;color:var(--green)">class</code>.
+            Ein <strong>Objekt</strong> entsteht, wenn du die Klasse „aufrufst“ wie eine Funktion.
+          </p>
+        </div>
+
+        <div class="fade-in">
+          <div class="code-header">
+            <div class="code-dots">
+              <div class="code-dot" style="background:#ff5f57"></div>
+              <div class="code-dot" style="background:#febc2e"></div>
+              <div class="code-dot" style="background:#28c840"></div>
+            </div>
+            <span class="code-filename">klassen.py</span>
+            <span></span>
+          </div>
+
+          <div class="code-block">
+            <span class="line"><span class="cmt"># Klasse (Bauplan)</span></span>
+            <span class="line"><span class="kw">class</span> <span class="cls">Hund</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="kw">pass</span> <span class="cmt"># (später füllen)</span></span>
+            <span class="line"></span>
+            <span class="line"><span class="cmt"># Objekt / Instanz</span></span>
+            <span class="line"><span class="var">h1</span> <span class="op">=</span> <span class="cls">Hund</span><span class="op">()</span></span>
+            <span class="line"><span class="var">h2</span> <span class="op">=</span> <span class="cls">Hund</span><span class="op">()</span></span>
+            <span class="line"><span class="fn">print</span><span class="op">(</span><span class="var">h1</span><span class="op">,</span> <span class="var">h2</span><span class="op">)</span> <span class="cmt"># zwei verschiedene Objekte</span></span>
+          </div>
+        </div>
+
+        <div class="ann-list fade-in">
+          <div class="ann-item" style="border-color:rgba(245,200,66,0.15)">
+            <div class="ann-dot-wrap"><div class="ann-dot" style="background:var(--yellow)"></div></div>
+            <div>
+              <div class="ann-kw" style="color:var(--yellow)">Klassenname</div>
+              <div class="ann-desc">Klassen schreibt man in Python meistens in <strong>PascalCase</strong> (z.B. <code style="font-family:'JetBrains Mono',monospace">MeineKlasse</code>).</div>
+              <span class="ann-ex">class UserAccount: ... ✓</span>
+            </div>
+          </div>
+
+          <div class="ann-item" style="border-color:rgba(79,168,255,0.15)">
+            <div class="ann-dot-wrap"><div class="ann-dot" style="background:var(--blue)"></div></div>
+            <div>
+              <div class="ann-kw" style="color:var(--blue)">Instanz</div>
+              <div class="ann-desc">Ein Objekt ist eine <strong>Instanz</strong> einer Klasse – also ein „konkreter Bauplan-Abdruck“.</div>
+              <span class="ann-ex">user1 = User() ✓</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- 03 __init__ -->
+      <section id="init">
+        <div class="fade-in">
+          <div class="section-label">▸ 03 — Konstruktor</div>
+          <h2 class="section-heading">__init__ (Konstruktor)</h2>
+          <p class="section-desc">
+            Wenn du ein Objekt erzeugst, kann Python automatisch eine Start-Logik ausführen:
+            <code style="font-family:'JetBrains Mono',monospace;color:var(--green)">__init__</code>.
+            Hier setzt du häufig Startwerte (Attribute).
+          </p>
+        </div>
+
+        <div class="fade-in">
+          <div class="code-header">
+            <div class="code-dots">
+              <div class="code-dot" style="background:#ff5f57"></div>
+              <div class="code-dot" style="background:#febc2e"></div>
+              <div class="code-dot" style="background:#28c840"></div>
+            </div>
+            <span class="code-filename">init.py</span>
+            <span></span>
+          </div>
+
+          <div class="code-block">
+            <span class="line"><span class="kw">class</span> <span class="cls">User</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="kw">def</span> <span class="fn">__init__</span><span class="op">(</span><span class="prm">self</span><span class="op">,</span> <span class="var">name</span><span class="op">,</span> <span class="var">rolle</span><span class="op">=</span><span class="str">"User"</span><span class="op">)</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="ind"></span><span class="prm">self</span><span class="op">.</span><span class="var">name</span> <span class="op">=</span> <span class="var">name</span></span>
+            <span class="line"><span class="ind"></span><span class="ind"></span><span class="prm">self</span><span class="op">.</span><span class="var">rolle</span> <span class="op">=</span> <span class="var">rolle</span></span>
+            <span class="line"></span>
+            <span class="line"><span class="var">u1</span> <span class="op">=</span> <span class="cls">User</span><span class="op">(</span><span class="str">"Bastian"</span><span class="op">)</span></span>
+            <span class="line"><span class="var">u2</span> <span class="op">=</span> <span class="cls">User</span><span class="op">(</span><span class="str">"Sarah"</span><span class="op">,</span> <span class="str">"Admin"</span><span class="op">)</span></span>
+            <span class="line"><span class="fn">print</span><span class="op">(</span><span class="var">u1</span><span class="op">.</span><span class="var">name</span><span class="op">,</span> <span class="var">u1</span><span class="op">.</span><span class="var">rolle</span><span class="op">)</span> <span class="cmt"># Bastian User</span></span>
+            <span class="line"><span class="fn">print</span><span class="op">(</span><span class="var">u2</span><span class="op">.</span><span class="var">name</span><span class="op">,</span> <span class="var">u2</span><span class="op">.</span><span class="var">rolle</span><span class="op">)</span> <span class="cmt"># Sarah Admin</span></span>
+          </div>
+        </div>
+
+        <div class="rule-card fade-in">
+          <span class="rule-icon">⚠️</span>
+          <div class="rule-text">
+            <strong>Merke:</strong> <code style="font-family:'JetBrains Mono',monospace">self</code> ist Pflicht als erster Parameter in Methoden.
+            Er zeigt auf das aktuelle Objekt, damit du auf Attribute wie <code style="font-family:'JetBrains Mono',monospace">self.name</code> zugreifen kannst.
+          </div>
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- 04 Attribute -->
+      <section id="attribute">
+        <div class="fade-in">
+          <div class="section-label">▸ 04 — Attribute</div>
+          <h2 class="section-heading">Instanzattribute vs. Klassenattribute</h2>
+          <p class="section-desc">
+            <strong>Instanzattribute</strong> gehören zu einem bestimmten Objekt.
+            <strong>Klassenattribute</strong> gehören zur Klasse selbst und werden von allen Instanzen geteilt.
+          </p>
+        </div>
+
+        <div class="grid-2 fade-in">
+          <div class="card c-green">
+            <div class="card-icon">📌</div>
+            <div class="card-title">Instanzattribute</div>
+            <div class="card-text">Werden meistens in <code style="font-family:'JetBrains Mono',monospace">__init__</code> über <code style="font-family:'JetBrains Mono',monospace">self</code> gesetzt.</div>
+            <div class="code-block" style="margin-top:12px;padding:12px 16px;font-size:12px">
+              <span class="kw">class</span> <span class="cls">User</span><span class="op">:</span><br>
+              <span class="ind"></span><span class="kw">def</span> <span class="fn">__init__</span><span class="op">(</span><span class="prm">self</span><span class="op">,</span> <span class="var">name</span><span class="op">)</span><span class="op">:</span><br>
+              <span class="ind"></span><span class="ind"></span><span class="prm">self</span><span class="op">.</span><span class="var">name</span> <span class="op">=</span> <span class="var">name</span>
+            </div>
+          </div>
+
+          <div class="card c-blue">
+            <div class="card-icon">🏷️</div>
+            <div class="card-title">Klassenattribute</div>
+            <div class="card-text">Stehen direkt in der Klasse – ohne <code style="font-family:'JetBrains Mono',monospace">self</code>.</div>
+            <div class="code-block" style="margin-top:12px;padding:12px 16px;font-size:12px">
+              <span class="kw">class</span> <span class="cls">User</span><span class="op">:</span><br>
+              <span class="ind"></span><span class="var">plattform</span> <span class="op">=</span> <span class="str">"HelloPython.de"</span><br>
+              <span class="ind"></span><span class="kw">def</span> <span class="fn">__init__</span><span class="op">(</span><span class="prm">self</span><span class="op">,</span> <span class="var">name</span><span class="op">)</span><span class="op">:</span><br>
+              <span class="ind"></span><span class="ind"></span><span class="prm">self</span><span class="op">.</span><span class="var">name</span> <span class="op">=</span> <span class="var">name</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="rule-card fade-in">
+          <span class="rule-icon">💡</span>
+          <div class="rule-text">
+            Klassenattribute eignen sich z.B. für Konstanten (Version, Name, Limits) oder Zähler.
+            Alles, was pro Objekt unterschiedlich ist, gehört meistens in Instanzattribute.
+          </div>
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- 05 Methoden -->
+      <section id="methoden">
+        <div class="fade-in">
+          <div class="section-label">▸ 05 — Methoden</div>
+          <h2 class="section-heading">Methoden & self</h2>
+          <p class="section-desc">
+            Methoden sind Funktionen innerhalb einer Klasse. Der wichtigste Punkt: Der erste Parameter ist fast immer
+            <code style="font-family:'JetBrains Mono',monospace;color:var(--green)">self</code>.
+          </p>
+        </div>
+
+        <div class="fade-in">
+          <div class="code-header">
+            <div class="code-dots">
+              <div class="code-dot" style="background:#ff5f57"></div>
+              <div class="code-dot" style="background:#febc2e"></div>
+              <div class="code-dot" style="background:#28c840"></div>
+            </div>
+            <span class="code-filename">methoden.py</span>
+            <span></span>
+          </div>
+
+          <div class="code-block">
+            <span class="line"><span class="kw">class</span> <span class="cls">Konto</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="kw">def</span> <span class="fn">__init__</span><span class="op">(</span><span class="prm">self</span><span class="op">,</span> <span class="var">inhaber</span><span class="op">,</span> <span class="var">saldo</span><span class="op">=</span><span class="num">0</span><span class="op">)</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="ind"></span><span class="prm">self</span><span class="op">.</span><span class="var">inhaber</span> <span class="op">=</span> <span class="var">inhaber</span></span>
+            <span class="line"><span class="ind"></span><span class="ind"></span><span class="prm">self</span><span class="op">.</span><span class="var">saldo</span> <span class="op">=</span> <span class="var">saldo</span></span>
+            <span class="line"></span>
+            <span class="line"><span class="ind"></span><span class="kw">def</span> <span class="fn">einzahlen</span><span class="op">(</span><span class="prm">self</span><span class="op">,</span> <span class="var">betrag</span><span class="op">)</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="ind"></span><span class="prm">self</span><span class="op">.</span><span class="var">saldo</span> <span class="op">+=</span> <span class="var">betrag</span></span>
+            <span class="line"></span>
+            <span class="line"><span class="ind"></span><span class="kw">def</span> <span class="fn">anzeigen</span><span class="op">(</span><span class="prm">self</span><span class="op">)</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="ind"></span><span class="fn">print</span><span class="op">(</span><span class="str">f"Konto {</span><span style="color:var(--blue)">{"{self.inhaber}"}</span><span class="str">}: {</span><span style="color:var(--blue)">{"{self.saldo}"}</span><span class="str">} €"</span><span class="op">)</span></span>
+            <span class="line"></span>
+            <span class="line"><span class="var">k</span> <span class="op">=</span> <span class="cls">Konto</span><span class="op">(</span><span class="str">"Bastian"</span><span class="op">,</span> <span class="num">50</span><span class="op">)</span></span>
+            <span class="line"><span class="var">k</span><span class="op">.</span><span class="fn">einzahlen</span><span class="op">(</span><span class="num">25</span><span class="op">)</span></span>
+            <span class="line"><span class="var">k</span><span class="op">.</span><span class="fn">anzeigen</span><span class="op">()</span> <span class="cmt"># Konto Bastian: 75 €</span></span>
+          </div>
+        </div>
+
+        <div class="ann-list fade-in">
+          <div class="ann-item">
+            <div class="ann-dot-wrap"><div class="ann-dot" style="background:var(--green)"></div></div>
+            <div>
+              <div class="ann-kw" style="color:var(--green)">Warum self?</div>
+              <div class="ann-desc">Weil Python wissen muss, <strong>auf welches Objekt</strong> du dich beziehst. So werden Methoden „objektbezogen“.</div>
+              <span class="ann-ex">self.saldo += betrag ✓</span>
+            </div>
+          </div>
+
+          <div class="ann-item">
+            <div class="ann-dot-wrap"><div class="ann-dot" style="background:var(--pink)"></div></div>
+            <div>
+              <div class="ann-kw" style="color:var(--pink)">Methoden vs. Funktionen</div>
+              <div class="ann-desc">Eine Funktion steht „frei“. Eine Methode ist eine Funktion <strong>in einer Klasse</strong> und arbeitet meistens mit <code style="font-family:'JetBrains Mono',monospace">self</code>.</div>
+              <span class="ann-ex">print(x) Funktion · obj.methode() Methode</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- 06 Kapselung -->
+      <section id="kapselung">
+        <div class="fade-in">
+          <div class="section-label">▸ 06 — Kapselung</div>
+          <h2 class="section-heading">Kapselung & Properties</h2>
+          <p class="section-desc">
+            Kapselung bedeutet: Du schützt interne Daten, damit sie nicht „wild“ verändert werden.
+            In Python gibt es kein echtes <em>private</em> wie in Java – aber es gibt Konventionen:
+            <code style="font-family:'JetBrains Mono',monospace;color:var(--green)">_name</code> (intern) und
+            <code style="font-family:'JetBrains Mono',monospace;color:var(--green)">__name</code> (Name Mangling).
+            Für kontrollierten Zugriff nutzt man oft <code style="font-family:'JetBrains Mono',monospace;color:var(--green)">@property</code>.
+          </p>
+        </div>
+
+        <div class="fade-in">
+          <div class="code-header">
+            <div class="code-dots">
+              <div class="code-dot" style="background:#ff5f57"></div>
+              <div class="code-dot" style="background:#febc2e"></div>
+              <div class="code-dot" style="background:#28c840"></div>
+            </div>
+            <span class="code-filename">property.py</span>
+            <span></span>
+          </div>
+
+          <div class="code-block">
+            <span class="line"><span class="kw">class</span> <span class="cls">Temperatur</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="kw">def</span> <span class="fn">__init__</span><span class="op">(</span><span class="prm">self</span><span class="op">,</span> <span class="var">celsius</span><span class="op">)</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="ind"></span><span class="prm">self</span><span class="op">.</span><span class="var">_c</span> <span class="op">=</span> <span class="var">celsius</span> <span class="cmt"># '_' = interne Variable</span></span>
+            <span class="line"></span>
+            <span class="line"><span class="ind"></span><span class="op">@</span><span class="fn">property</span></span>
+            <span class="line"><span class="ind"></span><span class="kw">def</span> <span class="fn">celsius</span><span class="op">(</span><span class="prm">self</span><span class="op">)</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="ind"></span><span class="kw">return</span> <span class="prm">self</span><span class="op">.</span><span class="var">_c</span></span>
+            <span class="line"></span>
+            <span class="line"><span class="ind"></span><span class="op">@</span><span class="var">celsius</span><span class="op">.</span><span class="fn">setter</span></span>
+            <span class="line"><span class="ind"></span><span class="kw">def</span> <span class="fn">celsius</span><span class="op">(</span><span class="prm">self</span><span class="op">,</span> <span class="var">value</span><span class="op">)</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="ind"></span><span class="kw">if</span> <span class="var">value</span> <span class="op"><</span> <span class="num">-273.15</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="ind"></span><span class="ind"></span><span class="kw">raise</span> <span class="cls">ValueError</span><span class="op">(</span><span class="str">"Unter absolutem Nullpunkt!"</span><span class="op">)</span></span>
+            <span class="line"><span class="ind"></span><span class="ind"></span><span class="prm">self</span><span class="op">.</span><span class="var">_c</span> <span class="op">=</span> <span class="var">value</span></span>
+            <span class="line"></span>
+            <span class="line"><span class="var">t</span> <span class="op">=</span> <span class="cls">Temperatur</span><span class="op">(</span><span class="num">20</span><span class="op">)</span></span>
+            <span class="line"><span class="fn">print</span><span class="op">(</span><span class="var">t</span><span class="op">.</span><span class="var">celsius</span><span class="op">)</span> <span class="cmt"># Getter</span></span>
+            <span class="line"><span class="var">t</span><span class="op">.</span><span class="var">celsius</span> <span class="op">=</span> <span class="num">30</span> <span class="cmt"># Setter (mit Prüfung)</span></span>
+          </div>
+        </div>
+
+        <div class="rule-card fade-in">
+          <span class="rule-icon">🔒</span>
+          <div class="rule-text">
+            <strong>Warum Properties?</strong> Du kannst Werte validieren (prüfen), bevor du sie setzt.
+            So bleibt dein Objekt „gesund“ und dein Code wird robuster.
+          </div>
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- 07 Vererbung -->
+      <section id="vererbung">
+        <div class="fade-in">
+          <div class="section-label">▸ 07 — Vererbung</div>
+          <h2 class="section-heading">Vererbung (Inheritance)</h2>
+          <p class="section-desc">
+            Vererbung bedeutet: Eine Klasse kann Eigenschaften/Methoden von einer anderen Klasse übernehmen.
+            Die „Kindklasse“ erweitert oder überschreibt das Verhalten der „Elternklasse“.
+          </p>
+        </div>
+
+        <div class="fade-in">
+          <div class="code-header">
+            <div class="code-dots">
+              <div class="code-dot" style="background:#ff5f57"></div>
+              <div class="code-dot" style="background:#febc2e"></div>
+              <div class="code-dot" style="background:#28c840"></div>
+            </div>
+            <span class="code-filename">vererbung.py</span>
+            <span></span>
+          </div>
+
+          <div class="code-block">
+            <span class="line"><span class="kw">class</span> <span class="cls">Tier</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="kw">def</span> <span class="fn">__init__</span><span class="op">(</span><span class="prm">self</span><span class="op">,</span> <span class="var">name</span><span class="op">)</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="ind"></span><span class="prm">self</span><span class="op">.</span><span class="var">name</span> <span class="op">=</span> <span class="var">name</span></span>
+            <span class="line"><span class="ind"></span><span class="kw">def</span> <span class="fn">sound</span><span class="op">(</span><span class="prm">self</span><span class="op">)</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="ind"></span><span class="kw">return</span> <span class="str">"..."</span></span>
+            <span class="line"></span>
+            <span class="line"><span class="kw">class</span> <span class="cls">Hund</span><span class="op">(</span><span class="cls">Tier</span><span class="op">)</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="kw">def</span> <span class="fn">sound</span><span class="op">(</span><span class="prm">self</span><span class="op">)</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="ind"></span><span class="kw">return</span> <span class="str">"Wuff"</span></span>
+            <span class="line"></span>
+            <span class="line"><span class="kw">class</span> <span class="cls">Katze</span><span class="op">(</span><span class="cls">Tier</span><span class="op">)</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="kw">def</span> <span class="fn">sound</span><span class="op">(</span><span class="prm">self</span><span class="op">)</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="ind"></span><span class="kw">return</span> <span class="str">"Miau"</span></span>
+            <span class="line"></span>
+            <span class="line"><span class="var">tiere</span> <span class="op">=</span> <span class="op">[</span><span class="cls">Hund</span><span class="op">(</span><span class="str">"Rex"</span><span class="op">)</span><span class="op">,</span> <span class="cls">Katze</span><span class="op">(</span><span class="str">"Luna"</span><span class="op">)</span><span class="op">]</span></span>
+            <span class="line"><span class="kw">for</span> <span class="var">t</span> <span class="kw">in</span> <span class="var">tiere</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="fn">print</span><span class="op">(</span><span class="var">t</span><span class="op">.</span><span class="var">name</span><span class="op">,</span> <span class="var">t</span><span class="op">.</span><span class="fn">sound</span><span class="op">()</span><span class="op">)</span></span>
+          </div>
+        </div>
+
+        <div class="rule-card fade-in">
+          <span class="rule-icon">🧬</span>
+          <div class="rule-text">
+            Wenn du Konstruktor-Logik aus der Elternklasse brauchst, nutzt du oft
+            <code style="font-family:'JetBrains Mono',monospace">super().__init__(...)</code> in der Kindklasse.
+          </div>
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- 08 Polymorphismus -->
+      <section id="polymorph">
+        <div class="fade-in">
+          <div class="section-label">▸ 08 — Polymorphismus</div>
+          <h2 class="section-heading">Gleiches Interface, unterschiedliches Verhalten</h2>
+          <p class="section-desc">
+            Polymorphismus bedeutet: Verschiedene Objekte können dieselbe Methode besitzen, aber unterschiedlich reagieren.
+            Im Beispiel oben haben <code style="font-family:'JetBrains Mono',monospace">Hund</code> und <code style="font-family:'JetBrains Mono',monospace">Katze</code> beide
+            <code style="font-family:'JetBrains Mono',monospace">sound()</code> – aber mit unterschiedlichem Ergebnis.
+          </p>
+        </div>
+
+        <div class="grid-2 fade-in">
+          <div class="card c-purple">
+            <div class="card-icon">🎭</div>
+            <div class="card-title">Warum praktisch?</div>
+            <div class="card-text">Du kannst über eine Liste von Objekten iterieren, ohne zu wissen, welche konkrete Klasse jedes Objekt hat.</div>
+          </div>
+          <div class="card c-green">
+            <div class="card-icon">✅</div>
+            <div class="card-title">Merksatz</div>
+            <div class="card-text">„Wenn es wie eine Ente quakt …“ – Duck Typing: Entscheidend ist, welche Methoden ein Objekt hat.</div>
+          </div>
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- 09 Komposition -->
+      <section id="komposition">
+        <div class="fade-in">
+          <div class="section-label">▸ 09 — Komposition</div>
+          <h2 class="section-heading">Komposition statt Vererbung</h2>
+          <p class="section-desc">
+            Komposition bedeutet: Ein Objekt <strong>besteht aus</strong> anderen Objekten.
+            Oft ist das flexibler als Vererbung ("has-a" statt "is-a").
+          </p>
+        </div>
+
+        <div class="fade-in">
+          <div class="code-header">
+            <div class="code-dots">
+              <div class="code-dot" style="background:#ff5f57"></div>
+              <div class="code-dot" style="background:#febc2e"></div>
+              <div class="code-dot" style="background:#28c840"></div>
+            </div>
+            <span class="code-filename">komposition.py</span>
+            <span></span>
+          </div>
+
+          <div class="code-block">
+            <span class="line"><span class="kw">class</span> <span class="cls">Motor</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="kw">def</span> <span class="fn">start</span><span class="op">(</span><span class="prm">self</span><span class="op">)</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="ind"></span><span class="kw">return</span> <span class="str">"Motor läuft"</span></span>
+            <span class="line"></span>
+            <span class="line"><span class="kw">class</span> <span class="cls">Auto</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="kw">def</span> <span class="fn">__init__</span><span class="op">(</span><span class="prm">self</span><span class="op">)</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="ind"></span><span class="prm">self</span><span class="op">.</span><span class="var">motor</span> <span class="op">=</span> <span class="cls">Motor</span><span class="op">()</span> <span class="cmt"># Auto "hat" einen Motor</span></span>
+            <span class="line"><span class="ind"></span><span class="kw">def</span> <span class="fn">starten</span><span class="op">(</span><span class="prm">self</span><span class="op">)</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="ind"></span><span class="kw">return</span> <span class="prm">self</span><span class="op">.</span><span class="var">motor</span><span class="op">.</span><span class="fn">start</span><span class="op">()</span></span>
+            <span class="line"></span>
+            <span class="line"><span class="var">a</span> <span class="op">=</span> <span class="cls">Auto</span><span class="op">()</span></span>
+            <span class="line"><span class="fn">print</span><span class="op">(</span><span class="var">a</span><span class="op">.</span><span class="fn">starten</span><span class="op">()</span><span class="op">)</span></span>
+          </div>
+        </div>
+
+        <div class="rule-card fade-in">
+          <span class="rule-icon">🧱</span>
+          <div class="rule-text">
+            <strong>Faustregel:</strong> Nutze Vererbung, wenn wirklich eine „ist-ein“-Beziehung existiert.
+            Ansonsten ist Komposition oft sauberer.
+          </div>
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- 10 classmethod/staticmethod -->
+      <section id="classmethods">
+        <div class="fade-in">
+          <div class="section-label">▸ 10 — Decorators</div>
+          <h2 class="section-heading">@classmethod & @staticmethod</h2>
+          <p class="section-desc">
+            Neben normalen Methoden gibt es:
+            <strong>@classmethod</strong> (arbeitet mit der Klasse selbst) und
+            <strong>@staticmethod</strong> (wie eine Funktion, aber logisch in der Klasse gruppiert).
+          </p>
+        </div>
+
+        <div class="grid-2 fade-in">
+          <div class="card c-yellow">
+            <div class="card-icon">🏷️</div>
+            <div class="card-title">@classmethod</div>
+            <div class="card-text">Erster Parameter ist <code style="font-family:'JetBrains Mono',monospace">cls</code> (die Klasse). Praktisch für alternative Konstruktoren.</div>
+            <div class="code-block" style="margin-top:12px;padding:12px 16px;font-size:12px">
+              <span class="kw">class</span> <span class="cls">User</span><span class="op">:</span><br>
+              <span class="ind"></span><span class="kw">def</span> <span class="fn">__init__</span><span class="op">(</span><span class="prm">self</span><span class="op">,</span> <span class="var">name</span><span class="op">)</span><span class="op">:</span><br>
+              <span class="ind"></span><span class="ind"></span><span class="prm">self</span><span class="op">.</span><span class="var">name</span> <span class="op">=</span> <span class="var">name</span><br>
+              <span class="ind"></span><span class="op">@</span><span class="fn">classmethod</span><br>
+              <span class="ind"></span><span class="kw">def</span> <span class="fn">guest</span><span class="op">(</span><span class="prm">cls</span><span class="op">)</span><span class="op">:</span><br>
+              <span class="ind"></span><span class="ind"></span><span class="kw">return</span> <span class="prm">cls</span><span class="op">(</span><span class="str">"Gast"</span><span class="op">)</span>
+            </div>
+          </div>
+
+          <div class="card c-blue">
+            <div class="card-icon">🧰</div>
+            <div class="card-title">@staticmethod</div>
+            <div class="card-text">Kein <code style="font-family:'JetBrains Mono',monospace">self</code> und kein <code style="font-family:'JetBrains Mono',monospace">cls</code>. Gut für kleine Hilfsfunktionen.</div>
+            <div class="code-block" style="margin-top:12px;padding:12px 16px;font-size:12px">
+              <span class="kw">class</span> <span class="cls">Math</span><span class="op">:</span><br>
+              <span class="ind"></span><span class="op">@</span><span class="fn">staticmethod</span><br>
+              <span class="ind"></span><span class="kw">def</span> <span class="fn">is_even</span><span class="op">(</span><span class="var">n</span><span class="op">)</span><span class="op">:</span><br>
+              <span class="ind"></span><span class="ind"></span><span class="kw">return</span> <span class="var">n</span> <span class="op">%</span> <span class="num">2</span> <span class="op">==</span> <span class="num">0</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- 11 Dunder -->
+      <section id="dunder">
+        <div class="fade-in">
+          <div class="section-label">▸ 11 — Magische Methoden</div>
+          <h2 class="section-heading">Dunder-Methoden ("__...__")</h2>
+          <p class="section-desc">
+            Dunder-Methoden (double underscore) geben deinen Objekten „Superkräfte“.
+            Damit funktionieren Dinge wie <code style="font-family:'JetBrains Mono',monospace">print(obj)</code> oder <code style="font-family:'JetBrains Mono',monospace">len(obj)</code>.
+          </p>
+        </div>
+
+        <div class="fade-in">
+          <table class="syntax-table" style="margin-top:14px">
+            <thead>
+              <tr>
+                <th>Methode</th>
+                <th>Wann wird sie genutzt?</th>
+                <th>Beispiel</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>__str__</code></td>
+                <td class="td-muted">Bei <code>print(obj)</code> / <code>str(obj)</code></td>
+                <td><code>return "User: ..."</code></td>
+              </tr>
+              <tr>
+                <td><code>__repr__</code></td>
+                <td class="td-muted">Debug-Ansicht (z.B. in Listen)</td>
+                <td><code>return "User(name=...)"</code></td>
+              </tr>
+              <tr>
+                <td><code>__len__</code></td>
+                <td class="td-muted">Bei <code>len(obj)</code></td>
+                <td><code>return len(self.items)</code></td>
+              </tr>
+              <tr>
+                <td><code>__add__</code></td>
+                <td class="td-muted">Bei <code>a + b</code></td>
+                <td><code>return ...</code></td>
+              </tr>
+              <tr>
+                <td><code>__eq__</code></td>
+                <td class="td-muted">Bei <code>a == b</code></td>
+                <td><code>return self.id == other.id</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="fade-in" style="margin-top:20px">
+          <div class="code-header">
+            <div class="code-dots">
+              <div class="code-dot" style="background:#ff5f57"></div>
+              <div class="code-dot" style="background:#febc2e"></div>
+              <div class="code-dot" style="background:#28c840"></div>
+            </div>
+            <span class="code-filename">dunder.py</span>
+            <span></span>
+          </div>
+
+          <div class="code-block">
+            <span class="line"><span class="kw">class</span> <span class="cls">Playlist</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="kw">def</span> <span class="fn">__init__</span><span class="op">(</span><span class="prm">self</span><span class="op">,</span> <span class="var">name</span><span class="op">)</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="ind"></span><span class="prm">self</span><span class="op">.</span><span class="var">name</span> <span class="op">=</span> <span class="var">name</span></span>
+            <span class="line"><span class="ind"></span><span class="ind"></span><span class="prm">self</span><span class="op">.</span><span class="var">songs</span> <span class="op">=</span> <span class="op">[]</span></span>
+            <span class="line"></span>
+            <span class="line"><span class="ind"></span><span class="kw">def</span> <span class="fn">add</span><span class="op">(</span><span class="prm">self</span><span class="op">,</span> <span class="var">title</span><span class="op">)</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="ind"></span><span class="prm">self</span><span class="op">.</span><span class="var">songs</span><span class="op">.</span><span class="fn">append</span><span class="op">(</span><span class="var">title</span><span class="op">)</span></span>
+            <span class="line"></span>
+            <span class="line"><span class="ind"></span><span class="kw">def</span> <span class="fn">__len__</span><span class="op">(</span><span class="prm">self</span><span class="op">)</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="ind"></span><span class="kw">return</span> <span class="fn">len</span><span class="op">(</span><span class="prm">self</span><span class="op">.</span><span class="var">songs</span><span class="op">)</span></span>
+            <span class="line"></span>
+            <span class="line"><span class="ind"></span><span class="kw">def</span> <span class="fn">__str__</span><span class="op">(</span><span class="prm">self</span><span class="op">)</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="ind"></span><span class="kw">return</span> <span class="str">f"Playlist '{</span><span style="color:var(--blue)">{"{self.name}"}</span><span class="str">}' ({</span><span style="color:var(--blue)">{"{len(self)}"}</span><span class="str">} Songs)"</span></span>
+            <span class="line"></span>
+            <span class="line"><span class="var">p</span> <span class="op">=</span> <span class="cls">Playlist</span><span class="op">(</span><span class="str">"Coding"</span><span class="op">)</span></span>
+            <span class="line"><span class="var">p</span><span class="op">.</span><span class="fn">add</span><span class="op">(</span><span class="str">"Song 1"</span><span class="op">)</span></span>
+            <span class="line"><span class="fn">print</span><span class="op">(</span><span class="fn">len</span><span class="op">(</span><span class="var">p</span><span class="op">)</span><span class="op">)</span> <span class="cmt"># 1</span></span>
+            <span class="line"><span class="fn">print</span><span class="op">(</span><span class="var">p</span><span class="op">)</span> <span class="cmt"># Playlist 'Coding' (1 Songs)</span></span>
+          </div>
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- 12 Praxis -->
+      <section id="praxis">
+        <div class="fade-in">
+          <div class="section-label">▸ 12 — Praxis</div>
+          <h2 class="section-heading">Mini-Projekt: Aufgabenliste als Klasse</h2>
+          <p class="section-desc">
+            Ein kleines Projekt, das du direkt in VS Code ausprobieren kannst: Eine ToDo-Liste mit Tasks.
+            Dabei übst du: Klassen, Listen, Methoden, Dunder und saubere Struktur.
+          </p>
+        </div>
+
+        <div class="fade-in">
+          <div class="code-header">
+            <div class="code-dots">
+              <div class="code-dot" style="background:#ff5f57"></div>
+              <div class="code-dot" style="background:#febc2e"></div>
+              <div class="code-dot" style="background:#28c840"></div>
+            </div>
+            <span class="code-filename">todo_oop.py</span>
+            <span></span>
+          </div>
+
+          <div class="code-block">
+            <span class="line"><span class="kw">class</span> <span class="cls">Task</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="kw">def</span> <span class="fn">__init__</span><span class="op">(</span><span class="prm">self</span><span class="op">,</span> <span class="var">title</span><span class="op">)</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="ind"></span><span class="prm">self</span><span class="op">.</span><span class="var">title</span> <span class="op">=</span> <span class="var">title</span></span>
+            <span class="line"><span class="ind"></span><span class="ind"></span><span class="prm">self</span><span class="op">.</span><span class="var">done</span> <span class="op">=</span> <span class="kw">False</span></span>
+            <span class="line"></span>
+            <span class="line"><span class="ind"></span><span class="kw">def</span> <span class="fn">toggle</span><span class="op">(</span><span class="prm">self</span><span class="op">)</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="ind"></span><span class="prm">self</span><span class="op">.</span><span class="var">done</span> <span class="op">=</span> <span class="kw">not</span> <span class="prm">self</span><span class="op">.</span><span class="var">done</span></span>
+            <span class="line"></span>
+            <span class="line"><span class="ind"></span><span class="kw">def</span> <span class="fn">__str__</span><span class="op">(</span><span class="prm">self</span><span class="op">)</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="ind"></span><span class="var">mark</span> <span class="op">=</span> <span class="str">"✅"</span> <span class="kw">if</span> <span class="prm">self</span><span class="op">.</span><span class="var">done</span> <span class="kw">else</span> <span class="str">"⬜"</span></span>
+            <span class="line"><span class="ind"></span><span class="ind"></span><span class="kw">return</span> <span class="str">f"{</span><span style="color:var(--blue)">{"{mark}"}</span><span class="str">} {</span><span style="color:var(--blue)">{"{self.title}"}</span><span class="str">}"</span></span>
+            <span class="line"></span>
+            <span class="line"><span class="kw">class</span> <span class="cls">TodoList</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="kw">def</span> <span class="fn">__init__</span><span class="op">(</span><span class="prm">self</span><span class="op">)</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="ind"></span><span class="prm">self</span><span class="op">.</span><span class="var">tasks</span> <span class="op">=</span> <span class="op">[]</span></span>
+            <span class="line"></span>
+            <span class="line"><span class="ind"></span><span class="kw">def</span> <span class="fn">add</span><span class="op">(</span><span class="prm">self</span><span class="op">,</span> <span class="var">title</span><span class="op">)</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="ind"></span><span class="prm">self</span><span class="op">.</span><span class="var">tasks</span><span class="op">.</span><span class="fn">append</span><span class="op">(</span><span class="cls">Task</span><span class="op">(</span><span class="var">title</span><span class="op">)</span><span class="op">)</span></span>
+            <span class="line"></span>
+            <span class="line"><span class="ind"></span><span class="kw">def</span> <span class="fn">toggle</span><span class="op">(</span><span class="prm">self</span><span class="op">,</span> <span class="var">index</span><span class="op">)</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="ind"></span><span class="prm">self</span><span class="op">.</span><span class="var">tasks</span><span class="op">[</span><span class="var">index</span><span class="op">]</span><span class="op">.</span><span class="fn">toggle</span><span class="op">()</span></span>
+            <span class="line"></span>
+            <span class="line"><span class="ind"></span><span class="kw">def</span> <span class="fn">__len__</span><span class="op">(</span><span class="prm">self</span><span class="op">)</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="ind"></span><span class="kw">return</span> <span class="fn">len</span><span class="op">(</span><span class="prm">self</span><span class="op">.</span><span class="var">tasks</span><span class="op">)</span></span>
+            <span class="line"></span>
+            <span class="line"><span class="ind"></span><span class="kw">def</span> <span class="fn">show</span><span class="op">(</span><span class="prm">self</span><span class="op">)</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="ind"></span><span class="kw">for</span> <span class="var">i</span><span class="op">,</span> <span class="var">t</span> <span class="kw">in</span> <span class="fn">enumerate</span><span class="op">(</span><span class="prm">self</span><span class="op">.</span><span class="var">tasks</span><span class="op">)</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="ind"></span><span class="ind"></span><span class="fn">print</span><span class="op">(</span><span class="str">f"{</span><span style="color:var(--blue)">{"{i}"}</span><span class="str">}. {</span><span style="color:var(--blue)">{"{t}"}</span><span class="str">}"</span><span class="op">)</span></span>
+            <span class="line"></span>
+            <span class="line"><span class="var">todo</span> <span class="op">=</span> <span class="cls">TodoList</span><span class="op">()</span></span>
+            <span class="line"><span class="var">todo</span><span class="op">.</span><span class="fn">add</span><span class="op">(</span><span class="str">"OOP-Seite fertigstellen"</span><span class="op">)</span></span>
+            <span class="line"><span class="var">todo</span><span class="op">.</span><span class="fn">add</span><span class="op">(</span><span class="str">"Tests schreiben"</span><span class="op">)</span></span>
+            <span class="line"><span class="var">todo</span><span class="op">.</span><span class="fn">show</span><span class="op">()</span></span>
+            <span class="line"><span class="var">todo</span><span class="op">.</span><span class="fn">toggle</span><span class="op">(</span><span class="num">0</span><span class="op">)</span></span>
+            <span class="line"><span class="var">todo</span><span class="op">.</span><span class="fn">show</span><span class="op">()</span></span>
+          </div>
+        </div>
+
+        <div class="rule-card fade-in">
+          <span class="rule-icon">🚀</span>
+          <div class="rule-text">
+            Challenge: Baue <strong>remove(index)</strong> und <strong>clear_done()</strong> dazu.
+            Bonus: Schreibe eine Methode <code style="font-family:'JetBrains Mono',monospace">save_to_file()</code> und speichere die Tasks in eine Textdatei.
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section id="cta">
+        <div class="cta-box fade-in">
+          <div class="cta-title">Weiter lernen</div>
+          <p class="cta-text">
+            Nice! Du hast die wichtigsten OOP-Bausteine verstanden.
+            Als nächstes passen perfekt: Fehlerbehandlung (try/except) und Module & Pakete.
+          </p>
+          <div class="hero-buttons">
+            <a href="/python Grundlagen/html/datenstrukturen.html" class="btn btn-primary">Next - Datenstrukturen →</a>
+            <a href="/index.html" class="btn btn-outline">← Zur Startseite</a>
+          </div>
+        </div>
+      </section>
+
+      <footer>Erstellt mit <span>♥</span> · HelloPython.de · Bastian Meese · <span>2025 - 2026</span></footer>
+    </main>
+  </div>
+
+  <!-- gleicher JS wie deine Syntax-Seite -->
+  <script src="/python Grundlagen/JS/landingpage.js"></script>
+</body>
+</html>

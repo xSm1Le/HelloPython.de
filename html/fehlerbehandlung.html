@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Python – Fehlerbehandlung</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet" />
+  <!-- gleicher Stil wie deine Syntax-Seite -->
+  <link rel="stylesheet" href="/python Grundlagen/css/funktionenStyle.css" />
+</head>
+<body>
+  <div class="progress-bar" id="progressBar"></div>
+
+  <!-- TOP NAV -->
+  <nav class="topnav">
+    <a class="nav-logo" href="/index.html"><span><</span> HelloPython.de</a>
+
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="#overview">Basics</a></li>
+        <li><a href="#tryexcept">try/except</a></li>
+        <li><a href="#finally">finally</a></li>
+        <li><a href="#raise">raise</a></li>
+        <li><a href="#custom">eigene Fehler</a></li>
+        <li><a href="#praxis">Praxis</a></li>
+      </ul>
+
+      <button class="hamburger" id="hamburgerBtn" aria-label="Menü öffnen">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- OVERLAY -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <a class="sidebar-back" href="/index.html">
+      <span class="sidebar-back-arrow">←</span> Zurück zur Startseite
+    </a>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section-label">Hier geht's zurück</div>
+    <a class="sidebar-link lp-link" href="/html/index.html">
+      <span class="s-icon">🐍</span> Was ist Python?
+      <span class="s-badge">Start</span>
+    </a>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section-label">Fehlerbehandlung – Kapitel</div>
+
+    <a class="sidebar-link active" href="#overview" data-section="overview">
+      <span class="s-icon">🧯</span> Warum Fehlerbehandlung?
+    </a>
+    <a class="sidebar-link" href="#fehlerarten" data-section="fehlerarten">
+      <span class="s-icon">🚫</span> Fehlerarten
+    </a>
+    <a class="sidebar-link" href="#tryexcept" data-section="tryexcept">
+      <span class="s-icon">🧱</span> try / except
+      <span class="s-badge">wichtig</span>
+    </a>
+    <a class="sidebar-link" href="#else" data-section="else">
+      <span class="s-icon">✅</span> else
+    </a>
+    <a class="sidebar-link" href="#finally" data-section="finally">
+      <span class="s-icon">🧹</span> finally
+    </a>
+    <a class="sidebar-link" href="#mehrere" data-section="mehrere">
+      <span class="s-icon">🎯</span> mehrere excepts
+    </a>
+    <a class="sidebar-link" href="#raise" data-section="raise">
+      <span class="s-icon">📣</span> raise
+    </a>
+    <a class="sidebar-link" href="#custom" data-section="custom">
+      <span class="s-icon">🧩</span> eigene Exceptions
+    </a>
+    <a class="sidebar-link" href="#assert" data-section="assert">
+      <span class="s-icon">🔎</span> assert
+    </a>
+    <a class="sidebar-link" href="#praxis" data-section="praxis">
+      <span class="s-icon">🏗️</span> Mini-Projekt
+      <span class="s-badge">praxis</span>
+    </a>
+
+    <div class="sidebar-divider"></div>
+    
+    <div class="sidebar-section-label">Weitere – Kapitel</div>
+    <a class="sidebar-link" href="/html/fehlerbehandlung.html" data-section="themen">
+      <span class="s-icon">🛡️</span> Fehlerbehandlung
+      <span class="s-badge">aktiv</span>
+    </a>
+    <a class="sidebar-link" href="/python Grundlagen/html/vscode.html" data-section="themen">
+    <span class="s-icon">💻</span> VS Code Guide
+    <span class="s-badge">neu</span>
+  </a>
+    <a class="sidebar-link" href="/python Grundlagen/html/syntax.html" data-section="themen">
+      <span class="s-icon">⚙️</span> Syntax
+    </a>
+    <a class="sidebar-link" href="/python Grundlagen/html/schleifen.html" data-section="themen">
+      <span class="s-icon">🔁</span> Schleifen
+    </a>
+    <a class="sidebar-link" href="/python Grundlagen/html/funktionen.html" data-section="themen">
+      <span class="s-icon">📦</span> Funktionen
+    </a>
+    <a class="sidebar-link" href="/python Grundlagen/html/datenstrukturen.html" data-section="themen">
+      <span class="s-icon">🗂️</span> Datenstrukturen
+    </a>
+    <a class="sidebar-link" href="/python Grundlagen/html/oop.html" data-section="themen">
+      <span class="s-icon">📐</span> OOP
+    </a>
+    <a class="sidebar-link" href="/python Grundlagen/html/module_pakete.html" data-section="themen">
+      <span class="s-icon">📦</span> Module & Pakete
+      <span class="s-badge">neu</span>
+    </a>
+  </aside>
+
+  <!-- LAYOUT -->
+  <div class="layout">
+    <main class="main">
+
+      <!-- HERO -->
+      <section id="hero">
+        <div class="hero-badge">Damit deine Programme nicht abstürzen:</div>
+        <h1 class="hero-title">Fehlerbehebung</h1>
+        <p class="hero-sub"># try · except · else · finally · raise · custom exceptions</p>
+
+        <div class="hero-code">
+          <span class="cmt"># Klassiker: User-Eingabe robust abfangen</span><br>
+          <span class="kw">try</span><span class="op">:</span><br>
+          <span class="ind"></span><span class="var">x</span> <span class="op">=</span> <span class="fn">int</span><span class="op">(</span><span class="fn">input</span><span class="op">(</span><span class="str">"Zahl: "</span><span class="op">)</span><span class="op">)</span><br>
+          <span class="ind"></span><span class="fn">print</span><span class="op">(</span><span class="str">f"Du hast {</span><span style="color:var(--blue)">{"{x}"}</span><span class="str">} eingegeben"</span><span class="op">)</span><br>
+          <span class="kw">except</span> <span class="cls">ValueError</span><span class="op">:</span><br>
+          <span class="ind"></span><span class="fn">print</span><span class="op">(</span><span class="str">"Das war keine gültige Zahl 😅"</span><span class="op">)</span>
+        </div>
+
+        <div class="hero-buttons">
+          <a href="#overview" class="btn btn-primary">Los geht's →</a>
+          <a href="#praxis" class="btn btn-outline">Mini-Projekt ↓</a>
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- 01 Overview -->
+      <section id="overview">
+        <div class="fade-in">
+          <div class="section-label">▸ 01 — Überblick</div>
+          <h2 class="section-heading">Warum Fehlerbehandlung wichtig ist</h2>
+          <p class="section-desc">
+            Fehler passieren immer: falsche Eingaben, fehlende Dateien, Netzwerkprobleme oder Logikfehler.
+            Gute Fehlerbehandlung sorgt dafür, dass dein Programm <strong>nicht einfach abstürzt</strong>, sondern
+            <strong>kontrolliert reagiert</strong> (z.B. eine Meldung ausgibt, neu fragt oder sauber beendet).
+          </p>
+        </div>
+
+        <div class="grid-3 fade-in">
+          <div class="card c-green">
+            <div class="card-icon">🧠</div>
+            <div class="card-title">Robust</div>
+            <div class="card-text">Dein Code läuft weiter, auch wenn etwas schief geht.</div>
+          </div>
+          <div class="card c-blue">
+            <div class="card-icon">🧹</div>
+            <div class="card-title">Sauber</div>
+            <div class="card-text">Ressourcen (Dateien, Verbindungen) werden korrekt geschlossen.</div>
+          </div>
+          <div class="card c-purple">
+            <div class="card-icon">🔍</div>
+            <div class="card-title">Debugbar</div>
+            <div class="card-text">Du erkennst schneller, was schief lief – und wo.</div>
+          </div>
+        </div>
+
+        <div class="rule-card fade-in">
+          <span class="rule-icon">💡</span>
+          <div class="rule-text">
+            Fehlerbehandlung ist nicht dazu da, <strong>alle Fehler zu verstecken</strong>.
+            Sie ist dazu da, Fehler <strong>kontrolliert</strong> zu behandeln und dem Nutzer sinnvolle Hinweise zu geben.
+          </div>
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- 02 Fehlerarten -->
+      <section id="fehlerarten">
+        <div class="fade-in">
+          <div class="section-label">▸ 02 — Fehlerarten</div>
+          <h2 class="section-heading">SyntaxError vs. Exceptions</h2>
+          <p class="section-desc">
+            Es gibt grob zwei Kategorien:
+            <strong>Syntaxfehler</strong> (dein Code ist nicht gültig) und <strong>Exceptions</strong>
+            (Fehler während das Programm läuft).
+          </p>
+        </div>
+
+        <div class="grid-2 fade-in">
+          <div class="card c-pink">
+            <div class="card-icon">🚫</div>
+            <div class="card-title">SyntaxError</div>
+            <div class="card-text">Passiert vor dem Start. Beispiel: Doppelpunkt vergessen, Klammern falsch, Tippfehler.</div>
+            <div class="code-block" style="margin-top:12px;padding:12px 16px;font-size:12px">
+              <span class="kw">if</span> <span class="kw">True</span><br>
+              <span class="ind"></span><span class="fn">print</span><span class="op">(</span><span class="str">"Oops"</span><span class="op">)</span>
+              <br><span class="cmt"># → SyntaxError: ':' fehlt</span>
+            </div>
+          </div>
+
+          <div class="card c-green">
+            <div class="card-icon">⚠️</div>
+            <div class="card-title">Runtime-Exceptions</div>
+            <div class="card-text">Passieren während das Programm läuft: falsche Eingabe, Datei nicht gefunden, Division durch 0 …</div>
+            <div class="code-block" style="margin-top:12px;padding:12px 16px;font-size:12px">
+              <span class="var">x</span> <span class="op">=</span> <span class="num">10</span> <span class="op">/</span> <span class="num">0</span>
+              <br><span class="cmt"># → ZeroDivisionError</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="fade-in" style="margin-top:28px">
+          <div class="section-label">Häufige Exceptions</div>
+          <table class="syntax-table" style="margin-top:14px">
+            <thead>
+              <tr>
+                <th>Exception</th>
+                <th>Wann?</th>
+                <th>Beispiel</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>ValueError</code></td>
+                <td class="td-muted">Wert passt nicht zum Typ/Format</td>
+                <td><code>int("abc")</code></td>
+              </tr>
+              <tr>
+                <td><code>TypeError</code></td>
+                <td class="td-muted">Falscher Typ in Operation</td>
+                <td><code>"5" + 2</code></td>
+              </tr>
+              <tr>
+                <td><code>ZeroDivisionError</code></td>
+                <td class="td-muted">Division durch 0</td>
+                <td><code>10/0</code></td>
+              </tr>
+              <tr>
+                <td><code>FileNotFoundError</code></td>
+                <td class="td-muted">Datei existiert nicht</td>
+                <td><code>open("x.txt")</code></td>
+              </tr>
+              <tr>
+                <td><code>KeyError</code></td>
+                <td class="td-muted">Key fehlt im Dictionary</td>
+                <td><code>d["x"]</code></td>
+              </tr>
+              <tr>
+                <td><code>IndexError</code></td>
+                <td class="td-muted">Index außerhalb Liste</td>
+                <td><code>lst[99]</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- 03 try/except -->
+      <section id="tryexcept">
+        <div class="fade-in">
+          <div class="section-label">▸ 03 — try / except</div>
+          <h2 class="section-heading">try: Risiko · except: Reaktion</h2>
+          <p class="section-desc">
+            Mit <code style="font-family:'JetBrains Mono',monospace;color:var(--green)">try</code> führst du Code aus,
+            der schiefgehen kann. Wenn eine Exception auftritt, springt Python in den passenden
+            <code style="font-family:'JetBrains Mono',monospace;color:var(--green)">except</code>-Block.
+          </p>
+        </div>
+
+        <div class="fade-in">
+          <div class="code-header">
+            <div class="code-dots">
+              <div class="code-dot" style="background:#ff5f57"></div>
+              <div class="code-dot" style="background:#febc2e"></div>
+              <div class="code-dot" style="background:#28c840"></div>
+            </div>
+            <span class="code-filename">try_except.py</span>
+            <span></span>
+          </div>
+
+          <div class="code-block">
+            <span class="line"><span class="kw">try</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="var">a</span> <span class="op">=</span> <span class="fn">int</span><span class="op">(</span><span class="fn">input</span><span class="op">(</span><span class="str">"Zahl A: "</span><span class="op">)</span><span class="op">)</span></span>
+            <span class="line"><span class="ind"></span><span class="var">b</span> <span class="op">=</span> <span class="fn">int</span><span class="op">(</span><span class="fn">input</span><span class="op">(</span><span class="str">"Zahl B: "</span><span class="op">)</span><span class="op">)</span></span>
+            <span class="line"><span class="ind"></span><span class="fn">print</span><span class="op">(</span><span class="str">f"Ergebnis: {</span><span style="color:var(--blue)">{"{a/b}"}</span><span class="str">}"</span><span class="op">)</span></span>
+            <span class="line"><span class="kw">except</span> <span class="cls">ValueError</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="fn">print</span><span class="op">(</span><span class="str">"Bitte nur Zahlen eingeben."</span><span class="op">)</span></span>
+            <span class="line"><span class="kw">except</span> <span class="cls">ZeroDivisionError</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="fn">print</span><span class="op">(</span><span class="str">"Division durch 0 ist nicht erlaubt."</span><span class="op">)</span></span>
+          </div>
+        </div>
+
+        <div class="rule-card fade-in">
+          <span class="rule-icon">⚠️</span>
+          <div class="rule-text">
+            <strong>Wichtig:</strong> Fang nicht einfach pauschal alles mit <code style="font-family:'JetBrains Mono',monospace">except:</code> ab.
+            Besser: konkrete Exceptions (z.B. <code>ValueError</code>). Sonst versteckst du echte Bugs.
+          </div>
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- 04 else -->
+      <section id="else">
+        <div class="fade-in">
+          <div class="section-label">▸ 04 — else</div>
+          <h2 class="section-heading">else läuft nur, wenn kein Fehler passiert</h2>
+          <p class="section-desc">
+            Der <code style="font-family:'JetBrains Mono',monospace;color:var(--green)">else</code>-Block ist super,
+            wenn du Code trennen willst: <strong>try</strong> nur „gefährlich“, <strong>else</strong> nur „okay“.
+          </p>
+        </div>
+
+        <div class="fade-in">
+          <div class="code-header">
+            <div class="code-dots">
+              <div class="code-dot" style="background:#ff5f57"></div>
+              <div class="code-dot" style="background:#febc2e"></div>
+              <div class="code-dot" style="background:#28c840"></div>
+            </div>
+            <span class="code-filename">try_else.py</span>
+            <span></span>
+          </div>
+
+          <div class="code-block">
+            <span class="line"><span class="kw">try</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="var">x</span> <span class="op">=</span> <span class="fn">int</span><span class="op">(</span><span class="fn">input</span><span class="op">(</span><span class="str">"Zahl: "</span><span class="op">)</span><span class="op">)</span></span>
+            <span class="line"><span class="kw">except</span> <span class="cls">ValueError</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="fn">print</span><span class="op">(</span><span class="str">"Keine Zahl."</span><span class="op">)</span></span>
+            <span class="line"><span class="kw">else</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="fn">print</span><span class="op">(</span><span class="str">f"Quadrat: {</span><span style="color:var(--blue)">{"{x*x}"}</span><span class="str">}"</span><span class="op">)</span></span>
+          </div>
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- 05 finally -->
+      <section id="finally">
+        <div class="fade-in">
+          <div class="section-label">▸ 05 — finally</div>
+          <h2 class="section-heading">finally läuft immer</h2>
+          <p class="section-desc">
+            Der <code style="font-family:'JetBrains Mono',monospace;color:var(--green)">finally</code>-Block wird
+            <strong>immer</strong> ausgeführt – egal ob Fehler oder nicht.
+            Perfekt für Cleanup (Dateien schließen, Verbindungen beenden).
+          </p>
+        </div>
+
+        <div class="fade-in">
+          <div class="code-header">
+            <div class="code-dots">
+              <div class="code-dot" style="background:#ff5f57"></div>
+              <div class="code-dot" style="background:#febc2e"></div>
+              <div class="code-dot" style="background:#28c840"></div>
+            </div>
+            <span class="code-filename">finally.py</span>
+            <span></span>
+          </div>
+
+          <div class="code-block">
+            <span class="line"><span class="kw">f</span> <span class="op">=</span> <span class="kw">None</span></span>
+            <span class="line"><span class="kw">try</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="var">f</span> <span class="op">=</span> <span class="fn">open</span><span class="op">(</span><span class="str">"daten.txt"</span><span class="op">,</span> <span class="str">"r"</span><span class="op">)</span></span>
+            <span class="line"><span class="ind"></span><span class="var">content</span> <span class="op">=</span> <span class="var">f</span><span class="op">.</span><span class="fn">read</span><span class="op">()</span></span>
+            <span class="line"><span class="ind"></span><span class="fn">print</span><span class="op">(</span><span class="var">content</span><span class="op">)</span></span>
+            <span class="line"><span class="kw">except</span> <span class="cls">FileNotFoundError</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="fn">print</span><span class="op">(</span><span class="str">"Datei nicht gefunden."</span><span class="op">)</span></span>
+            <span class="line"><span class="kw">finally</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="kw">if</span> <span class="var">f</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="ind"></span><span class="var">f</span><span class="op">.</span><span class="fn">close</span><span class="op">()</span> <span class="cmt"># wird immer ausgeführt</span></span>
+          </div>
+        </div>
+
+        <div class="rule-card fade-in">
+          <span class="rule-icon">💡</span>
+          <div class="rule-text">
+            Noch besser als <code style="font-family:'JetBrains Mono',monospace">finally</code> ist oft der Kontextmanager:
+            <strong>with open(...)</strong>. Der schließt die Datei automatisch.
+          </div>
+        </div>
+
+        <div class="fade-in" style="margin-top:18px">
+          <div class="code-header">
+            <div class="code-dots">
+              <div class="code-dot" style="background:#ff5f57"></div>
+              <div class="code-dot" style="background:#febc2e"></div>
+              <div class="code-dot" style="background:#28c840"></div>
+            </div>
+            <span class="code-filename">with_open.py</span>
+            <span></span>
+          </div>
+
+          <div class="code-block">
+            <span class="line"><span class="kw">try</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="kw">with</span> <span class="fn">open</span><span class="op">(</span><span class="str">"daten.txt"</span><span class="op">,</span> <span class="str">"r"</span><span class="op">)</span> <span class="kw">as</span> <span class="var">f</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="ind"></span><span class="fn">print</span><span class="op">(</span><span class="var">f</span><span class="op">.</span><span class="fn">read</span><span class="op">()</span><span class="op">)</span></span>
+            <span class="line"><span class="kw">except</span> <span class="cls">FileNotFoundError</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="fn">print</span><span class="op">(</span><span class="str">"Datei fehlt."</span><span class="op">)</span></span>
+          </div>
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- 06 mehrere excepts -->
+      <section id="mehrere">
+        <div class="fade-in">
+          <div class="section-label">▸ 06 — mehrere excepts</div>
+          <h2 class="section-heading">Mehrere Exceptions elegant behandeln</h2>
+          <p class="section-desc">
+            Du kannst mehrere Exceptions entweder einzeln abfangen oder in einer Klammer zusammenfassen.
+            Außerdem kannst du die Fehlermeldung in eine Variable speichern.
+          </p>
+        </div>
+
+        <div class="fade-in">
+          <div class="code-header">
+            <div class="code-dots">
+              <div class="code-dot" style="background:#ff5f57"></div>
+              <div class="code-dot" style="background:#febc2e"></div>
+              <div class="code-dot" style="background:#28c840"></div>
+            </div>
+            <span class="code-filename">multi_except.py</span>
+            <span></span>
+          </div>
+
+          <div class="code-block">
+            <span class="line"><span class="kw">try</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="var">x</span> <span class="op">=</span> <span class="fn">int</span><span class="op">(</span><span class="fn">input</span><span class="op">(</span><span class="str">"Zahl: "</span><span class="op">)</span><span class="op">)</span></span>
+            <span class="line"><span class="ind"></span><span class="var">y</span> <span class="op">=</span> <span class="num">10</span> <span class="op">/</span> <span class="var">x</span></span>
+            <span class="line"><span class="kw">except</span> <span class="op">(</span><span class="cls">ValueError</span><span class="op">,</span> <span class="cls">ZeroDivisionError</span><span class="op">)</span> <span class="kw">as</span> <span class="var">e</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="fn">print</span><span class="op">(</span><span class="str">f"Fehler: {</span><span style="color:var(--blue)">{"{e}"}</span><span class="str">}"</span><span class="op">)</span></span>
+            <span class="line"><span class="kw">else</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="fn">print</span><span class="op">(</span><span class="str">f"10 / x = {</span><span style="color:var(--blue)">{"{y}"}</span><span class="str">}"</span><span class="op">)</span></span>
+          </div>
+        </div>
+
+        <div class="rule-card fade-in">
+          <span class="rule-icon">🎯</span>
+          <div class="rule-text">
+            Fang nur das ab, was du wirklich erwartest.
+            Wenn du alles abfängst, merkst du Bugs später oder gar nicht.
+          </div>
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- 07 raise -->
+      <section id="raise">
+        <div class="fade-in">
+          <div class="section-label">▸ 07 — raise</div>
+          <h2 class="section-heading">Fehler bewusst auslösen</h2>
+          <p class="section-desc">
+            Mit <code style="font-family:'JetBrains Mono',monospace;color:var(--green)">raise</code> kannst du selbst
+            eine Exception auslösen – z.B. wenn eine Eingabe ungültig ist.
+          </p>
+        </div>
+
+        <div class="fade-in">
+          <div class="code-header">
+            <div class="code-dots">
+              <div class="code-dot" style="background:#ff5f57"></div>
+              <div class="code-dot" style="background:#febc2e"></div>
+              <div class="code-dot" style="background:#28c840"></div>
+            </div>
+            <span class="code-filename">raise.py</span>
+            <span></span>
+          </div>
+
+          <div class="code-block">
+            <span class="line"><span class="kw">def</span> <span class="fn">set_age</span><span class="op">(</span><span class="var">age</span><span class="op">)</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="kw">if</span> <span class="var">age</span> <span class="op"><</span> <span class="num">0</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="ind"></span><span class="kw">raise</span> <span class="cls">ValueError</span><span class="op">(</span><span class="str">"Alter darf nicht negativ sein"</span><span class="op">)</span></span>
+            <span class="line"><span class="ind"></span><span class="kw">return</span> <span class="var">age</span></span>
+            <span class="line"></span>
+            <span class="line"><span class="kw">try</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="fn">print</span><span class="op">(</span><span class="fn">set_age</span><span class="op">(</span><span class="num">-1</span><span class="op">)</span><span class="op">)</span></span>
+            <span class="line"><span class="kw">except</span> <span class="cls">ValueError</span> <span class="kw">as</span> <span class="var">e</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="fn">print</span><span class="op">(</span><span class="str">f"Fehler: {</span><span style="color:var(--blue)">{"{e}"}</span><span class="str">}"</span><span class="op">)</span></span>
+          </div>
+        </div>
+
+        <div class="rule-card fade-in">
+          <span class="rule-icon">📣</span>
+          <div class="rule-text">
+            <strong>raise</strong> ist perfekt für Validierung.
+            Du sagst damit: „So darf mein Programm nicht weiterarbeiten.“
+          </div>
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- 08 custom exceptions -->
+      <section id="custom">
+        <div class="fade-in">
+          <div class="section-label">▸ 08 — eigene Exceptions</div>
+          <h2 class="section-heading">Eigene Fehlerklassen erstellen</h2>
+          <p class="section-desc">
+            Manchmal willst du Fehler klarer benennen. Dann erstellst du eine eigene Exception.
+            Das ist einfach eine Klasse, die von <code style="font-family:'JetBrains Mono',monospace">Exception</code> erbt.
+          </p>
+        </div>
+
+        <div class="fade-in">
+          <div class="code-header">
+            <div class="code-dots">
+              <div class="code-dot" style="background:#ff5f57"></div>
+              <div class="code-dot" style="background:#febc2e"></div>
+              <div class="code-dot" style="background:#28c840"></div>
+            </div>
+            <span class="code-filename">custom_exception.py</span>
+            <span></span>
+          </div>
+
+          <div class="code-block">
+            <span class="line"><span class="kw">class</span> <span class="cls">LoginError</span><span class="op">(</span><span class="cls">Exception</span><span class="op">)</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="kw">pass</span></span>
+            <span class="line"></span>
+            <span class="line"><span class="kw">def</span> <span class="fn">login</span><span class="op">(</span><span class="var">username</span><span class="op">,</span> <span class="var">password</span><span class="op">)</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="kw">if</span> <span class="var">password</span> <span class="op">!=</span> <span class="str">"1234"</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="ind"></span><span class="kw">raise</span> <span class="cls">LoginError</span><span class="op">(</span><span class="str">"Passwort falsch"</span><span class="op">)</span></span>
+            <span class="line"><span class="ind"></span><span class="kw">return</span> <span class="kw">True</span></span>
+            <span class="line"></span>
+            <span class="line"><span class="kw">try</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="fn">login</span><span class="op">(</span><span class="str">"basti"</span><span class="op">,</span> <span class="str">"0000"</span><span class="op">)</span></span>
+            <span class="line"><span class="kw">except</span> <span class="cls">LoginError</span> <span class="kw">as</span> <span class="var">e</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="fn">print</span><span class="op">(</span><span class="str">f"Login fehlgeschlagen: {</span><span style="color:var(--blue)">{"{e}"}</span><span class="str">}"</span><span class="op">)</span></span>
+          </div>
+        </div>
+
+        <div class="rule-card fade-in">
+          <span class="rule-icon">🧩</span>
+          <div class="rule-text">
+            Eigene Exceptions machen Code lesbarer: Statt „ValueError irgendwo“ hast du z.B. „LoginError“.
+          </div>
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- 09 assert -->
+      <section id="assert">
+        <div class="fade-in">
+          <div class="section-label">▸ 09 — assert</div>
+          <h2 class="section-heading">assert für Annahmen (Debug)</h2>
+          <p class="section-desc">
+            <code style="font-family:'JetBrains Mono',monospace;color:var(--green)">assert</code> ist eine
+            „Sicherheitsleine“: Du prüfst Annahmen im Code. Wenn sie falsch sind, gibt es eine
+            <code style="font-family:'JetBrains Mono',monospace;color:var(--green)">AssertionError</code>.
+          </p>
+        </div>
+
+        <div class="fade-in">
+          <div class="code-header">
+            <div class="code-dots">
+              <div class="code-dot" style="background:#ff5f57"></div>
+              <div class="code-dot" style="background:#febc2e"></div>
+              <div class="code-dot" style="background:#28c840"></div>
+            </div>
+            <span class="code-filename">assert.py</span>
+            <span></span>
+          </div>
+
+          <div class="code-block">
+            <span class="line"><span class="kw">def</span> <span class="fn">divide</span><span class="op">(</span><span class="var">a</span><span class="op">,</span> <span class="var">b</span><span class="op">)</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="kw">assert</span> <span class="var">b</span> <span class="op">!=</span> <span class="num">0</span><span class="op">,</span> <span class="str">"b darf nicht 0 sein"</span></span>
+            <span class="line"><span class="ind"></span><span class="kw">return</span> <span class="var">a</span> <span class="op">/</span> <span class="var">b</span></span>
+            <span class="line"></span>
+            <span class="line"><span class="fn">print</span><span class="op">(</span><span class="fn">divide</span><span class="op">(</span><span class="num">10</span><span class="op">,</span> <span class="num">2</span><span class="op">)</span><span class="op">)</span> <span class="cmt"># 5.0</span></span>
+          </div>
+        </div>
+
+        <div class="rule-card fade-in">
+          <span class="rule-icon">🔎</span>
+          <div class="rule-text">
+            <strong>Hinweis:</strong> <code style="font-family:'JetBrains Mono',monospace">assert</code> ist eher für Debug/Entwicklung.
+            Für echte Nutzer-Eingaben ist <code>raise</code> + saubere Fehlerbehandlung oft besser.
+          </div>
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- 10 Praxis -->
+      <section id="praxis">
+        <div class="fade-in">
+          <div class="section-label">▸ 10 — Praxis</div>
+          <h2 class="section-heading">Mini-Projekt: Zahlenrechner (robust)</h2>
+          <p class="section-desc">
+            Ziel: Ein kleiner Rechner, der wiederholt zwei Zahlen und einen Operator abfragt.
+            Er soll nicht abstürzen, sondern sauber Fehler melden und neu fragen.
+          </p>
+        </div>
+
+        <div class="fade-in">
+          <div class="code-header">
+            <div class="code-dots">
+              <div class="code-dot" style="background:#ff5f57"></div>
+              <div class="code-dot" style="background:#febc2e"></div>
+              <div class="code-dot" style="background:#28c840"></div>
+            </div>
+            <span class="code-filename">rechner_try_except.py</span>
+            <span></span>
+          </div>
+
+          <div class="code-block">
+            <span class="line"><span class="kw">def</span> <span class="fn">read_int</span><span class="op">(</span><span class="var">prompt</span><span class="op">)</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="kw">while</span> <span class="kw">True</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="ind"></span><span class="kw">try</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="ind"></span><span class="ind"></span><span class="kw">return</span> <span class="fn">int</span><span class="op">(</span><span class="fn">input</span><span class="op">(</span><span class="var">prompt</span><span class="op">)</span><span class="op">)</span></span>
+            <span class="line"><span class="ind"></span><span class="ind"></span><span class="kw">except</span> <span class="cls">ValueError</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="ind"></span><span class="ind"></span><span class="fn">print</span><span class="op">(</span><span class="str">"Bitte eine ganze Zahl eingeben."</span><span class="op">)</span></span>
+            <span class="line"></span>
+            <span class="line"><span class="kw">def</span> <span class="fn">calc</span><span class="op">(</span><span class="var">a</span><span class="op">,</span> <span class="var">op</span><span class="op">,</span> <span class="var">b</span><span class="op">)</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="kw">if</span> <span class="var">op</span> <span class="op">==</span> <span class="str">"+"</span><span class="op">:</span> <span class="kw">return</span> <span class="var">a</span> <span class="op">+</span> <span class="var">b</span></span>
+            <span class="line"><span class="ind"></span><span class="kw">if</span> <span class="var">op</span> <span class="op">==</span> <span class="str">"-"</span><span class="op">:</span> <span class="kw">return</span> <span class="var">a</span> <span class="op">-</span> <span class="var">b</span></span>
+            <span class="line"><span class="ind"></span><span class="kw">if</span> <span class="var">op</span> <span class="op">==</span> <span class="str">"*"</span><span class="op">:</span> <span class="kw">return</span> <span class="var">a</span> <span class="op">*</span> <span class="var">b</span></span>
+            <span class="line"><span class="ind"></span><span class="kw">if</span> <span class="var">op</span> <span class="op">==</span> <span class="str">"/"</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="ind"></span><span class="kw">if</span> <span class="var">b</span> <span class="op">==</span> <span class="num">0</span><span class="op">:</span> <span class="kw">raise</span> <span class="cls">ZeroDivisionError</span><span class="op">(</span><span class="str">"Division durch 0"</span><span class="op">)</span></span>
+            <span class="line"><span class="ind"></span><span class="ind"></span><span class="kw">return</span> <span class="var">a</span> <span class="op">/</span> <span class="var">b</span></span>
+            <span class="line"><span class="ind"></span><span class="kw">raise</span> <span class="cls">ValueError</span><span class="op">(</span><span class="str">"Unbekannter Operator"</span><span class="op">)</span></span>
+            <span class="line"></span>
+            <span class="line"><span class="kw">while</span> <span class="kw">True</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="var">a</span> <span class="op">=</span> <span class="fn">read_int</span><span class="op">(</span><span class="str">"A: "</span><span class="op">)</span></span>
+            <span class="line"><span class="ind"></span><span class="var">b</span> <span class="op">=</span> <span class="fn">read_int</span><span class="op">(</span><span class="str">"B: "</span><span class="op">)</span></span>
+            <span class="line"><span class="ind"></span><span class="var">op</span> <span class="op">=</span> <span class="fn">input</span><span class="op">(</span><span class="str">"Operator (+ - * /) oder q: "</span><span class="op">)</span></span>
+            <span class="line"><span class="ind"></span><span class="kw">if</span> <span class="var">op</span> <span class="op">==</span> <span class="str">"q"</span><span class="op">:</span> <span class="kw">break</span></span>
+            <span class="line"><span class="ind"></span><span class="kw">try</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="ind"></span><span class="var">res</span> <span class="op">=</span> <span class="fn">calc</span><span class="op">(</span><span class="var">a</span><span class="op">,</span> <span class="var">op</span><span class="op">,</span> <span class="var">b</span><span class="op">)</span></span>
+            <span class="line"><span class="ind"></span><span class="ind"></span><span class="fn">print</span><span class="op">(</span><span class="str">f"= {</span><span style="color:var(--blue)">{"{res}"}</span><span class="str">}"</span><span class="op">)</span></span>
+            <span class="line"><span class="ind"></span><span class="kw">except</span> <span class="op">(</span><span class="cls">ValueError</span><span class="op">,</span> <span class="cls">ZeroDivisionError</span><span class="op">)</span> <span class="kw">as</span> <span class="var">e</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="ind"></span><span class="fn">print</span><span class="op">(</span><span class="str">f"Fehler: {</span><span style="color:var(--blue)">{"{e}"}</span><span class="str">}"</span><span class="op">)</span></span>
+          </div>
+        </div>
+
+        <div class="rule-card fade-in">
+          <span class="rule-icon">🚀</span>
+          <div class="rule-text">
+            Challenge: Erweitere den Rechner um <strong>Floats</strong> (Kommazahlen) und füge einen Modus hinzu,
+            der die letzten 5 Ergebnisse speichert (Liste) – und dabei ebenfalls Fehler abfängt.
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section id="cta">
+        <div class="cta-box fade-in">
+          <div class="cta-title">Weiter lernen</div>
+          <p class="cta-text">
+            Stabiler Code = besserer Code. Mit Fehlerbehandlung bist du schon deutlich "Pro" unterwegs.
+            Als nächstes passen super: Module & Pakete oder kleine Praxisprojekte.
+          </p>
+          <div class="hero-buttons">
+            <a href="/html/oop.html" class="btn btn-primary">Zurück - OOP →</a>
+            <a href="/index.html" class="btn btn-outline">← Zur Startseite</a>
+          </div>
+        </div>
+      </section>
+
+      <footer>Erstellt mit <span>♥</span> · HelloPython.de · Bastian Meese · <span>2025 - 2026</span></footer>
+    </main>
+  </div>
+
+  <!-- gleicher JS wie deine Syntax-Seite -->
+  <script src="/python Grundlagen/JS/syntax.js"></script>
+</body>
+</html>

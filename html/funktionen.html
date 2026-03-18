@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Python Funktionen – HelloPython.de</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/python Grundlagen/css/funktionenStyle.css">
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- TOP NAV -->
+<nav class="topnav">
+  <a class="nav-logo" href="/index.html"><span>&lt;</span> HelloPython.de</a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#aufbau">Aufbau</a></li>
+      <li><a href="#aufruf">Aufruf</a></li>
+      <li><a href="#stufen">4 Stufen</a></li>
+      <li><a href="#regel">Goldene Regel</a></li>
+    </ul>
+    <button class="hamburger" id="hamburgerBtn" aria-label="Menü öffnen">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- OVERLAY -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+
+  <a class="sidebar-back" href="/index.html">
+    <span class="sidebar-back-arrow">←</span> Zurück zur Startseite
+  </a>
+
+  <div class="sidebar-divider"></div>
+
+  <div class="sidebar-section-label">Funktionen – Kapitel</div>
+
+  <a class="sidebar-link active" href="#aufbau" data-section="aufbau">
+    <span class="s-icon">🔧</span> Aufbau
+  </a>
+  <a class="sidebar-link" href="#aufruf" data-section="aufruf">
+    <span class="s-icon">▶️</span> Aufruf
+  </a>
+  <a class="sidebar-link" href="#stufen" data-section="stufen">
+    <span class="s-icon">📶</span> 4 Stufen
+  </a>
+  <a class="sidebar-link" href="#regel" data-section="regel">
+    <span class="s-icon">💡</span> Goldene Regel
+    <span class="s-badge">wichtig</span>
+  </a>
+
+  <div class="sidebar-divider"></div>
+
+  <div class="sidebar-section-label">Weitere – Kapitel</div>
+
+  <a class="sidebar-link" href="/python Grundlagen/html/funktionen.html">
+    <span class="s-icon">📦</span> Funktionen
+    <span class="s-badge">aktiv</span>
+  </a>
+  <a class="sidebar-link" href="/python Grundlagen/html/vscode.html">
+    <span class="s-icon">💻</span> VS Code Guide
+    <span class="s-badge">neu</span>
+  </a>
+  <a class="sidebar-link" href="/python Grundlagen/html/syntax.html">
+    <span class="s-icon">⚙️</span> Syntax
+  </a>
+  <a class="sidebar-link" href="/python Grundlagen/html/schleifen.html">
+    <span class="s-icon">🔁</span> Schleifen
+  </a>
+  <a class="sidebar-link" href="/python Grundlagen/html/datenstrukturen.html" data-section="themen">
+    <span class="s-icon">🗂️</span> Datenstrukturen
+    <span class="s-badge">neu</span>
+  </a>
+  <a class="sidebar-link" href="/python Grundlagen/html/oop.html" data-section="themen">
+      <span class="s-icon">📐</span> OOP
+      <span class="s-badge">neu</span>
+    </a>
+    <a class="sidebar-link" href="/python Grundlagen/html/fehlerbehandlung.html" data-section="themen">
+      <span class="s-icon">🛡️</span> Fehlerbehandlung
+      <span class="s-badge">neu</span>
+    </a>
+    <a class="sidebar-link" href="/python Grundlagen/html/module_pakete.html" data-section="themen">
+      <span class="s-icon">📦</span> Module & Pakete
+      <span class="s-badge">neu</span>
+    </a>
+</aside>
+
+<!-- LAYOUT -->
+<div class="layout">
+<main class="main">
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-badge">Wiederverwendbarer Code mit</div>
+    <h1 class="hero-title">Funktionen</h1>
+    <p class="hero-sub"># def · parameter · return</p>
+    <div class="hero-code">
+      <span class="cmt"># Eine einfache Funktion</span><br>
+      <span class="kw">def</span> <span class="fn">addieren</span>(<span class="param">a</span>, <span class="param">b</span>):<br>
+      <span class="ind"></span><span class="ret">return</span> <span class="param">a</span> <span class="op">+</span> <span class="param">b</span><br><br>
+      <span class="var">summe</span> <span class="op">=</span> <span class="fn">addieren</span>(<span class="num">3</span>, <span class="num">5</span>)  <span class="cmt"># → 8</span>
+    </div>
+    <div class="hero-buttons">
+      <a href="#aufbau" class="btn btn-primary">Los geht's →</a>
+      <a href="/html/index.html#themen" class="btn btn-outline">Alle Themen</a>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- AUFBAU -->
+  <section id="aufbau">
+    <div class="fade-in">
+      <div class="section-label">▸ 01 — Aufbau</div>
+      <h2 class="section-heading">Aufbau einer Funktion</h2>
+      <p class="section-desc">Eine Funktion wird mit <code class="code-inline">def</code> definiert, hat einen Namen, optionale Parameter und gibt mit <code class="code-inline">return</code> ein Ergebnis zurück.</p>
+    </div>
+
+    <div class="fade-in">
+      <div class="anatomy-card">
+        <div class="section-title">▸ Anatomie</div>
+        <div class="code-anatomy">
+          <div class="code-line">
+            <span class="kw">def</span>&nbsp;<span class="fn">addieren</span><span class="paren">(</span><span class="param">a</span><span class="op">,</span>&nbsp;<span class="param">b</span><span class="paren">)</span><span class="op">:</span>
+          </div>
+          <div class="code-line">
+            <span class="indent"></span><span class="str">"""Addiert zwei Zahlen"""</span>
+          </div>
+          <div class="code-line">
+            <span class="indent"></span><span class="var">ergebnis</span>&nbsp;<span class="op">=</span>&nbsp;<span class="param">a</span>&nbsp;<span class="op">+</span>&nbsp;<span class="param">b</span>
+          </div>
+          <div class="code-line">
+            <span class="indent"></span><span class="ret">return</span>&nbsp;<span class="var">ergebnis</span>
+          </div>
+          <br>
+          <div class="code-line"><span class="cmt"># Aufruf:</span></div>
+          <div class="code-line">
+            <span class="var">summe</span>&nbsp;<span class="op">=</span>&nbsp;<span class="fn">addieren</span><span class="paren">(</span><span class="param">3</span><span class="op">,</span>&nbsp;<span class="param">5</span><span class="paren">)</span>&nbsp;<span class="cmt"># → 8</span>
+          </div>
+        </div>
+
+        <div class="annotations">
+          <div class="ann">
+            <div class="ann-dot" style="background:var(--pink)"></div>
+            <div>
+              <div class="ann-label">def</div>
+              <div class="ann-desc">Startet die Definition einer Funktion</div>
+            </div>
+          </div>
+          <div class="ann">
+            <div class="ann-dot" style="background:var(--yellow)"></div>
+            <div>
+              <div class="ann-label">name</div>
+              <div class="ann-desc">Wie du die Funktion später aufrufst</div>
+            </div>
+          </div>
+          <div class="ann">
+            <div class="ann-dot" style="background:var(--blue)"></div>
+            <div>
+              <div class="ann-label">parameter</div>
+              <div class="ann-desc">Eingaben, die die Funktion erhält</div>
+            </div>
+          </div>
+          <div class="ann">
+            <div class="ann-dot" style="background:var(--green)"></div>
+            <div>
+              <div class="ann-label">docstring</div>
+              <div class="ann-desc">Beschreibung (optional, aber gut!)</div>
+            </div>
+          </div>
+          <div class="ann">
+            <div class="ann-dot" style="background:var(--purple)"></div>
+            <div>
+              <div class="ann-label">return</div>
+              <div class="ann-desc">Gibt das Ergebnis zurück</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- AUFRUF -->
+  <section id="aufruf">
+    <div class="fade-in">
+      <div class="section-label">▸ 02 — Aufruf</div>
+      <h2 class="section-heading">Wie funktioniert ein Aufruf?</h2>
+      <p class="section-desc">Wenn du eine Funktion aufrufst, werden die Eingaben übergeben, verarbeitet und das Ergebnis zurückgegeben.</p>
+    </div>
+
+    <div class="flow-card fade-in">
+      <div class="section-title">▸ Ablauf</div>
+      <div class="flow">
+        <div class="flow-box" style="background:rgba(79,168,255,0.1); border:1px solid rgba(79,168,255,0.3)">
+          <div class="flow-label">Eingabe</div>
+          <div class="flow-value" style="color:var(--blue)">a=3, b=5</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box" style="background:rgba(245,200,66,0.1); border:1px solid rgba(245,200,66,0.3)">
+          <div class="flow-label">Funktion</div>
+          <div class="flow-value" style="color:var(--yellow)">addieren()</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box" style="background:rgba(77,255,176,0.1); border:1px solid rgba(77,255,176,0.3)">
+          <div class="flow-label">Verarbeitung</div>
+          <div class="flow-value" style="color:var(--green)">3 + 5</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box" style="background:rgba(184,122,255,0.1); border:1px solid rgba(184,122,255,0.3)">
+          <div class="flow-label">Ausgabe</div>
+          <div class="flow-value" style="color:var(--purple)">8</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 4 STUFEN -->
+  <section id="stufen">
+    <div class="fade-in">
+      <div class="section-label">▸ 03 — Stufen</div>
+      <h2 class="section-heading">4 Stufen – von einfach bis komplex</h2>
+      <p class="section-desc">Von der einfachsten Funktion ohne Parameter bis hin zu Standardwerten – Schritt für Schritt komplexer.</p>
+    </div>
+
+    <div class="levels-grid fade-in">
+
+      <div class="level-card" data-color="blue">
+        <div class="level-header">
+          <div class="level-num" style="background:rgba(79,168,255,0.15);color:var(--blue)">1</div>
+          <div class="level-title">Ohne Parameter</div>
+        </div>
+        <div class="level-code">
+          <span class="kw">def</span> <span class="fn">begruessung</span>():<br>
+          &nbsp;&nbsp;<span class="var">print</span>(<span class="str">"Hallo!"</span>)<br><br>
+          <span class="fn">begruessung</span>()
+        </div>
+        <div class="level-output">
+          <span class="output-arrow">▶</span> Hallo!
+        </div>
+      </div>
+
+      <div class="level-card" data-color="green">
+        <div class="level-header">
+          <div class="level-num" style="background:rgba(77,255,176,0.15);color:var(--green)">2</div>
+          <div class="level-title">Mit Parameter</div>
+        </div>
+        <div class="level-code">
+          <span class="kw">def</span> <span class="fn">begruessung</span>(<span class="param">name</span>):<br>
+          &nbsp;&nbsp;<span class="var">print</span>(<span class="str">"Hallo, {name}!"</span>)<br><br>
+          <span class="fn">begruessung</span>(<span class="str">"Anna"</span>)
+        </div>
+        <div class="level-output">
+          <span class="output-arrow">▶</span> Hallo, Anna!
+        </div>
+      </div>
+
+      <div class="level-card" data-color="pink">
+        <div class="level-header">
+          <div class="level-num" style="background:rgba(255,107,157,0.15);color:var(--pink)">3</div>
+          <div class="level-title">Mit Return</div>
+        </div>
+        <div class="level-code">
+          <span class="kw">def</span> <span class="fn">addieren</span>(<span class="param">a</span>, <span class="param">b</span>):<br>
+          &nbsp;&nbsp;<span class="ret">return</span> <span class="param">a</span> + <span class="param">b</span><br><br>
+          <span class="var">x</span> = <span class="fn">addieren</span>(3, 5)
+        </div>
+        <div class="level-output">
+          <span class="output-arrow">▶</span> x = 8
+        </div>
+      </div>
+
+      <div class="level-card" data-color="purple">
+        <div class="level-header">
+          <div class="level-num" style="background:rgba(184,122,255,0.15);color:var(--purple)">4</div>
+          <div class="level-title">Standardwerte</div>
+        </div>
+        <div class="level-code">
+          <span class="kw">def</span> <span class="fn">hoch</span>(<span class="param">x</span>, <span class="param">n</span>=<span class="str">2</span>):<br>
+          &nbsp;&nbsp;<span class="ret">return</span> <span class="param">x</span> ** <span class="param">n</span><br><br>
+          <span class="fn">hoch</span>(4) &nbsp;&nbsp;&nbsp;&nbsp;<span class="cmt"># n=2</span>
+        </div>
+        <div class="level-output">
+          <span class="output-arrow">▶</span> 16
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- GOLDENE REGEL -->
+  <section id="regel">
+    <div class="fade-in">
+      <div class="section-label">▸ 04 — Goldene Regel</div>
+      <h2 class="section-heading">Die goldene Regel</h2>
+    </div>
+    <div class="rule-card fade-in">
+      <div class="rule-icon">💡</div>
+      <div class="rule-text">
+        <strong>Die goldene Regel:</strong> Eine Funktion sollte immer <strong>genau eine Aufgabe</strong> erledigen – klar benannt, leicht wiederverwendbar.
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="cta">
+    <div class="cta-box fade-in">
+      <div class="cta-title">Weiter lernen</div>
+      <p class="cta-text">Du hast Funktionen gemeistert! Als nächstes kommen Schleifen, Datenstrukturen und OOP.</p>
+      <div class="hero-buttons">
+        <a href="/python Grundlagen/html/schleifen.html" class="btn btn-primary">Schleifen →</a>
+        <a href="/index.html" class="btn btn-outline">← Startseite</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>Erstellt mit <span>♥</span> · HelloPython.de · Bastian Meese · <span>2025 - 2026</span></footer>
+
+</main>
+</div>
+
+<script src="/python Grundlagen/JS/syntax.js"></script>
+</body>
+</html>

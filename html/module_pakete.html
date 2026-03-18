@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Python – Module & Pakete</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet" />
+  <!-- gleicher Stil wie deine Syntax-Seite -->
+  <link rel="stylesheet" href="/python Grundlagen/css/syntax.css" />
+</head>
+<body>
+  <div class="progress-bar" id="progressBar"></div>
+
+  <!-- TOP NAV -->
+  <nav class="topnav">
+    <a class="nav-logo" href="/index.html"><span><</span> HelloPython.de</a>
+
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="#grundlagen">Basics</a></li>
+        <li><a href="#import">import</a></li>
+        <li><a href="#pakete">Pakete</a></li>
+        <li><a href="#pip">pip</a></li>
+        <li><a href="#venv">venv</a></li>
+        <li><a href="#praxis">Praxis</a></li>
+      </ul>
+
+      <button class="hamburger" id="hamburgerBtn" aria-label="Menü öffnen">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- OVERLAY -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <a class="sidebar-back" href="/html/index.html">
+      <span class="sidebar-back-arrow">←</span> Zurück zur Startseite
+    </a>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section-label">Hier geht's zurück</div>
+    <a class="sidebar-link lp-link" href="/index.html">
+      <span class="s-icon">🐍</span> Was ist Python?
+      <span class="s-badge">Start</span>
+    </a>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section-label">Module & Pakete – Kapitel</div>
+
+    <a class="sidebar-link active" href="#grundlagen" data-section="grundlagen">
+      <span class="s-icon">🧩</span> Was ist ein Modul?
+    </a>
+    <a class="sidebar-link" href="#import" data-section="import">
+      <span class="s-icon">📥</span> import (Basics)
+      <span class="s-badge">wichtig</span>
+    </a>
+    <a class="sidebar-link" href="#fromimport" data-section="fromimport">
+      <span class="s-icon">🎯</span> from ... import ...
+    </a>
+    <a class="sidebar-link" href="#alias" data-section="alias">
+      <span class="s-icon">🏷️</span> Aliase (as)
+    </a>
+    <a class="sidebar-link" href="#eigene" data-section="eigene">
+      <span class="s-icon">🛠️</span> eigene Module
+    </a>
+    <a class="sidebar-link" href="#pakete" data-section="pakete">
+      <span class="s-icon">📦</span> Pakete
+    </a>
+    <a class="sidebar-link" href="#struktur" data-section="struktur">
+      <span class="s-icon">🗂️</span> Projektstruktur
+    </a>
+    <a class="sidebar-link" href="#init" data-section="init">
+      <span class="s-icon">✨</span> __init__.py
+    </a>
+    <a class="sidebar-link" href="#path" data-section="path">
+      <span class="s-icon">🧭</span> sys.path & PYTHONPATH
+    </a>
+    <a class="sidebar-link" href="#pip" data-section="pip">
+      <span class="s-icon">⬇️</span> pip
+    </a>
+    <a class="sidebar-link" href="#venv" data-section="venv">
+      <span class="s-icon">🧪</span> venv
+    </a>
+    <a class="sidebar-link" href="#requirements" data-section="requirements">
+      <span class="s-icon">🧾</span> requirements.txt
+    </a>
+    <a class="sidebar-link" href="#praxis" data-section="praxis">
+      <span class="s-icon">🏗️</span> Mini-Projekt
+      <span class="s-badge">praxis</span>
+    </a>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section-label">Weitere – Kapitel</div>
+    <a class="sidebar-link" href="/python Grundlagen/html/module_pakete.html" data-section="themen">
+      <span class="s-icon">📦</span> Module & Pakete
+      <span class="s-badge">aktiv</span>
+    </a>
+    <a class="sidebar-link" href="/python Grundlagen/html/vscode.html" data-section="themen">
+    <span class="s-icon">💻</span> VS Code Guide
+    <span class="s-badge">neu</span>
+  </a>
+    <a class="sidebar-link" href="/python Grundlagen/html/syntax.html" data-section="themen"><span class="s-icon">⚙️</span> Syntax</a>
+    <a class="sidebar-link" href="/python Grundlagen/html/schleifen.html" data-section="themen"><span class="s-icon">🔁</span> Schleifen</a>
+    <a class="sidebar-link" href="/python Grundlagen/html/funktionen.html" data-section="themen"><span class="s-icon">📦</span> Funktionen</a>
+    <a class="sidebar-link" href="/python Grundlagen/html/datenstrukturen.html" data-section="themen"><span class="s-icon">🗂️</span> Datenstrukturen</a>
+    <a class="sidebar-link" href="/python Grundlagen/html/oop.html" data-section="themen"><span class="s-icon">📐</span> OOP</a>
+    <a class="sidebar-link" href="/python Grundlagen/html/fehlerbehandlung.html" data-section="themen"><span class="s-icon">🛡️</span> Fehlerbehandlung</a>
+  </aside>
+
+  <!-- LAYOUT -->
+  <div class="layout">
+    <main class="main">
+
+      <!-- HERO -->
+      <section id="hero">
+        <div class="hero-badge">Sauberer Code beginnt mit</div>
+        <h1 class="hero-title">Module & Pakete</h1>
+        <p class="hero-sub"># import · package · pip · venv · requirements</p>
+
+        <div class="hero-code">
+          <span class="cmt"># Beispiel: Standardbibliothek + Alias</span><br>
+          <span class="kw">import</span> <span class="var">math</span> <span class="kw">as</span> <span class="var">m</span><br>
+          <span class="var">radius</span> <span class="op">=</span> <span class="num">3</span><br>
+          <span class="var">flaeche</span> <span class="op">=</span> <span class="var">m</span><span class="op">.</span><span class="fn">pi</span> <span class="op">*</span> <span class="var">radius</span> <span class="op">**</span> <span class="num">2</span><br>
+          <span class="fn">print</span><span class="op">(</span><span class="str">f"A = {</span><span style="color:var(--blue)">{"{flaeche:.2f}"}</span><span class="str">}"</span><span class="op">)</span>
+        </div>
+
+        <div class="hero-buttons">
+          <a href="#grundlagen" class="btn btn-primary">Los geht's →</a>
+          <a href="#praxis" class="btn btn-outline">Mini-Projekt ↓</a>
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- 01 Grundlagen -->
+      <section id="grundlagen">
+        <div class="fade-in">
+          <div class="section-label">▸ 01 — Grundlagen</div>
+          <h2 class="section-heading">Modul vs. Paket – was ist der Unterschied?</h2>
+          <p class="section-desc">
+            In Python bedeutet <strong>Modul</strong> meistens: <strong>eine Datei</strong> (z.B. <code style="font-family:'JetBrains Mono',monospace;color:var(--green)">tools.py</code>).
+            Ein <strong>Paket</strong> ist: <strong>ein Ordner</strong> mit mehreren Modulen (z.B. <code style="font-family:'JetBrains Mono',monospace;color:var(--green)">utils/</code>).
+            Beides hilft dir, große Projekte übersichtlich zu strukturieren.
+          </p>
+        </div>
+
+        <div class="grid-3 fade-in">
+          <div class="card c-green">
+            <div class="card-icon">📄</div>
+            <div class="card-title">Modul</div>
+            <div class="card-text">Eine .py-Datei mit Funktionen, Klassen oder Variablen.</div>
+          </div>
+          <div class="card c-blue">
+            <div class="card-icon">📁</div>
+            <div class="card-title">Paket</div>
+            <div class="card-text">Ein Ordner mit mehreren Modulen (meist inkl. __init__.py).</div>
+          </div>
+          <div class="card c-purple">
+            <div class="card-icon">🧱</div>
+            <div class="card-title">Projekt</div>
+            <div class="card-text">Sammlung aus Paketen + Dateien + (optional) venv + requirements.</div>
+          </div>
+        </div>
+
+        <div class="rule-card fade-in">
+          <span class="rule-icon">💡</span>
+          <div class="rule-text">
+            Du nutzt Module/Pakete jeden Tag, ohne es zu merken: <code style="font-family:'JetBrains Mono',monospace">import random</code>, <code>import time</code>, <code>import os</code> …
+            Das sind Module aus der <strong>Standardbibliothek</strong>.
+          </div>
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- 02 import -->
+      <section id="import">
+        <div class="fade-in">
+          <div class="section-label">▸ 02 — import</div>
+          <h2 class="section-heading">import: Module laden</h2>
+          <p class="section-desc">
+            Mit <code style="font-family:'JetBrains Mono',monospace;color:var(--green)">import</code> lädst du ein Modul.
+            Danach greifst du mit <strong>Punktnotation</strong> auf Inhalte zu: <code style="font-family:'JetBrains Mono',monospace;color:var(--green)">modul.funktion()</code>.
+          </p>
+        </div>
+
+        <div class="fade-in">
+          <div class="code-header">
+            <div class="code-dots">
+              <div class="code-dot" style="background:#ff5f57"></div>
+              <div class="code-dot" style="background:#febc2e"></div>
+              <div class="code-dot" style="background:#28c840"></div>
+            </div>
+            <span class="code-filename">import_basics.py</span>
+            <span></span>
+          </div>
+
+          <div class="code-block">
+            <span class="line"><span class="kw">import</span> <span class="var">random</span></span>
+            <span class="line"><span class="kw">import</span> <span class="var">time</span></span>
+            <span class="line"></span>
+            <span class="line"><span class="var">zahl</span> <span class="op">=</span> <span class="var">random</span><span class="op">.</span><span class="fn">randint</span><span class="op">(</span><span class="num">1</span><span class="op">,</span> <span class="num">6</span><span class="op">)</span></span>
+            <span class="line"><span class="fn">print</span><span class="op">(</span><span class="str">f"Würfel: {</span><span style="color:var(--blue)">{"{zahl}"}</span><span class="str">}"</span><span class="op">)</span></span>
+            <span class="line"><span class="var">time</span><span class="op">.</span><span class="fn">sleep</span><span class="op">(</span><span class="num">1</span><span class="op">)</span> <span class="cmt"># 1 Sekunde warten</span></span>
+          </div>
+        </div>
+
+        <div class="rule-card fade-in">
+          <span class="rule-icon">⚠️</span>
+          <div class="rule-text">
+            Achte darauf, dass deine Datei <strong>nicht</strong> so heißt wie ein Modul.
+            Wenn du z.B. deine Datei <code style="font-family:'JetBrains Mono',monospace">random.py</code> nennst, kann <code>import random</code> plötzlich dein eigenes File importieren.
+          </div>
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- 03 from import -->
+      <section id="fromimport">
+        <div class="fade-in">
+          <div class="section-label">▸ 03 — from ... import ...</div>
+          <h2 class="section-heading">Gezielt importieren</h2>
+          <p class="section-desc">
+            Mit <code style="font-family:'JetBrains Mono',monospace;color:var(--green)">from modul import name</code>
+            importierst du nur bestimmte Dinge – danach kannst du sie <strong>direkt</strong> verwenden.
+          </p>
+        </div>
+
+        <div class="grid-2 fade-in">
+          <div class="card c-yellow">
+            <div class="card-icon">🎯</div>
+            <div class="card-title">Einzelne Funktion</div>
+            <div class="card-text">Du holst nur, was du brauchst.</div>
+            <div class="code-block" style="margin-top:12px;padding:12px 16px;font-size:12px">
+              <span class="kw">from</span> <span class="var">math</span> <span class="kw">import</span> <span class="fn">sqrt</span><br>
+              <span class="fn">print</span><span class="op">(</span><span class="fn">sqrt</span><span class="op">(</span><span class="num">9</span><span class="op">)</span><span class="op">)</span>
+            </div>
+          </div>
+
+          <div class="card c-blue">
+            <div class="card-icon">🧰</div>
+            <div class="card-title">Mehrere Namen</div>
+            <div class="card-text">Kommagetrennt importieren.</div>
+            <div class="code-block" style="margin-top:12px;padding:12px 16px;font-size:12px">
+              <span class="kw">from</span> <span class="var">random</span> <span class="kw">import</span> <span class="fn">randint</span><span class="op">,</span> <span class="fn">choice</span><br>
+              <span class="fn">print</span><span class="op">(</span><span class="fn">randint</span><span class="op">(</span><span class="num">1</span><span class="op">,</span><span class="num">10</span><span class="op">)</span><span class="op">)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="rule-card fade-in">
+          <span class="rule-icon">💡</span>
+          <div class="rule-text">
+            <strong>Kein</strong> Stern-Import: <code style="font-family:'JetBrains Mono',monospace">from modul import *</code> wirkt zwar bequem,
+            macht Code aber unübersichtlich (du weißt nicht mehr, woher ein Name kommt).
+          </div>
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- 04 Alias -->
+      <section id="alias">
+        <div class="fade-in">
+          <div class="section-label">▸ 04 — Aliase</div>
+          <h2 class="section-heading">as: Kurzname vergeben</h2>
+          <p class="section-desc">
+            Aliase sind Standard in Python – z.B. <code style="font-family:'JetBrains Mono',monospace;color:var(--green)">import numpy as np</code>.
+            Das spart Tippaufwand und macht Code lesbarer.
+          </p>
+        </div>
+
+        <div class="fade-in">
+          <div class="code-header">
+            <div class="code-dots">
+              <div class="code-dot" style="background:#ff5f57"></div>
+              <div class="code-dot" style="background:#febc2e"></div>
+              <div class="code-dot" style="background:#28c840"></div>
+            </div>
+            <span class="code-filename">alias.py</span>
+            <span></span>
+          </div>
+
+          <div class="code-block">
+            <span class="line"><span class="kw">import</span> <span class="var">datetime</span> <span class="kw">as</span> <span class="var">dt</span></span>
+            <span class="line"><span class="var">now</span> <span class="op">=</span> <span class="var">dt</span><span class="op">.</span><span class="fn">datetime</span><span class="op">.</span><span class="fn">now</span><span class="op">()</span></span>
+            <span class="line"><span class="fn">print</span><span class="op">(</span><span class="var">now</span><span class="op">)</span></span>
+          </div>
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- 05 Eigene Module -->
+      <section id="eigene">
+        <div class="fade-in">
+          <div class="section-label">▸ 05 — Eigene Module</div>
+          <h2 class="section-heading">Eigene .py-Datei importieren</h2>
+          <p class="section-desc">
+            Du kannst deine eigenen Funktionen in eine Datei auslagern und dann importieren.
+            Das ist der nächste Schritt zu sauberem Projekt-Code.
+          </p>
+        </div>
+
+        <div class="fade-in">
+          <div class="code-header">
+            <div class="code-dots">
+              <div class="code-dot" style="background:#ff5f57"></div>
+              <div class="code-dot" style="background:#febc2e"></div>
+              <div class="code-dot" style="background:#28c840"></div>
+            </div>
+            <span class="code-filename">tools.py</span>
+            <span></span>
+          </div>
+
+          <div class="code-block">
+            <span class="line"><span class="cmt"># tools.py</span></span>
+            <span class="line"><span class="kw">def</span> <span class="fn">add</span><span class="op">(</span><span class="var">a</span><span class="op">,</span> <span class="var">b</span><span class="op">)</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="kw">return</span> <span class="var">a</span> <span class="op">+</span> <span class="var">b</span></span>
+            <span class="line"></span>
+            <span class="line"><span class="kw">def</span> <span class="fn">sub</span><span class="op">(</span><span class="var">a</span><span class="op">,</span> <span class="var">b</span><span class="op">)</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="kw">return</span> <span class="var">a</span> <span class="op">-</span> <span class="var">b</span></span>
+          </div>
+        </div>
+
+        <div class="fade-in" style="margin-top:18px">
+          <div class="code-header">
+            <div class="code-dots">
+              <div class="code-dot" style="background:#ff5f57"></div>
+              <div class="code-dot" style="background:#febc2e"></div>
+              <div class="code-dot" style="background:#28c840"></div>
+            </div>
+            <span class="code-filename">main.py</span>
+            <span></span>
+          </div>
+
+          <div class="code-block">
+            <span class="line"><span class="cmt"># main.py</span></span>
+            <span class="line"><span class="kw">import</span> <span class="var">tools</span></span>
+            <span class="line"><span class="fn">print</span><span class="op">(</span><span class="var">tools</span><span class="op">.</span><span class="fn">add</span><span class="op">(</span><span class="num">3</span><span class="op">,</span> <span class="num">4</span><span class="op">)</span><span class="op">)</span> <span class="cmt"># 7</span></span>
+          </div>
+        </div>
+
+        <div class="rule-card fade-in">
+          <span class="rule-icon">⚠️</span>
+          <div class="rule-text">
+            Damit <code style="font-family:'JetBrains Mono',monospace">import tools</code> funktioniert, müssen <strong>main.py</strong> und <strong>tools.py</strong>
+            im selben Ordner liegen (oder tools muss im Python-Suchpfad liegen).
+          </div>
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- 06 Pakete -->
+      <section id="pakete">
+        <div class="fade-in">
+          <div class="section-label">▸ 06 — Pakete</div>
+          <h2 class="section-heading">Ein Paket ist ein Ordner voller Module</h2>
+          <p class="section-desc">
+            Pakete erlauben dir eine klare Struktur: z.B. <strong>utils</strong>, <strong>services</strong>, <strong>models</strong>.
+            Imports funktionieren dann über den Pfad: <code style="font-family:'JetBrains Mono',monospace;color:var(--green)">from utils.tools import add</code>.
+          </p>
+        </div>
+
+        <div class="fade-in">
+          <div class="code-header">
+            <div class="code-dots">
+              <div class="code-dot" style="background:#ff5f57"></div>
+              <div class="code-dot" style="background:#febc2e"></div>
+              <div class="code-dot" style="background:#28c840"></div>
+            </div>
+            <span class="code-filename">ordnerstruktur.txt</span>
+            <span></span>
+          </div>
+
+          <div class="code-block">
+            <span class="line"><span class="cmt"># Projektstruktur (Beispiel)</span></span>
+            <span class="line"><span class="var">projekt</span><span class="op">/</span></span>
+            <span class="line"><span class="ind"></span><span class="var">main.py</span></span>
+            <span class="line"><span class="ind"></span><span class="var">utils</span><span class="op">/</span></span>
+            <span class="line"><span class="ind"></span><span class="ind"></span><span class="var">__init__.py</span></span>
+            <span class="line"><span class="ind"></span><span class="ind"></span><span class="var">tools.py</span></span>
+          </div>
+        </div>
+
+        <div class="fade-in" style="margin-top:18px">
+          <div class="code-header">
+            <div class="code-dots">
+              <div class="code-dot" style="background:#ff5f57"></div>
+              <div class="code-dot" style="background:#febc2e"></div>
+              <div class="code-dot" style="background:#28c840"></div>
+            </div>
+            <span class="code-filename">import_aus_paket.py</span>
+            <span></span>
+          </div>
+
+          <div class="code-block">
+            <span class="line"><span class="kw">from</span> <span class="var">utils</span><span class="op">.</span><span class="var">tools</span> <span class="kw">import</span> <span class="fn">add</span></span>
+            <span class="line"><span class="fn">print</span><span class="op">(</span><span class="fn">add</span><span class="op">(</span><span class="num">10</span><span class="op">,</span> <span class="num">5</span><span class="op">)</span><span class="op">)</span></span>
+          </div>
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- 07 Struktur -->
+      <section id="struktur">
+        <div class="fade-in">
+          <div class="section-label">▸ 07 — Projektstruktur</div>
+          <h2 class="section-heading">So bleibt dein Projekt übersichtlich</h2>
+          <p class="section-desc">
+            Eine typische Struktur (gerade in VS Code) sieht so aus:
+            <strong>src/</strong> für Code, <strong>tests/</strong> für Tests, <strong>data/</strong> für Daten,
+            und optional <strong>venv/</strong> + <strong>requirements.txt</strong>.
+          </p>
+        </div>
+
+        <div class="grid-2 fade-in">
+          <div class="card c-purple">
+            <div class="card-icon">🗂️</div>
+            <div class="card-title">Faustregel</div>
+            <div class="card-text">Ein Ordner = ein Thema. Keine 20.000 Zeilen in einer Datei.</div>
+          </div>
+          <div class="card c-green">
+            <div class="card-icon">🧭</div>
+            <div class="card-title">Imports planen</div>
+            <div class="card-text">Achte darauf, dass dein „Startpunkt“ klar ist (z.B. main.py).</div>
+          </div>
+        </div>
+
+        <div class="rule-card fade-in">
+          <span class="rule-icon">💡</span>
+          <div class="rule-text">
+            Tipp: Wenn du später z.B. Web-Apps baust, nutzt man oft ein Paket <code style="font-family:'JetBrains Mono',monospace">app</code>
+            oder <code>src</code> und startet über eine Datei wie <code>main.py</code> oder <code>run.py</code>.
+          </div>
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- 08 __init__.py -->
+      <section id="init">
+        <div class="fade-in">
+          <div class="section-label">▸ 08 — __init__.py</div>
+          <h2 class="section-heading">Was macht __init__.py?</h2>
+          <p class="section-desc">
+            <code style="font-family:'JetBrains Mono',monospace;color:var(--green)">__init__.py</code> markiert einen Ordner als Paket.
+            Außerdem kannst du dort festlegen, was beim Import „sichtbar“ sein soll.
+          </p>
+        </div>
+
+        <div class="fade-in">
+          <div class="code-header">
+            <div class="code-dots">
+              <div class="code-dot" style="background:#ff5f57"></div>
+              <div class="code-dot" style="background:#febc2e"></div>
+              <div class="code-dot" style="background:#28c840"></div>
+            </div>
+            <span class="code-filename">utils/__init__.py</span>
+            <span></span>
+          </div>
+
+          <div class="code-block">
+            <span class="line"><span class="cmt"># utils/__init__.py</span></span>
+            <span class="line"><span class="cmt"># Du kannst hier Exporte bündeln:</span></span>
+            <span class="line"><span class="kw">from</span> <span class="op">.</span><span class="var">tools</span> <span class="kw">import</span> <span class="fn">add</span><span class="op">,</span> <span class="fn">sub</span></span>
+            <span class="line"></span>
+            <span class="line"><span class="cmt"># Dann geht später: from utils import add</span></span>
+          </div>
+        </div>
+
+        <div class="rule-card fade-in">
+          <span class="rule-icon">✨</span>
+          <div class="rule-text">
+            Das <code style="font-family:'JetBrains Mono',monospace">.</code> in <code>from .tools import ...</code> bedeutet:
+            „importiere aus dem <strong>gleichen Paket</strong>“ (relativer Import).
+          </div>
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- 09 sys.path -->
+      <section id="path">
+        <div class="fade-in">
+          <div class="section-label">▸ 09 — sys.path</div>
+          <h2 class="section-heading">Wo sucht Python nach Modulen?</h2>
+          <p class="section-desc">
+            Python sucht Module in mehreren Orten: im aktuellen Ordner, in der Standardbibliothek und in installierten Paketen.
+            Diese Liste findest du in <code style="font-family:'JetBrains Mono',monospace;color:var(--green)">sys.path</code>.
+          </p>
+        </div>
+
+        <div class="fade-in">
+          <div class="code-header">
+            <div class="code-dots">
+              <div class="code-dot" style="background:#ff5f57"></div>
+              <div class="code-dot" style="background:#febc2e"></div>
+              <div class="code-dot" style="background:#28c840"></div>
+            </div>
+            <span class="code-filename">sys_path.py</span>
+            <span></span>
+          </div>
+
+          <div class="code-block">
+            <span class="line"><span class="kw">import</span> <span class="var">sys</span></span>
+            <span class="line"><span class="kw">for</span> <span class="var">p</span> <span class="kw">in</span> <span class="var">sys</span><span class="op">.</span><span class="var">path</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="fn">print</span><span class="op">(</span><span class="var">p</span><span class="op">)</span></span>
+          </div>
+        </div>
+
+        <div class="rule-card fade-in">
+          <span class="rule-icon">🧭</span>
+          <div class="rule-text">
+            Wenn Imports „plötzlich“ nicht gehen, liegt es oft an der <strong>Arbeitsmappe</strong> (Working Directory) oder an einer falschen Projektstruktur.
+          </div>
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- 10 pip -->
+      <section id="pip">
+        <div class="fade-in">
+          <div class="section-label">▸ 10 — pip</div>
+          <h2 class="section-heading">Pakete installieren (pip)</h2>
+          <p class="section-desc">
+            <strong>pip</strong> ist der Paketmanager für Python. Damit installierst du externe Libraries (z.B. requests, flask, pandas).
+            Installierte Pakete landen in deiner Python-Umgebung.
+          </p>
+        </div>
+
+        <div class="fade-in">
+          <div class="code-header">
+            <div class="code-dots">
+              <div class="code-dot" style="background:#ff5f57"></div>
+              <div class="code-dot" style="background:#febc2e"></div>
+              <div class="code-dot" style="background:#28c840"></div>
+            </div>
+            <span class="code-filename">pip_commands.txt</span>
+            <span></span>
+          </div>
+
+          <div class="code-block">
+            <span class="line"><span class="cmt"># Installieren</span></span>
+            <span class="line"><span class="var">pip</span> <span class="var">install</span> <span class="var">requests</span></span>
+            <span class="line"></span>
+            <span class="line"><span class="cmt"># Updaten</span></span>
+            <span class="line"><span class="var">pip</span> <span class="var">install</span> <span class="op">--</span><span class="var">upgrade</span> <span class="var">requests</span></span>
+            <span class="line"></span>
+            <span class="line"><span class="cmt"># Liste anzeigen</span></span>
+            <span class="line"><span class="var">pip</span> <span class="var">list</span></span>
+          </div>
+        </div>
+
+        <div class="rule-card fade-in">
+          <span class="rule-icon">⚠️</span>
+          <div class="rule-text">
+            Wenn du mehrere Python-Versionen hast, nutze lieber:
+            <code style="font-family:'JetBrains Mono',monospace">python -m pip install ...</code>
+            Dann ist klar, welche Python-Installation gemeint ist.
+          </div>
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- 11 venv -->
+      <section id="venv">
+        <div class="fade-in">
+          <div class="section-label">▸ 11 — venv</div>
+          <h2 class="section-heading">Virtuelle Umgebungen (venv)</h2>
+          <p class="section-desc">
+            Eine virtuelle Umgebung ist eine <strong>isolierte</strong> Python-Installation pro Projekt.
+            Dadurch vermischst du keine Pakete zwischen Projekten.
+          </p>
+        </div>
+
+        <div class="fade-in">
+          <div class="code-header">
+            <div class="code-dots">
+              <div class="code-dot" style="background:#ff5f57"></div>
+              <div class="code-dot" style="background:#febc2e"></div>
+              <div class="code-dot" style="background:#28c840"></div>
+            </div>
+            <span class="code-filename">venv_setup.txt</span>
+            <span></span>
+          </div>
+
+          <div class="code-block">
+            <span class="line"><span class="cmt"># Erstellen</span></span>
+            <span class="line"><span class="var">python</span> <span class="op">-</span><span class="var">m</span> <span class="var">venv</span> <span class="var">venv</span></span>
+            <span class="line"></span>
+            <span class="line"><span class="cmt"># Aktivieren (Windows)</span></span>
+            <span class="line"><span class="var">venv\Scripts\activate</span></span>
+            <span class="line"></span>
+            <span class="line"><span class="cmt"># Aktivieren (macOS/Linux)</span></span>
+            <span class="line"><span class="var">source</span> <span class="var">venv/bin/activate</span></span>
+            <span class="line"></span>
+            <span class="line"><span class="cmt"># Deaktivieren</span></span>
+            <span class="line"><span class="var">deactivate</span></span>
+          </div>
+        </div>
+
+        <div class="rule-card fade-in">
+          <span class="rule-icon">🧪</span>
+          <div class="rule-text">
+            In VS Code kannst du dann die venv als Interpreter auswählen – und installierst Pakete nur noch in dieser Umgebung.
+          </div>
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- 12 requirements -->
+      <section id="requirements">
+        <div class="fade-in">
+          <div class="section-label">▸ 12 — requirements.txt</div>
+          <h2 class="section-heading">Abhängigkeiten speichern</h2>
+          <p class="section-desc">
+            Damit andere (oder du in 3 Monaten 😄) dein Projekt starten können, speichert man Abhängigkeiten in
+            <code style="font-family:'JetBrains Mono',monospace;color:var(--green)">requirements.txt</code>.
+          </p>
+        </div>
+
+        <div class="fade-in">
+          <div class="code-header">
+            <div class="code-dots">
+              <div class="code-dot" style="background:#ff5f57"></div>
+              <div class="code-dot" style="background:#febc2e"></div>
+              <div class="code-dot" style="background:#28c840"></div>
+            </div>
+            <span class="code-filename">requirements.txt</span>
+            <span></span>
+          </div>
+
+          <div class="code-block">
+            <span class="line"><span class="cmt"># Erstellen:</span></span>
+            <span class="line"><span class="var">pip</span> <span class="var">freeze</span> <span class="op">></span> <span class="var">requirements</span><span class="op">.</span><span class="var">txt</span></span>
+            <span class="line"></span>
+            <span class="line"><span class="cmt"># Installieren:</span></span>
+            <span class="line"><span class="var">pip</span> <span class="var">install</span> <span class="op">-</span><span class="var">r</span> <span class="var">requirements</span><span class="op">.</span><span class="var">txt</span></span>
+          </div>
+        </div>
+
+        <div class="rule-card fade-in">
+          <span class="rule-icon">🧾</span>
+          <div class="rule-text">
+            Pro-Tipp: Nutze <strong>venv + requirements.txt</strong> zusammen.
+            Dann ist dein Projekt „reproduzierbar“.
+          </div>
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- 13 Praxis -->
+      <section id="praxis">
+        <div class="fade-in">
+          <div class="section-label">▸ 13 — Praxis</div>
+          <h2 class="section-heading">Mini-Projekt: Calculator als Paket</h2>
+          <p class="section-desc">
+            Wir bauen eine kleine Rechner-Struktur wie in „echten“ Projekten: Ein Paket <strong>calc</strong> mit Modulen.
+            So übst du Imports, __init__.py und Struktur.
+          </p>
+        </div>
+
+        <div class="fade-in">
+          <div class="code-header">
+            <div class="code-dots">
+              <div class="code-dot" style="background:#ff5f57"></div>
+              <div class="code-dot" style="background:#febc2e"></div>
+              <div class="code-dot" style="background:#28c840"></div>
+            </div>
+            <span class="code-filename">projektstruktur_calc.txt</span>
+            <span></span>
+          </div>
+
+          <div class="code-block">
+            <span class="line"><span class="var">calc_project</span><span class="op">/</span></span>
+            <span class="line"><span class="ind"></span><span class="var">main.py</span></span>
+            <span class="line"><span class="ind"></span><span class="var">calc</span><span class="op">/</span></span>
+            <span class="line"><span class="ind"></span><span class="ind"></span><span class="var">__init__.py</span></span>
+            <span class="line"><span class="ind"></span><span class="ind"></span><span class="var">ops.py</span></span>
+            <span class="line"><span class="ind"></span><span class="ind"></span><span class="var">io.py</span></span>
+          </div>
+        </div>
+
+        <div class="fade-in" style="margin-top:18px">
+          <div class="code-header">
+            <div class="code-dots">
+              <div class="code-dot" style="background:#ff5f57"></div>
+              <div class="code-dot" style="background:#febc2e"></div>
+              <div class="code-dot" style="background:#28c840"></div>
+            </div>
+            <span class="code-filename">calc/ops.py</span>
+            <span></span>
+          </div>
+
+          <div class="code-block">
+            <span class="line"><span class="kw">def</span> <span class="fn">add</span><span class="op">(</span><span class="var">a</span><span class="op">,</span> <span class="var">b</span><span class="op">)</span><span class="op">:</span> <span class="kw">return</span> <span class="var">a</span> <span class="op">+</span> <span class="var">b</span></span>
+            <span class="line"><span class="kw">def</span> <span class="fn">sub</span><span class="op">(</span><span class="var">a</span><span class="op">,</span> <span class="var">b</span><span class="op">)</span><span class="op">:</span> <span class="kw">return</span> <span class="var">a</span> <span class="op">-</span> <span class="var">b</span></span>
+            <span class="line"><span class="kw">def</span> <span class="fn">mul</span><span class="op">(</span><span class="var">a</span><span class="op">,</span> <span class="var">b</span><span class="op">)</span><span class="op">:</span> <span class="kw">return</span> <span class="var">a</span> <span class="op">*</span> <span class="var">b</span></span>
+            <span class="line"><span class="kw">def</span> <span class="fn">div</span><span class="op">(</span><span class="var">a</span><span class="op">,</span> <span class="var">b</span><span class="op">)</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="kw">if</span> <span class="var">b</span> <span class="op">==</span> <span class="num">0</span><span class="op">:</span> <span class="kw">raise</span> <span class="cls">ZeroDivisionError</span><span class="op">(</span><span class="str">"Division durch 0"</span><span class="op">)</span></span>
+            <span class="line"><span class="ind"></span><span class="kw">return</span> <span class="var">a</span> <span class="op">/</span> <span class="var">b</span></span>
+          </div>
+        </div>
+
+        <div class="fade-in" style="margin-top:18px">
+          <div class="code-header">
+            <div class="code-dots">
+              <div class="code-dot" style="background:#ff5f57"></div>
+              <div class="code-dot" style="background:#febc2e"></div>
+              <div class="code-dot" style="background:#28c840"></div>
+            </div>
+            <span class="code-filename">calc/io.py</span>
+            <span></span>
+          </div>
+
+          <div class="code-block">
+            <span class="line"><span class="kw">def</span> <span class="fn">read_float</span><span class="op">(</span><span class="var">prompt</span><span class="op">)</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="kw">while</span> <span class="kw">True</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="ind"></span><span class="kw">try</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="ind"></span><span class="ind"></span><span class="kw">return</span> <span class="fn">float</span><span class="op">(</span><span class="fn">input</span><span class="op">(</span><span class="var">prompt</span><span class="op">)</span><span class="op">.</span><span class="fn">replace</span><span class="op">(</span><span class="str">","</span><span class="op">,</span> <span class="str">"."</span><span class="op">)</span><span class="op">)</span></span>
+            <span class="line"><span class="ind"></span><span class="ind"></span><span class="kw">except</span> <span class="cls">ValueError</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="ind"></span><span class="ind"></span><span class="fn">print</span><span class="op">(</span><span class="str">"Bitte eine Zahl eingeben."</span><span class="op">)</span></span>
+          </div>
+        </div>
+
+        <div class="fade-in" style="margin-top:18px">
+          <div class="code-header">
+            <div class="code-dots">
+              <div class="code-dot" style="background:#ff5f57"></div>
+              <div class="code-dot" style="background:#febc2e"></div>
+              <div class="code-dot" style="background:#28c840"></div>
+            </div>
+            <span class="code-filename">calc/__init__.py</span>
+            <span></span>
+          </div>
+
+          <div class="code-block">
+            <span class="line"><span class="cmt"># Bündel-Exports</span></span>
+            <span class="line"><span class="kw">from</span> <span class="op">.</span><span class="var">ops</span> <span class="kw">import</span> <span class="fn">add</span><span class="op">,</span> <span class="fn">sub</span><span class="op">,</span> <span class="fn">mul</span><span class="op">,</span> <span class="fn">div</span></span>
+            <span class="line"><span class="kw">from</span> <span class="op">.</span><span class="var">io</span> <span class="kw">import</span> <span class="fn">read_float</span></span>
+          </div>
+        </div>
+
+        <div class="fade-in" style="margin-top:18px">
+          <div class="code-header">
+            <div class="code-dots">
+              <div class="code-dot" style="background:#ff5f57"></div>
+              <div class="code-dot" style="background:#febc2e"></div>
+              <div class="code-dot" style="background:#28c840"></div>
+            </div>
+            <span class="code-filename">main.py</span>
+            <span></span>
+          </div>
+
+          <div class="code-block">
+            <span class="line"><span class="kw">from</span> <span class="var">calc</span> <span class="kw">import</span> <span class="fn">add</span><span class="op">,</span> <span class="fn">sub</span><span class="op">,</span> <span class="fn">mul</span><span class="op">,</span> <span class="fn">div</span><span class="op">,</span> <span class="fn">read_float</span></span>
+            <span class="line"><span class="var">a</span> <span class="op">=</span> <span class="fn">read_float</span><span class="op">(</span><span class="str">"A: "</span><span class="op">)</span></span>
+            <span class="line"><span class="var">b</span> <span class="op">=</span> <span class="fn">read_float</span><span class="op">(</span><span class="str">"B: "</span><span class="op">)</span></span>
+            <span class="line"><span class="kw">try</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="fn">print</span><span class="op">(</span><span class="fn">div</span><span class="op">(</span><span class="var">a</span><span class="op">,</span> <span class="var">b</span><span class="op">)</span><span class="op">)</span></span>
+            <span class="line"><span class="kw">except</span> <span class="cls">ZeroDivisionError</span><span class="op">:</span></span>
+            <span class="line"><span class="ind"></span><span class="fn">print</span><span class="op">(</span><span class="str">"B darf nicht 0 sein."</span><span class="op">)</span></span>
+          </div>
+        </div>
+
+        <div class="rule-card fade-in">
+          <span class="rule-icon">🚀</span>
+          <div class="rule-text">
+            Challenge: Füge einen Operator-Parser hinzu (z.B. '+' '-' '*' '/'), und nutze dann die passende Funktion aus <code style="font-family:'JetBrains Mono',monospace">calc</code>.
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section id="cta">
+        <div class="cta-box fade-in">
+          <div class="cta-title">Weiter lernen</div>
+          <p class="cta-text">
+            Mit Modulen & Paketen wirkt dein Code sofort „professioneller“.
+            Als nächstes passen super: kleine Praxisprojekte, GitHub/Repo-Struktur und Tests.
+          </p>
+          <div class="hero-buttons">
+            <a href="/python Grundlagen/html/fehlerbehandlung.html" class="btn btn-primary">Zurück - Fehlerbehandlung →</a>
+            <a href="/index.html" class="btn btn-outline">← Zur Startseite</a>
+          </div>
+        </div>
+      </section>
+
+      <footer>Erstellt mit <span>♥</span> · HelloPython.de · Bastian Meese · <span>2025 - 2026</span></footer>
+    </main>
+  </div>
+
+  <!-- gleicher JS wie deine Syntax-Seite -->
+  <script src="/python Grundlagen/JS/syntax.js"></script>
+</body>
+</html>
