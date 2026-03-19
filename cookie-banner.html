@@ -52,57 +52,45 @@
     align-items: center;
   }
 
-  /* Basis für alle Buttons – gleiche Größe, gleiches Gewicht */
-  #cookie-banner button {
+  /* Beide Hauptbuttons IDENTISCH – DSGVO-konform */
+  #cookie-btn-accept,
+  #cookie-btn-decline {
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.8rem;
     font-weight: 700;
     padding: 0.6rem 1.4rem;
     border-radius: 6px;
     cursor: pointer;
-    border: 1px solid transparent;
+    border: 1px solid #4ade80;
+    background: transparent;
+    color: #4ade80;
     transition: all 0.2s;
     white-space: nowrap;
-    min-width: 130px;
+    min-width: 140px;
     text-align: center;
   }
 
-  /* Akzeptieren – grün ausgefüllt */
-  #cookie-btn-accept {
-    background: #4ade80;
-    color: #0d0d0d;
-    border-color: #4ade80;
-  }
-
-  #cookie-btn-accept:hover {
-    background: #22c55e;
-    border-color: #22c55e;
-  }
-
-  /* Ablehnen – gleichwertig als Outline */
-  #cookie-btn-decline {
-    background: transparent;
-    color: #4ade80;
-    border-color: #4ade80;
-  }
-
+  #cookie-btn-accept:hover,
   #cookie-btn-decline:hover {
-    background: rgba(74, 222, 128, 0.08);
+    background: rgba(74, 222, 128, 0.1);
   }
 
   /* Einstellungen – dezent als Textlink */
   #cookie-btn-settings {
-    background: transparent;
-    color: #666;
-    border-color: transparent;
-    text-decoration: underline;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
     font-weight: 400;
-    min-width: auto;
+    background: transparent;
+    color: #555;
+    border: none;
+    text-decoration: underline;
+    cursor: pointer;
     padding: 0.6rem 0.4rem;
+    transition: color 0.2s;
   }
 
   #cookie-btn-settings:hover {
-    color: #999;
+    color: #888;
   }
 
   /* ── Modal ── */
@@ -222,7 +210,7 @@
     opacity: 0.5;
   }
 
-  /* Modal Buttons – gleichwertig */
+  /* Modal Buttons – ebenfalls IDENTISCH */
   .cookie-modal-buttons {
     display: flex;
     gap: 0.75rem;
@@ -230,37 +218,25 @@
     justify-content: flex-end;
   }
 
-  .cookie-modal-buttons button {
+  #modal-btn-save,
+  #modal-btn-cancel {
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.8rem;
     font-weight: 700;
     padding: 0.6rem 1.2rem;
     border-radius: 6px;
     cursor: pointer;
-    border: 1px solid transparent;
+    border: 1px solid #4ade80;
+    background: transparent;
+    color: #4ade80;
     transition: all 0.2s;
-    min-width: 130px;
+    min-width: 140px;
     text-align: center;
   }
 
-  #modal-btn-save {
-    background: #4ade80;
-    color: #0d0d0d;
-    border-color: #4ade80;
-  }
-
-  #modal-btn-save:hover {
-    background: #22c55e;
-  }
-
-  #modal-btn-cancel {
-    background: transparent;
-    color: #4ade80;
-    border-color: #4ade80;
-  }
-
+  #modal-btn-save:hover,
   #modal-btn-cancel:hover {
-    background: rgba(74, 222, 128, 0.08);
+    background: rgba(74, 222, 128, 0.1);
   }
 
   @media (max-width: 600px) {
@@ -363,7 +339,6 @@
 
     function loadAnalytics() {
       if (document.getElementById('ga-script')) return;
-      // ← Ersetze G-XXXXXXXX mit deiner echten Google Analytics Mess-ID
       const s = document.createElement('script');
       s.id    = 'ga-script';
       s.src   = 'https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXX';
@@ -379,7 +354,6 @@
       if (consent.analytics) loadAnalytics();
     }
 
-    // Bereits entschieden?
     const existing = getConsent();
     if (existing) {
       applyConsent(existing);
@@ -387,7 +361,6 @@
       setTimeout(() => banner.classList.add('visible'), 300);
     }
 
-    // Alle akzeptieren
     document.getElementById('cookie-btn-accept').addEventListener('click', function () {
       const consent = { necessary: true, fonts: true, analytics: true };
       saveConsent(consent);
@@ -395,13 +368,11 @@
       hideBanner();
     });
 
-    // Alle ablehnen
     document.getElementById('cookie-btn-decline').addEventListener('click', function () {
       saveConsent({ necessary: true, fonts: false, analytics: false });
       hideBanner();
     });
 
-    // Einstellungen öffnen
     document.getElementById('cookie-btn-settings').addEventListener('click', function () {
       const consent = getConsent();
       if (consent) {
@@ -411,14 +382,12 @@
       modal.classList.add('open');
     });
 
-    // Modal – Ablehnen
     document.getElementById('modal-btn-cancel').addEventListener('click', function () {
       saveConsent({ necessary: true, fonts: false, analytics: false });
       modal.classList.remove('open');
       hideBanner();
     });
 
-    // Modal – Auswahl speichern
     document.getElementById('modal-btn-save').addEventListener('click', function () {
       const consent = {
         necessary: true,
@@ -431,12 +400,10 @@
       hideBanner();
     });
 
-    // Modal bei Klick außerhalb schließen
     modal.addEventListener('click', function (e) {
       if (e.target === modal) modal.classList.remove('open');
     });
 
-    // Cookie-Einstellungen erneut öffnen (für Footer-Link)
     window.openCookieSettings = function () {
       const consent = getConsent();
       if (consent) {
