@@ -1,0 +1,348 @@
+/* ============================================
+   HelloPython.de – Datenschutz Stylesheet
+   Passend zum Dark-Theme der Hauptseite
+   ============================================ */
+
+:root {
+  --bg:           #0d0d0d;
+  --surface:      #141414;
+  --surface-2:    #1a1a1a;
+  --border:       #222;
+  --border-light: #2a2a2a;
+  --accent:       #4ade80;
+  --accent-dim:   #16a34a;
+  --text:         #e5e5e5;
+  --text-muted:   #666;
+  --text-soft:    #999;
+  --font-mono:    'JetBrains Mono', monospace;
+  --font-display: 'Syne', sans-serif;
+  --radius:       8px;
+  --max-width:    780px;
+}
+
+/* ── Reset & Base ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  line-height: 1.85;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+main {
+  flex: 1;
+  max-width: var(--max-width);
+  width: 100%;
+  margin: 0 auto;
+  padding: 3.5rem 2rem 5rem;
+}
+
+/* ── Navigation ── */
+nav {
+  padding: 1.2rem 2rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  position: sticky;
+  top: 0;
+  background: rgba(13, 13, 13, 0.95);
+  backdrop-filter: blur(8px);
+  z-index: 100;
+}
+
+nav a {
+  color: var(--accent);
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  transition: opacity 0.2s;
+}
+
+nav a:hover {
+  opacity: 0.75;
+}
+
+nav span.sep {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+nav span.page {
+  color: var(--text-soft);
+  font-size: 0.82rem;
+}
+
+/* ── Main Layout ── */
+main {
+  flex: 1;
+  max-width: var(--max-width);
+  width: 100%;
+  margin: 0 auto;
+  padding: 3.5rem 2rem 5rem;
+}
+
+/* ── Page Header ── */
+.page-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+}
+
+main > h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.05;
+  margin-bottom: 0.4rem;
+}
+
+.page-meta {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  margin-bottom: 3rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+/* ── Inhaltsübersicht ── */
+.index {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem 1.75rem;
+  margin-bottom: 3rem;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 0.4rem 1.5rem;
+}
+
+.index li {
+  font-size: 0.82rem;
+}
+
+.index-link {
+  color: var(--text-soft);
+  text-decoration: none;
+  transition: color 0.2s;
+  display: inline-block;
+  padding: 0.1rem 0;
+}
+
+.index-link::before {
+  content: '→ ';
+  color: var(--accent-dim);
+}
+
+.index-link:hover {
+  color: var(--accent);
+}
+
+/* ── Überschriften ── */
+h2 {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+  scroll-margin-top: 5rem;
+}
+
+h2:first-of-type {
+  margin-top: 0;
+}
+
+h3 {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-top: 1.5rem;
+  margin-bottom: 0.6rem;
+  letter-spacing: 0.03em;
+}
+
+/* ── Paragraphen ── */
+p {
+  color: var(--text);
+  margin-bottom: 1rem;
+  font-size: 0.88rem;
+  line-height: 1.9;
+}
+
+/* ── Listen ── */
+ul:not(.index):not(.glossary) {
+  margin: 0.75rem 0 1rem 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+ul:not(.index):not(.glossary) li {
+  position: relative;
+  padding-left: 1.25rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.87rem;
+  color: var(--text);
+  line-height: 1.75;
+}
+
+ul:not(.index):not(.glossary) li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--accent-dim);
+  font-size: 0.7rem;
+  top: 0.3rem;
+}
+
+/* m-elements Liste (strukturierte Datenschutz-Punkte) */
+ul.m-elements {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.5rem !important;
+  margin: 1rem 0 !important;
+}
+
+ul.m-elements li {
+  padding-left: 0 !important;
+  border-bottom: 1px solid var(--border-light);
+  padding-bottom: 0.6rem;
+  margin-bottom: 0.6rem;
+}
+
+ul.m-elements li:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+ul.m-elements li::before {
+  display: none !important;
+}
+
+/* ── Glossar ── */
+ul.glossary {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+}
+
+ul.glossary li {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  margin-bottom: 0.6rem;
+  font-size: 0.85rem;
+  line-height: 1.75;
+  color: var(--text);
+}
+
+/* ── Fett / Strong ── */
+strong {
+  color: #fff;
+  font-weight: 700;
+}
+
+/* ── Links ── */
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+a:hover {
+  opacity: 0.75;
+  text-decoration: underline;
+}
+
+/* ── Premium-Text (gesperrt) ── */
+.dsg-license-content-blurred {
+  background: var(--surface-2);
+  color: transparent;
+  border-radius: 3px;
+  user-select: none;
+  filter: blur(4px);
+  pointer-events: none;
+}
+
+/* ── Seal / Generator-Link ── */
+p.seal {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+p.seal a {
+  color: var(--text-muted);
+}
+
+p.seal a:hover {
+  color: var(--accent);
+}
+
+/* ── Footer ── */
+footer {
+  text-align: center;
+  padding: 1.75rem 2rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+footer a {
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+footer a:hover {
+  color: var(--accent);
+}
+
+footer span {
+  color: var(--accent-dim);
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  main {
+    padding: 2rem 1.25rem 4rem;
+  }
+
+  nav {
+    padding: 1rem 1.25rem;
+  }
+
+  .index {
+    grid-template-columns: 1fr;
+  }
+
+  h2 {
+    font-size: 1.1rem;
+  }
+}
