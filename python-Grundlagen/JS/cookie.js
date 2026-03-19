@@ -246,4 +246,16 @@
       injectBanner();
     }
   }
+
+  window.openCookieSettings = function () {
+  var banner = document.getElementById('hp-cookie-banner');
+  var modal = document.getElementById('hp-cookie-modal');
+  if (!banner || !modal) {
+    injectStyles();
+    injectBanner();
+  }
+  setTimeout(function () {
+    document.getElementById('hp-cookie-modal').classList.add('open');
+  }, 100);
+};
 })();
