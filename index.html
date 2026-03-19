@@ -14,14 +14,6 @@
   <link rel="preload" href="/python-Grundlagen/css/landingpageStyle.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <script src="/python-Grundlagen/JS/cookie.js" defer></script>
 </head>
-<div id="cookie-root"></div>
-<script>
-  fetch('/cookie-banner.html')
-    .then(r => r.text())
-    .then(html => {
-      document.getElementById('cookie-root').innerHTML = html;
-    });
-</script>
 <body>
 <!-- PROGRESS BAR -->
 <div class="progress-bar" id="progressBar"></div>
@@ -507,17 +499,7 @@
 
   </div><!-- end main-content -->
 </div><!-- end page-layout -->
-
-<script src="/python-Grundlagen/JS/landingpage.js">
-</script>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-GFSQG3CG7S"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-GFSQG3CG7S');
+<script src="/python-Grundlagen/JS/landingpage.js" defer>
 </script>
 </body>
 </html>

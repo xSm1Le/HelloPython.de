@@ -11,16 +11,15 @@
 
   function loadAnalytics() {
     if (document.getElementById('ga-script')) return;
-    // ← Ersetze G-XXXXXXXX mit deiner echten Google Analytics Mess-ID
     var s = document.createElement('script');
     s.id = 'ga-script';
-    s.src = 'https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXX';
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=G-GFSQG3CG7S';
     s.async = true;
     document.head.appendChild(s);
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-    gtag('config', 'G-XXXXXXXX', { anonymize_ip: true });
+    gtag('config', 'G-GFSQG3CG7S', { anonymize_ip: true });
   }
 
   function applyConsent(consent) {
