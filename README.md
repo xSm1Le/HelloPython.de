@@ -95,8 +95,10 @@ Gerne als Issue oder Pull Request – oder einfach als Nachricht.
 
 ## 👤 Autor
 
-**Bastian Meese**  
-Azubi Fachinformatiker für Systemintegration  
+**Bastian Meese**
+Zertifizierter Fullstack Web- und Softwareentwickler,
+Azubi Fachinformatiker für Systemintegration
+bei Nordseeheilbad Borkum GmbH
 
 🌐 https://www.hellopython.de  
 🐙 GitHub: https://github.com/xSm1Le
