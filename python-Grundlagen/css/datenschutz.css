@@ -11,6 +11,7 @@
   --text: #e8e8f0;
   --muted: #7070a0;
   --sidebar-w: 280px;
+  --accent: var(--blue);
 }
 
 section {

@@ -2,7 +2,6 @@
     --bg: #0d0d14;
     --card: #13131f;
     --border: #1e1e30;
-    --sidebar-w: 260px;
     --yellow: #f5c842;
     --blue: #4fa8ff;
     --green: #4dffb0;
@@ -11,6 +10,7 @@
     --orange: #ff9f4a;
     --text: #e8e8f0;
     --muted: #7070a0;
+    --accent: var(--orange);
   }
 
   section {
@@ -121,103 +121,6 @@
     display: flex;
     padding-top: 56px;
     min-height: 100vh;
-  }
-
-  /* ===== SIDEBAR ===== */
-  .sidebar {
-    position: fixed;
-    top: 56px;
-    left: 0;
-    bottom: 0;
-    width: var(--sidebar-w);
-    background: rgba(13,13,20,0.97);
-    border-right: 1px solid var(--border);
-    overflow-y: auto;
-    z-index: 150;
-    padding: 24px 0 40px;
-    transition: transform 0.3s ease;
-  }
-
-  .sidebar::-webkit-scrollbar { width: 4px; }
-  .sidebar::-webkit-scrollbar-track { background: transparent; }
-  .sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
-
-  .sidebar-section-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--muted);
-    padding: 0 20px;
-    margin-bottom: 8px;
-    margin-top: 20px;
-  }
-
-  .sidebar-section-label:first-child { margin-top: 0; }
-
-  .sidebar-link {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 9px 20px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    color: var(--muted);
-    text-decoration: none;
-    transition: color 0.15s, background 0.15s;
-    border-left: 2px solid transparent;
-    cursor: pointer;
-  }
-
-  .sidebar-link:hover {
-    color: var(--text);
-    background: rgba(255,255,255,0.03);
-  }
-
-  .sidebar-link.active {
-    color: var(--yellow);
-    border-left-color: var(--yellow);
-    background: rgba(245,200,66,0.06);
-  }
-
-  .sidebar-link .s-icon { font-size: 14px; flex-shrink: 0; }
-
-  .sidebar-link .s-badge {
-    margin-left: auto;
-    font-size: 9px;
-    padding: 1px 6px;
-    border-radius: 10px;
-    background: rgba(245,200,66,0.12);
-    color: var(--yellow);
-    border: 1px solid rgba(245,200,66,0.2);
-  }
-
-  .sidebar-divider {
-    height: 1px;
-    background: var(--border);
-    margin: 12px 20px;
-  }
-
-  /* Overlay for mobile */
-  .sidebar-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.6);
-    z-index: 140;
-    backdrop-filter: blur(2px);
-  }
-
-  @media (max-width: 900px) {
-    .sidebar {
-      transform: translateX(-100%);
-    }
-    .sidebar.open {
-      transform: translateX(0);
-    }
-    .sidebar-overlay.open {
-      display: block;
-    }
   }
 
   /* ===== MAIN CONTENT ===== */
@@ -588,8 +491,6 @@
     border: 1px solid var(--border);
   }
 
-  /* ===== THEMEN SIDEBAR LIST (in content) ===== */
-  /* These are the topic cards shown in the sidebar chapter sections */
   .topic-list {
     margin-top: 32px;
     display: flex;
