@@ -27,27 +27,23 @@
 
     window.dataLayer = window.dataLayer || [];
     function gtag() {
-      window.dataLayer.push(arguments);
+      dataLayer.push(arguments);
     }
     gtag('js', new Date());
     gtag('config', 'G-GFSQG3CG7S', { anonymize_ip: true });
   }
 
+  // Optional: Wenn du Fonts wirklich zustimmungsbasiert laden willst,
+  // müsstest du die Google-Fonts <link>-Tags NICHT fest im <head> haben,
+  // sondern erst hier nachladen. (Aktuell sind sie in deinen Seiten fest eingebunden.)
   function applyConsent(consent) {
-    if (consent && consent.analytics) loadAnalytics();
-    // fonts: wird aktuell nur gespeichert/angezeigt.
-    // Wenn du Fonts wirklich erst nach Zustimmung laden willst,
-    // müssen die <link>-Tags in den HTML-Seiten raus und dynamisch geladen werden.
+    if (!consent) return;
+    if (consent.analytics) loadAnalytics();
   }
 
   function hideBanner() {
     const banner = document.getElementById('hp-cookie-banner');
     if (banner) banner.style.transform = 'translateY(120%)';
-  }
-
-  function closeModal() {
-    const modal = document.getElementById('hp-cookie-modal');
-    if (modal) modal.classList.remove('open');
   }
 
   function syncConsentUI() {
@@ -59,14 +55,6 @@
 
     if (fontsToggle) fontsToggle.checked = !!consent.fonts;
     if (analyticsToggle) analyticsToggle.checked = !!consent.analytics;
-  }
-
-  function setConsent(consent) {
-    saveConsent(consent);
-    applyConsent(consent);
-    syncConsentUI();
-    closeModal();
-    hideBanner();
   }
 
   function injectStyles() {
@@ -100,7 +88,6 @@
 #hp-cookie-banner .cb-text a:hover { text-decoration: underline; }
 #hp-cookie-banner .cb-text strong { color: #e5e5e5; }
 #hp-cookie-banner .cb-buttons { display: flex; gap: 0.75rem; flex-shrink: 0; flex-wrap: wrap; }
-
 #hp-cookie-banner button {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.8rem;
@@ -111,13 +98,10 @@
   transition: all 0.2s;
   white-space: nowrap;
 }
-
 #hp-btn-accept { background: #4ade80; color: #0d0d0d; font-weight: 700; border-color: #4ade80; }
 #hp-btn-accept:hover { background: #22c55e; border-color: #22c55e; }
-
 #hp-btn-decline { background: transparent; color: #666; border-color: #333; }
 #hp-btn-decline:hover { color: #e5e5e5; border-color: #555; }
-
 #hp-btn-settings { background: transparent; color: #555; border: none; text-decoration: underline; padding: 0.55rem 0.5rem; cursor: pointer; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; }
 #hp-btn-settings:hover { color: #999; }
 
@@ -128,7 +112,6 @@
   font-family: 'JetBrains Mono', monospace;
 }
 #hp-cookie-modal.open { display: flex; }
-
 #hp-modal-box {
   background: #141414; border: 1px solid #2a2a2a;
   border-radius: 10px; padding: 2rem;
@@ -152,7 +135,6 @@
 
 .cb-modal-buttons { display: flex; gap: 0.75rem; margin-top: 1.5rem; justify-content: flex-end; }
 .cb-modal-buttons button { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; padding: 0.55rem 1.1rem; border-radius: 6px; cursor: pointer; border: 1px solid transparent; transition: all 0.2s; }
-
 #hp-modal-save { background: #4ade80; color: #0d0d0d; font-weight: 700; border-color: #4ade80; }
 #hp-modal-save:hover { background: #22c55e; }
 #hp-modal-cancel { background: transparent; color: #666; border-color: #333; }
@@ -163,11 +145,11 @@
   #hp-cookie-banner .cb-buttons { width: 100%; }
   #hp-btn-accept, #hp-btn-decline { flex: 1; text-align: center; }
 }
-    `;
+`;
     document.head.appendChild(style);
   }
 
-  function injectBanner(showBanner) {
+  function injectBanner() {
     if (document.getElementById('hp-cookie-banner')) return;
 
     const banner = document.createElement('div');
@@ -175,148 +157,150 @@
     banner.setAttribute('role', 'dialog');
     banner.setAttribute('aria-label', 'Cookie-Einstellungen');
     banner.innerHTML = `
-      <div class="cb-text">
-        <strong>🍪 Diese Website verwendet Cookies</strong><br>
-        Wir nutzen Cookies für Analyse und Google Fonts. Mehr dazu in unserer
-        <a href="/datenschutz.html">Datenschutzerklärung</a>.
-      </div>
-      <div class="cb-buttons">
-        <button id="hp-btn-settings">Einstellungen</button>
-        <button id="hp-btn-decline">Ablehnen</button>
-        <button id="hp-btn-accept">Alle akzeptieren</button>
-      </div>
-    `;
+<div class="cb-text">
+  <strong>🍪 Diese Website verwendet Cookies</strong><br>
+  Wir nutzen Cookies für Analyse und Google Fonts. Mehr dazu in unserer
+  <a href="/datenschutz.html">Datenschutzerklärung</a>.
+</div>
+<div class="cb-buttons">
+  <button id="hp-btn-settings">Einstellungen</button>
+  <button id="hp-btn-decline">Ablehnen</button>
+  <button id="hp-btn-accept">Alle akzeptieren</button>
+</div>
+`;
 
     const modal = document.createElement('div');
     modal.id = 'hp-cookie-modal';
     modal.setAttribute('role', 'dialog');
     modal.setAttribute('aria-modal', 'true');
     modal.innerHTML = `
-      <div id="hp-modal-box">
-        <h3>Cookie-Einstellungen</h3>
-        <p>Wähle welche Cookies du erlaubst. Notwendige Cookies sind immer aktiv.</p>
+<div id="hp-modal-box">
+  <h3>Cookie-Einstellungen</h3>
+  <p>Wähle welche Cookies du erlaubst. Notwendige Cookies sind immer aktiv.</p>
 
-        <div class="cb-option">
-          <div class="cb-option-info">
-            <strong>Notwendig</strong>
-            <span>Technisch erforderlich für den Betrieb der Seite.</span>
-          </div>
-          <label class="cb-toggle">
-            <input type="checkbox" checked disabled>
-            <span class="cb-slider"></span>
-          </label>
-        </div>
+  <div class="cb-option">
+    <div class="cb-option-info">
+      <strong>Notwendig</strong>
+      <span>Technisch erforderlich für den Betrieb der Seite.</span>
+    </div>
+    <label class="cb-toggle">
+      <input type="checkbox" checked disabled>
+      <span class="cb-slider"></span>
+    </label>
+  </div>
 
-        <div class="cb-option">
-          <div class="cb-option-info">
-            <strong>Google Fonts</strong>
-            <span>Schriften werden von Google-Servern geladen.</span>
-          </div>
-          <label class="cb-toggle">
-            <input type="checkbox" id="hp-toggle-fonts">
-            <span class="cb-slider"></span>
-          </label>
-        </div>
+  <div class="cb-option">
+    <div class="cb-option-info">
+      <strong>Google Fonts</strong>
+      <span>Schriften werden von Google-Servern geladen.</span>
+    </div>
+    <label class="cb-toggle">
+      <input type="checkbox" id="hp-toggle-fonts">
+      <span class="cb-slider"></span>
+    </label>
+  </div>
 
-        <div class="cb-option">
-          <div class="cb-option-info">
-            <strong>Google Analytics</strong>
-            <span>Anonymisierte Analyse des Nutzerverhaltens.</span>
-          </div>
-          <label class="cb-toggle">
-            <input type="checkbox" id="hp-toggle-analytics">
-            <span class="cb-slider"></span>
-          </label>
-        </div>
+  <div class="cb-option">
+    <div class="cb-option-info">
+      <strong>Google Analytics</strong>
+      <span>Anonymisierte Analyse des Nutzerverhaltens.</span>
+    </div>
+    <label class="cb-toggle">
+      <input type="checkbox" id="hp-toggle-analytics">
+      <span class="cb-slider"></span>
+    </label>
+  </div>
 
-        <div class="cb-modal-buttons">
-          <button id="hp-modal-cancel">Abbrechen</button>
-          <button id="hp-modal-save">Auswahl speichern</button>
-        </div>
-      </div>
-    `;
+  <div class="cb-modal-buttons">
+    <button id="hp-modal-cancel">Abbrechen</button>
+    <button id="hp-modal-save">Auswahl speichern</button>
+  </div>
+</div>
+`;
 
     document.body.appendChild(banner);
     document.body.appendChild(modal);
 
-    // Event: Alle akzeptieren
+    // --- Events ---
     document.getElementById('hp-btn-accept').addEventListener('click', function () {
-      setConsent({ necessary: true, fonts: true, analytics: true });
+      const consent = { necessary: true, fonts: true, analytics: true };
+      saveConsent(consent);
+      applyConsent(consent);
+      syncConsentUI();
+      modal.classList.remove('open');
+      hideBanner();
     });
 
-    // Event: Ablehnen
     document.getElementById('hp-btn-decline').addEventListener('click', function () {
-      setConsent({ necessary: true, fonts: false, analytics: false });
+      const consent = { necessary: true, fonts: false, analytics: false };
+      saveConsent(consent);
+      applyConsent(consent);
+      syncConsentUI();
+      modal.classList.remove('open');
+      hideBanner();
     });
 
-    // Event: Einstellungen öffnen
     document.getElementById('hp-btn-settings').addEventListener('click', function () {
       syncConsentUI();
       modal.classList.add('open');
     });
 
-    // Modal: Abbrechen
     document.getElementById('hp-modal-cancel').addEventListener('click', function () {
       modal.classList.remove('open');
     });
 
-    // Modal: Speichern
     document.getElementById('hp-modal-save').addEventListener('click', function () {
       const consent = {
         necessary: true,
         fonts: document.getElementById('hp-toggle-fonts').checked,
         analytics: document.getElementById('hp-toggle-analytics').checked
       };
-      setConsent(consent);
+      saveConsent(consent);
+      applyConsent(consent);
+      syncConsentUI();
+      modal.classList.remove('open');
+      hideBanner();
     });
 
-    // Modal click outside
     modal.addEventListener('click', function (e) {
       if (e.target === modal) modal.classList.remove('open');
     });
 
-    // Banner nur anzeigen, wenn gewünscht (z.B. beim Erstbesuch)
-    if (showBanner) {
-      setTimeout(function () {
-        banner.classList.add('visible');
-      }, 400);
-    }
+    // Banner einblenden
+    setTimeout(function () {
+      banner.classList.add('visible');
+    }, 400);
+
+    // Wenn schon Consent existiert und UI nachträglich injiziert wurde, sofort syncen
+    syncConsentUI();
   }
 
-  function ensureUIForSettings() {
-    injectStyles();
-    // Wenn Consent schon existiert: Banner nicht anzeigen, nur Modal bereitstellen
-    injectBanner(false);
-  }
-
-  // Init
+  // --- Init ---
   const existing = getConsent();
   if (existing) {
     applyConsent(existing);
   } else {
     injectStyles();
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', function () {
-        injectBanner(true);
-      });
+      document.addEventListener('DOMContentLoaded', injectBanner);
     } else {
-      injectBanner(true);
+      injectBanner();
     }
   }
 
-  // Global: Cookie-Einstellungen öffnen (Footer-Link)
+  // Globaler Öffner (Footer-Link etc.)
   window.openCookieSettings = function () {
     let banner = document.getElementById('hp-cookie-banner');
     let modal = document.getElementById('hp-cookie-modal');
 
     if (!banner || !modal) {
-      ensureUIForSettings();
-      banner = document.getElementById('hp-cookie-banner');
-      modal = document.getElementById('hp-cookie-modal');
-// UI aus localStorage ziehen und Modal öffnen
+      injectStyles();
+      injectBanner();
+    }
+
     setTimeout(function () {
       syncConsentUI();
-      if (modal) modal.classList.add('open');
-    }, 50);
+      document.getElementById('hp-cookie-modal').classList.add('open');
+    }, 100);
   };
-}})();
+})();
