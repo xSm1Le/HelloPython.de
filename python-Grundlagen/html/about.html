@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Über mich – HelloPython.de</title>
+  <meta name="description" content="Über den Ersteller von HelloPython.de – Motivation, Lernansatz und Ziel der Plattform.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/python-Grundlagen/css/global.css">
+  <link rel="stylesheet" href="/python-Grundlagen/css/sidebar.css">
+  <link rel="stylesheet" href="/python-Grundlagen/css/about.css">
+    <script src="/python-Grundlagen/JS/syntax.js" defer></script>
+  <script src="/python-Grundlagen/JS/cookie.js" defer></script>
+  <script src="/python-Grundlagen/JS/sidebar.js" defer></script>
+</head>
+
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- TOP NAV -->
+<nav class="topnav">
+  <a class="nav-logo" href="/index.html"><span>&lt;</span> HelloPython.de</a>
+
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#wer">Wer</a></li>
+      <li><a href="#idee">Idee</a></li>
+      <li><a href="#ziel">Ziel</a></li>
+    </ul>
+
+    <button class="hamburger" id="hamburgerBtn" aria-label="Menü öffnen">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <a class="sidebar-back" href="/index.html">
+    <span class="sidebar-back-arrow">←</span> Zurück zur Startseite
+  </a>
+
+  <div class="sidebar-divider"></div>
+  <div class="sidebar-section-label">Über mich</div>
+
+  <a class="sidebar-link" href="#wer">
+    <span class="s-icon">👋</span> Wer ich bin
+  </a>
+
+  <a class="sidebar-link" href="#idee">
+    <span class="s-icon">💡</span> Idee
+  </a>
+
+  <a class="sidebar-link" href="#ziel">
+    <span class="s-icon">🎯</span> Ziel
+  </a>
+</aside>
+
+<!-- LAYOUT -->
+<div class="layout">
+  <main class="main">
+
+    <!-- HERO -->
+    <section id="hero">
+      <div class="hero-badge">Über den Ersteller</div>
+      <h1 class="hero-title">Bastian</h1>
+      <p class="hero-sub"># Ausbildung · IT · Python · Verständlich lernen</p>
+
+      <div class="hero-code">
+        <span class="kw">class</span> <span class="cls">HelloPython</span><span class="op">:</span><br>
+        <span class="ind"></span><span class="kw">def</span> <span class="fn">idee</span><span class="paren">(</span><span class="param">self</span><span class="paren">)</span><span class="op">:</span><br>
+        <span class="ind"></span><span class="ind"></span>
+        <span class="ret">return</span>
+        <span class="str">"Programmieren logisch erklären"</span>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- WER -->
+    <section id="wer">
+      <div class="fade-in">
+        <div class="section-label">▸ 01 — Wer ich bin</div>
+        <h2 class="section-heading">Der Mensch hinter HelloPython</h2>
+        <p class="section-desc">
+          Ich bin <strong>Bastian</strong> und befinde mich in einer Ausbildung zum
+          <strong>Fachinformatiker für Systemintegration</strong>. Aktuell bin ich im <strong>1. Lehrjahr</strong> und habe diese am 01.08.2025 Begonnen.
+          Python ist ein teil der Ausbildung dementsprechend muss ich mich damit wirklich auseinander setzen.
+          Vorher habe ich einen Zertifizierten Abschluss zum <strong>Fullstack Web- und Softwareentwickler</strong> bei der DCI -Digital Career Institute gemacht, 
+          wo der Fokus allerdings auf Javascript, HTML und CSS lag.
+          Mein Fokus liegt darauf, Dinge wirklich zu verstehen – nicht nur auswendig zu lernen.
+        </p>
+      </div>
+
+      <div class="anatomy-card fade-in">
+        <div class="section-title">▸ Kurzprofil</div>
+        <ul class="about-list">
+          <li>💻 IT‑Azubi mit starkem Praxisbezug</li>
+          <li>🐍 Python als Lern‑ und Denkwerkzeug</li>
+          <li>🧠 Struktur statt Chaos</li>
+          <li>📚 Schritt‑für‑Schritt‑Erklärungen</li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- IDEE -->
+    <section id="idee">
+      <div class="fade-in">
+        <div class="section-label">▸ 02 — Idee</div>
+        <h2 class="section-heading">Warum HelloPython?</h2>
+        <p class="section-desc">
+          Viele Tutorials erklären zu schnell oder setzen Vorwissen voraus.
+          HelloPython soll zeigen, dass Programmieren ruhig, logisch und nachvollziehbar sein kann.
+          🚀 
+
+            Viele Python‑Einsteiger scheitern nicht an der Sprache selbst, sondern an:
+        <ul class="about-list">
+            <li>- fehlender Struktur,</li>
+            <li>- zu theoretischen Erklärungen,</li>
+            <li>- oder Beispielen ohne Praxisbezug.</li>
+        </ul>
+            <p class="section-desc"><strong>HelloPython.de</strong> setzt genau hier an: </p>
+        <ul class="about-list">
+                <li>- klare Kapitel,</li>
+                <li>- verständliche Erklärungen,</li>
+                <li>- echte Übungs‑ und Mini‑Projekte,</li>
+                <li>- sauberer Code und Best Practices von Anfang an.</li>
+        </ul>
+        </p>
+      </div>
+
+      <div class="rule-card fade-in">
+        <div class="rule-icon">💡</div>
+        <div class="rule-text">
+          <strong>Grundsatz:</strong><br>
+          Wenn du etwas erklären kannst, hast du es wirklich verstanden.
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ZIEL -->
+    <section id="ziel">
+      <div class="fade-in">
+        <div class="section-label">▸ 03 — Ziel</div>
+        <h2 class="section-heading">Was dich hier erwartet</h2>
+        <p class="section-desc">
+          Nachhaltiges Lernen mit echten Beispielen,
+          klaren Erklärungen und logisch aufgebauten Inhalten.
+        </p>
+      </div>
+
+      <div class="levels-grid fade-in">
+        <div class="level-card" data-color="green">
+          <div class="level-header">
+            <div class="level-num" style="background:rgba(77,255,176,0.15);color:var(--green)">✔</div>
+            <div class="level-title">Verständlich</div>
+          </div>
+          <div class="level-code">Klare Sprache · kein Fachchinesisch</div>
+        </div>
+
+        <div class="level-card" data-color="blue">
+          <div class="level-header">
+            <div class="level-num" style="background:rgba(79,168,255,0.15);color:var(--blue)">↗</div>
+            <div class="level-title">Praxisnah</div>
+          </div>
+          <div class="level-code">Denken lernen statt kopieren</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="cta">
+      <div class="cta-box fade-in">
+        <div class="cta-title">Bereit loszulegen?</div>
+        <p class="cta-text">
+          Wenn du Python wirklich verstehen willst, bist du hier genau richtig.
+        </p>
+
+        <div class="hero-buttons">
+          <a href="/index.html#themen" class="btn btn-primary">Zu den Themen →</a>
+          <a href="/index.html" class="btn btn-outline">← Startseite</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  Erstellt mit <span>♥</span> · HelloPython.de · Bastian Meese · <span>2025 – 2026</span> ·
+  <a href="/impressum.html">Impressum</a> ·
+  <a href="#" onclick="openCookieSettings(); return false;">Cookie‑Einstellungen</a> ·
+  <a href="/datenschutz.html">Datenschutz</a>
+</footer>
+
+</body>
+</html>

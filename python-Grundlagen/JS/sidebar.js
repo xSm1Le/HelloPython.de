@@ -57,7 +57,27 @@ const PAGES = [
   </a>
 */
 
-// ─────────────────────────────────────────────
+const PAGES2 = [
+  {
+    icon: '✍️',
+    label: 'Über Mich',
+    href: '/python-Grundlagen/html/about.html',
+    badge: 'neu',
+  },
+  {
+    icon: '⚙️',
+    label: 'Einstellungen',
+    href: '/python-Grundlagen/html/syntax.html',
+    badge: 'neu',
+  },
+  {
+    icon: '👉',
+    label: 'Projektunterstützung',
+    href: '/python-Grundlagen/html/projekt.html',
+    badge: 'Empfehlung',
+  },
+];
+
 // SIDEBAR GENERIEREN
 document.addEventListener('DOMContentLoaded', function () {
   const sidebar = document.getElementById('sidebar');
@@ -106,4 +126,44 @@ document.addEventListener('DOMContentLoaded', function () {
 
     sidebar.appendChild(a);
   });
+  /** 
+  const divider2 = document.createElement('div');
+  divider2.className = 'sidebar-divider';
+  sidebar.appendChild(divider2);
+
+  const label2 = document.createElement('div');
+  label2.className = 'sidebar-section-label';
+  label2.textContent = 'Anderes';
+  sidebar.appendChild(label2);
+
+  PAGES2.forEach(function (page) {
+    const isActive = currentPath.indexOf(page.href) !== -1;
+
+    const a = document.createElement('a');
+    a.className = 'sidebar-link' + (isActive ? ' active' : '');
+    a.href = page.href;
+
+    const iconSpan = document.createElement('span');
+    iconSpan.className = 's-icon';
+    iconSpan.textContent = page.icon;
+    a.appendChild(iconSpan);
+
+    a.appendChild(document.createTextNode(' ' + page.label));
+
+    // Badge: "aktiv" wenn aktuelle Seite, sonst definiertes Badge
+    if (isActive) {
+      const badge = document.createElement('span');
+      badge.className = 's-badge';
+      badge.textContent = 'aktiv';
+      a.appendChild(badge);
+    } else if (page.badge) {
+      const badge = document.createElement('span');
+      badge.className = 's-badge';
+      badge.textContent = page.badge;
+      a.appendChild(badge);
+    }
+
+    sidebar.appendChild(a);
+  });
+  */
 });
