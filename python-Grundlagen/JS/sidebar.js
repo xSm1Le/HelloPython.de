@@ -4,49 +4,41 @@ const PAGES = [
     icon: '💻',
     label: 'VS Code Guide',
     href: '/python-Grundlagen/html/vscode.html',
-    badge: 'neu',
   },
   {
     icon: '⚙️',
     label: 'Syntax',
     href: '/python-Grundlagen/html/syntax.html',
-    badge: 'neu',
   },
   {
     icon: '🔁',
     label: 'Schleifen',
     href: '/python-Grundlagen/html/schleifen.html',
-    badge: 'neu',
   },
   {
     icon: '📦',
     label: 'Funktionen',
     href: '/python-Grundlagen/html/funktionen.html',
-    badge: 'neu',
   },
   {
     icon: '🗂️',
     label: 'Datenstrukturen',
     href: '/python-Grundlagen/html/datenstrukturen.html',
-    badge: 'neu',
   },
   {
     icon: '📐',
     label: 'OOP',
     href: '/python-Grundlagen/html/oop.html',
-    badge: 'neu',
   },
   {
     icon: '🛡️',
     label: 'Fehlerbehandlung',
     href: '/python-Grundlagen/html/fehlerbehandlung.html',
-    badge: 'neu',
   },
   {
     icon: '📦',
     label: 'Module & Pakete',
     href: '/python-Grundlagen/html/module_pakete.html',
-    badge: 'neu',
   },
 ];
 
@@ -62,13 +54,11 @@ const PAGES2 = [
     icon: '✍️',
     label: 'Über Mich',
     href: '/python-Grundlagen/html/about.html',
-    badge: 'neu',
   },
   {
     icon: '⚙️',
     label: 'Einstellungen',
     href: '/python-Grundlagen/html/syntax.html',
-    badge: 'neu',
   },
   {
     icon: '👉',
